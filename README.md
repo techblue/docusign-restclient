@@ -46,9 +46,6 @@ Signer signer = new Signer();
 signer.setRecipientId("1");
 signer.setEmail("ajay.deshwal@techblue.co.uk");
 signer.setName("Ajay");
-List<String> fields = new ArrayList<String>();
-fields.add("landlord_id=1831");
-signer.setCustomFields(fields);
 List<Signer> signerList = new ArrayList<Signer>();
 signerList.add(signer);
 recipientCollection.setSigners(signerList);
@@ -79,3 +76,5 @@ Signature response, among other useful information, will contain newly created e
 response.getEnvelopeId;
 response.getUri;
 ```
+
+For details on rest methods and parameters descripts, please go through docusign [REST service guide](http://www.docusign.com/sites/default/files/REST_API_Guide_v1.pdf).
