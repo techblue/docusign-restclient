@@ -23,7 +23,7 @@ Now you have all necessary elements (username, passoword and an integrator key) 
 ```java
 DocuSignCredentials credentials = new DocuSignCredentials("<Docusign Username>", "<Password>", "<Integrator Key>");
 ```
-- Each Service instantiation takes service endpoint URI and credentials as parameters. RequestSignature Service encapsulates all flavours of signature request rest methods. Initialize EnvelopeService with docusign demo rest services endpoint.
+- Each Service instantiation takes service endpoint URI and credentials as parameters. RequestSignature Service encapsulates all flavours of signature request rest methods. Initialize it with docusign demo rest services endpoint.
 
 ```java
 String serviceURI = "https://demo.docusign.net/restapi/v1";
