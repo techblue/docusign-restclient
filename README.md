@@ -1,15 +1,16 @@
 docusign-restclient
 ===================
 
-DocuSign is an electronic signature and document workflow automation service provider that facilitates electronic signature, document management and verification.
+[DocuSign](http://www.docusign.com/) is an electronic signature and document workflow automation service provider that facilitates end user to electronically sign, manage and verify documents.
 
-This project provides a java rest client api which consumes docusign RESTful services. Demo services can be viewed/executed @ http://iodocs.docusign.com/
+This project provides a java rest client api which consumes docusign RESTful services. Demo services can be viewed/executed @ [iodocs](http://iodocs.docusign.com/)
 
 Usage
 ==========
 
 Please create a developer account:
-1. http://www.docusign.com/developer-center#form-devaccount.
+
+1. Create a developer account from [here](http://www.docusign.com/developer-center#form-devaccount).
 2. Log into developer sandbox througn link on the same page. 
 3. Request an integrator key. 
 
