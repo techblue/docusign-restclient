@@ -1,4 +1,4 @@
-docusign-restclient
+Docusign RESTful Client
 ===================
 
 [DocuSign](http://www.docusign.com/) is an electronic signature and document workflow automation service provider that facilitates end user to electronically sign, manage and verify documents.
@@ -17,12 +17,14 @@ Please create a developer account:
 Now you have all necessary elements (username, passoword and an integrator key) to call docusign rest services.
 Let us look at an example on how to upload document using RESTful client:
 
-Initialize DocuSignCredentials using the aquired authentication data:
+- Initialize DocuSignCredentials using the aquired authentication data.
+
+```java
 DocuSignCredentials credentials = new DocuSignCredentials("<Docusign Username>", "<Password>", "<Integrator Key>");
+```
+- Each Service instantiation takes service endpoint URI and credentials as parameters. Envelope Service encapsulates all envelope related rest methods. Initialize EnvelopeService with docusign demo rest services endpoint.
 
-Each Service instantiation takes service endpoint URI and credentials as parameters.
-Docusign's demo rest services endpoint is
+```java
 String serviceURI = "https://demo.docusign.net/restapi/v1";
-
-Create Envelope Service which encapsulates all envelope related rest service methods.
 EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+```
