@@ -73,8 +73,8 @@ SignatureResponse response = signatureService.sendDocument(signatureRequest);
 Signature response, among other useful information, will contain newly created envelope Id and URI.
 
 ```java
-response.getEnvelopeId;
-response.getUri;
+response.getEnvelopeId();
+response.getUri();
 ```
 
 For details on rest methods and parameters descripts, please go through docusign [REST service guide](http://www.docusign.com/sites/default/files/REST_API_Guide_v1.pdf).
