@@ -15,7 +15,6 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.envelope.attributes;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Enum for envelope status.
  */
