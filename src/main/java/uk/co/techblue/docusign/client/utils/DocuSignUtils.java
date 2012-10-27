@@ -124,8 +124,8 @@ public class DocuSignUtils {
 	public static MultipartFormDataOutput generateMultipartFormDataOutput(
 			DocumentSignatureRequest signatureRequest) {
 		MultipartFormDataOutput dataOut = new MultipartFormDataOutput();
-		dataOut.addFormData("request-type", "send document for signature",
-				MediaType.APPLICATION_JSON_TYPE);
+//		dataOut.addFormData("request-type", "[\"send document for signature\"]",
+//				MediaType.APPLICATION_JSON_TYPE);
 		@SuppressWarnings("unused")
 		OutputPart metadataPart = dataOut.addFormData("envelope_definition",
 				signatureRequest, MediaType.APPLICATION_JSON_TYPE);
