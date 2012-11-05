@@ -92,6 +92,7 @@ public class DocumentFileProvider implements MessageBodyReader<DocumentFile> {
 			prefix = getFilePrefix(contentDisposition);
 		} else {
 			logger.warn("Content Disposition header not found in response. All the attributes DocumentFile instance won't be populated.");
+			suffix = getFileSuffix(mediaType);
 		}
 		if (StringUtils.isBlank(prefix)) {
 			prefix = PREFIX;
@@ -142,6 +143,14 @@ public class DocumentFileProvider implements MessageBodyReader<DocumentFile> {
 	private String getFileSuffix(ContentDisposition contentDisposition,
 			MediaType mediaType) {
 		String fileName = contentDisposition.getParameter(PARAM_FILENAME);
+		return getFileSuffix(mediaType, fileName);
+	}
+	
+	private String getFileSuffix(MediaType mediaType) {
+		return getFileSuffix(mediaType, null);
+	}
+
+	private String getFileSuffix(MediaType mediaType, String fileName) {
 		String suffix = StringUtils.substringAfterLast(fileName, ".");
 		String mediaSubtype = StringUtils.defaultString(mediaType.getSubtype());
 		boolean suffixBlank = StringUtils.isBlank(suffix);
