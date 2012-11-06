@@ -279,7 +279,7 @@ public abstract class Tab extends BaseDto {
     /**
      * Sets the label used with the tab.
      * <p>
-     * <b>Notes: Making a tab���s TabLabel the same will cause the all like
+     * <b>Notes: Making a tab's TabLabel the same will cause the all like
      * fields to update when the user enters data.</b>
      * </p>
      * 
