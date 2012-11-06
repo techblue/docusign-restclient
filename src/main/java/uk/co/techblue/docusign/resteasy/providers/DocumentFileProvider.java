@@ -55,12 +55,9 @@ public class DocumentFileProvider implements MessageBodyReader<DocumentFile> {
 	private static final String PARAM_FILENAME = "filename";
 	private static final String PARAM_DOCUMENT_ID = "documentId";
 
-	private String downloadDirectory = null; // by default temp dir, but
+	private String downloadDirectory = null; // by default temp dir, consider allowing it to be defined at runtime
 
 	private final static Logger logger = Logger.getLogger(DocuSignClient.class);
-
-	// consider allowing it to be
-	// defined at runtime
 
 	public boolean isReadable(Class<?> type, Type genericType,
 			Annotation[] annotations, MediaType mediaType) {

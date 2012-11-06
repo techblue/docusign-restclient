@@ -29,7 +29,7 @@ import uk.co.techblue.docusign.client.envelope.attributes.Status;
  * The Class Envelope.
  */
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class Envelope extends BaseDto{
+public class Envelope extends BaseDto {
 
 	/**
 	 * 
@@ -273,7 +273,10 @@ public class Envelope extends BaseDto{
 	}
 
 	/**
-	 * Sets the enforce signer visibility.
+	 * Sets the enforce signer visibility. It true, the signer is required to
+	 * have a signature or initial tab on the document or that the document has
+	 * no signers in order to view it. Account must have Document Visibility
+	 * enabled to use this.
 	 * 
 	 * @param enforceSignerVisibility
 	 *            the new enforce signer visibility
