@@ -43,6 +43,10 @@ public abstract class SignatureRequest extends BaseDto {
     /** The status. */
     @JsonProperty("status")
     private Status status;
+    
+    /** The enforce signer visibility. */
+	@JsonProperty
+	private Boolean enforceSignerVisibility;
 
     /**
      * Gets the email blurb.
@@ -100,5 +104,27 @@ public abstract class SignatureRequest extends BaseDto {
     public void setStatus(Status status) {
         this.status = status;
     }
+    
+    /**
+	 * Gets the enforce signer visibility.
+	 * 
+	 * @return the enforce signer visibility
+	 */
+	public Boolean getEnforceSignerVisibility() {
+		return enforceSignerVisibility;
+	}
+
+	/**
+	 * Sets the enforce signer visibility. It true, the signer is required to
+	 * have a signature or initial tab on the document or that the document has
+	 * no signers in order to view it. Account must have Document Visibility
+	 * enabled to use this.
+	 * 
+	 * @param enforceSignerVisibility
+	 *            the new enforce signer visibility
+	 */
+	public void setEnforceSignerVisibility(Boolean enforceSignerVisibility) {
+		this.enforceSignerVisibility = enforceSignerVisibility;
+	}
 
 }
