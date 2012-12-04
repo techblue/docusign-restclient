@@ -15,7 +15,7 @@
 	</parent>
 	<groupId>uk.co.techblue</groupId>
 	<artifactId>docusign-restclient</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Docusign RESTful client</name>
 	<packaging>jar</packaging>
 	<description>A client library to communicate with docusign restful services </description>
