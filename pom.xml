@@ -126,7 +126,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:techblue/docusign-restclient.git</connection>
 		<developerConnection>scm:git:git@github.com:techblue/docusign-restclient.git</developerConnection>
-		<url>git@github.com:techblue/docusign-restclient.git</url>
+		<url>scm:git:git@github.com:techblue/docusign-restclient.git</url>
 	</scm>
 
 	<developers>
