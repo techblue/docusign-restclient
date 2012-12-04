@@ -25,6 +25,7 @@ import uk.co.techblue.docusign.client.dto.CustomField;
 import uk.co.techblue.docusign.client.dto.Document;
 import uk.co.techblue.docusign.client.dto.DocumentInfo;
 import uk.co.techblue.docusign.client.dto.DocumentSignatureRequest;
+import uk.co.techblue.docusign.client.dto.DocumentTabCollection;
 import uk.co.techblue.docusign.client.dto.Envelope;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusQueryForm;
 import uk.co.techblue.docusign.client.dto.SignatureResponse;
@@ -34,6 +35,7 @@ import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientViewRequest;
 import uk.co.techblue.docusign.client.dto.recipients.Signer;
+import uk.co.techblue.docusign.client.dto.tabs.SignHereTab;
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
 import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
@@ -58,13 +60,13 @@ public class DocusignTest {
 			// testLoginService(credentials);
 			// testEnvelopeStatusChange(credentials);
 			// testTemplateService(credentials);
-//			 testSendingDoucmentSignRequest(credentials);
-			// testSendingDocument(credentials);
+			 testSendingDoucmentSignRequest(credentials);
+//			testSignatureService(credentials);
+//			 testSendingDocument(credentials);
 //			 testGetEnvelope(credentials);
 //		    testGetRecipient(credentials);
-//			 testGetDocument(credentials);
 			// testGetEnvelope(credentials);
-			 testGetDocument(credentials);
+//			 testGetDocument(credentials);
 			// testGettingConsoleViews(credentials);
 			// testSavingEnvelopeToDrafts(credentials);
 //			 testGettingEnvelopeStatus(credentials);
@@ -190,7 +192,7 @@ public class DocusignTest {
 		RecipientViewRequest recipientView = new RecipientViewRequest();
 		recipientView.setAuthenticationMethod("email");
 		recipientView.setReturnUrl("http://demo.docusign.net");
-		recipientView.setEmail("ajay.deshwal@techblue.co.uk");
+		recipientView.setEmail("<Set Email ID>");
 		recipientView.setUserName("Ajay Deshwal");
 		return recipientView;
 	}
@@ -228,7 +230,7 @@ public class DocusignTest {
 				credentials);
 		try {
 			System.out
-					.println(envService.getDocumentsCombined("fda5dac9-ae18-4f1f-b0ef-7559aa65dcc8"));
+					.println(envService.getDocumentsCombined("2847d154-c539-4c9c-bf0f-3987e2c01238"));
 //			System.out
 //			.println(envService.getEnvelope("e3b09d80-ac1a-4d46-a40b-bea9d7bb5996"));
 //			System.out
@@ -288,20 +290,25 @@ public class DocusignTest {
 
 	private static List<Document> getDocumentList() {
 		List<Document> documentList = new ArrayList<Document>();
-		Document document = new Document();
-		document.setName("test-signature.txt");
-		document.setDocumentId("1");
-		// document.setPath("/home/ajay/Documents/VAFguidancenotesvaf1a-1k.pdf");
-		document.setPath("/home/ajay/Documents/test-esign.txt");
-		documentList.add(document);
+		documentList.add(getMockDocument("test-techblue.txt", "1", "C:\\Users\\ajay\\Documents\\test-techblue.txt"));
+		documentList.add(getMockDocument("test-gmail.txt", "2", "C:\\Users\\ajay\\Documents\\test-gmail.txt"));
 		return documentList;
+	}
+
+	private static Document getMockDocument(String name, String documentId, String path) {
+		Document document = new Document();
+		document.setName(name);
+		document.setDocumentId(documentId);
+		// document.setPath("/home/ajay/Documents/VAFguidancenotesvaf1a-1k.pdf");
+		document.setPath(path);
+		return document;
 	}
 
 	private static Document getDocument() {
 		Document document = new Document();
 		document.setName("test-signature-2.txt");
 		document.setDocumentId("2");
-		document.setPath("/home/ajay/Documents/test-esign.txt");
+		document.setPath("C:\\Users\\ajay\\Documents\\imp.txt");
 		return document;
 	}
 
@@ -311,6 +318,7 @@ public class DocusignTest {
 		signatureRequest.setEmailSubject("Please sign up this doc - "
 				+ (new Date()));
 		signatureRequest.setStatus(Status.sent);
+		signatureRequest.setEnforceSignerVisibility(true);
 		RecipientCollection recipientCollection = getRecipientCollection();
 		signatureRequest.setRecipients(recipientCollection);
 		signatureRequest.setDocuments(getDocumentList());
@@ -335,24 +343,37 @@ public class DocusignTest {
 		DocumentInfo document = new DocumentInfo();
 		document.setName("test-signature.txt");
 		document.setDocumentId("1");
-		document.setPath("/home/ajay/Documents/test-esign.txt");
+		document.setPath("C:\\Users\\ajay\\Documents\\imp.txt");
 		documentList.add(document);
 		return documentList;
 	}
 
 	private static RecipientCollection getRecipientCollection() {
 		RecipientCollection recipientCollection = new RecipientCollection();
-		Signer signer = new Signer();
-		signer.setRecipientId("1");
-		signer.setEmail("ajay.deshwal@techblue.co.uk");
-		signer.setName("Ajay");
-		List<String> fields = new ArrayList<String>();
-		fields.add("landlord_id=1831");
-		signer.setCustomFields(fields);
+//		List<String> fields = new ArrayList<String>();
+//		fields.add("landlord_id=1831");
+//		signer.setCustomFields(fields);
 		List<Signer> signerList = new ArrayList<Signer>();
-		signerList.add(signer);
+		signerList.add(getSigner("1","<Set Email Id>","Ajay","1","Sign Here Ajay - Techblue"));
+		signerList.add(getSigner("2","<Set Email Id>","Ajay","2","Sign Here Ajay - Gmail"));
 		recipientCollection.setSigners(signerList);
 		return recipientCollection;
+	}
+
+	private static Signer getSigner(String recipientId, String email, String name, String documentId, String anchorString) {
+		Signer signer1 = new Signer();
+		signer1.setRecipientId(recipientId);
+		signer1.setEmail(email);
+		signer1.setName(name);
+		SignHereTab signTab = new SignHereTab();
+		signTab.setDocumentId(documentId);
+		signTab.setAnchorString(anchorString);
+		DocumentTabCollection tabCollection1 = new DocumentTabCollection();
+		List<SignHereTab> tabList1 = new ArrayList<SignHereTab>();
+		tabList1.add(signTab);
+		tabCollection1.setSignHereTabs(tabList1);
+		signer1.setTabs(tabCollection1);
+		return signer1;
 	}
 
 	private static List<CustomField> getCustomFieldList() {
@@ -412,6 +433,7 @@ public class DocusignTest {
 		signatureRequest.setEmailBlurb("Ajay Please sign the document.");
 		signatureRequest.setEmailSubject("Please sign up this doc - "
 				+ (new Date()));
+		signatureRequest.setEnforceSignerVisibility(true);
 		signatureRequest.setStatus(Status.sent);
 		List<TemplateRole> templateRoles = getTestTemplateRoles();
 		signatureRequest.setTemplateRoles(templateRoles);
@@ -422,13 +444,13 @@ public class DocusignTest {
 		List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
 		TemplateRole roleA = new TemplateRole();
 		roleA.setName("Ajay Deshwal");
-		roleA.setEmail("ajay.deshwal@techblue.co.uk");
+		roleA.setEmail("<Set Email ID>");
 		roleA.setRoleName("Manager");
 		templateRoles.add(roleA);
 
 		TemplateRole roleB = new TemplateRole();
-		roleB.setName("Ajay D");
-		roleB.setEmail("ajay.deshwal@gmail.com");
+		roleB.setName("Vik Tara");
+		roleB.setEmail("<Set Email Id>");
 		roleB.setRoleName("Borrower");
 		templateRoles.add(roleB);
 

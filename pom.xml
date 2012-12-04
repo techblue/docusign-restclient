@@ -1,32 +1,39 @@
-<!--
-  Copyright 2012 Technology Blueprint Ltd
-  
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-  
-    http://www.apache.org/licenses/LICENSE-2.0
-  
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
+<!-- Copyright 2012 Technology Blueprint Ltd Licensed under the Apache License, 
+	Version 2.0 (the "License"); you may not use this file except in compliance 
+	with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<groupId>uk.co.techblue</groupId>
 	<artifactId>docusign-restclient</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Docusign restful client</name>
+	<version>1.0.0</version>
+	<name>Docusign RESTful client</name>
 	<packaging>jar</packaging>
 	<description>A client library to communicate with docusign restful services </description>
+	<url>http://www.technologyblueprint.co.uk/</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<resteasy.version>2.3.3.Final</resteasy.version>
 	</properties>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<build>
 		<plugins>
@@ -66,29 +73,6 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>docusign-restclient-dto-jar-deploy</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy-file</goal>
-						</goals>
-						<configuration>
-							<packaging>jar</packaging>
-							<generatePom>true</generatePom>
-							<repositoryId>techblue-snapshot</repositoryId>
-							<url>${project.distributionManagement.repository.url}</url>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.artifactId}-dto</artifactId>
-							<version>${project.version}</version>
-							<file>${project.build.directory}/${project.artifactId}-dto-${project.version}.jar</file>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
 				<executions>
 					<execution>
@@ -111,19 +95,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>JBoss repository</id>
-			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
-		</repository>
-	</repositories>
-	<distributionManagement>
-		<repository>
-			<id>techblue-snapshot</id>
-			<name>techblue-snapshot-repository</name>
-			<url>${techblue.maven.repo.baseurl}/snapshots</url>
-		</repository>
-	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
@@ -140,9 +111,6 @@
 			<artifactId>resteasy-multipart-provider</artifactId>
 			<version>${resteasy.version}</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.jboss.resteasy</groupId> <artifactId>resteasy-jaxb-provider</artifactId> 
-			<version>${resteasy.version}</version> </dependency> -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -155,4 +123,20 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+
+	<scm>
+		<connection>scm:git:git@github.com:techblue/docusign-restclient.git</connection>
+		<developerConnection>scm:git:git@github.com:techblue/docusign-restclient.git</developerConnection>
+		<url>git@github.com:techblue/docusign-restclient.git</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Ajay Deshwal</name>
+			<email>ajay.deshwal@techblue.co.uk</email>
+			<roles>
+				<role>Author</role>
+			</roles>
+		</developer>
+	</developers>
 </project>
