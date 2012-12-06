@@ -27,7 +27,7 @@ DocuSignCredentials credentials = new DocuSignCredentials("<Docusign Username>",
 
 ```java
 String serviceURI = "https://demo.docusign.net/restapi/v1";
-RequestSignatureService signatureService = new RequestSignatureService(SERVER_URI, credentials);
+RequestSignatureService signatureService = new RequestSignatureService(serviceURI, credentials);
 ```
 
 - Create Document signature request DTO by setting necessary signer info.
