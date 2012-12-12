@@ -30,9 +30,7 @@ import uk.co.techblue.docusign.client.BaseDto;
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class RecipientStatusCollection extends BaseDto {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5875317120902456481L;
 
 	/** The signers. */
@@ -67,6 +65,11 @@ public class RecipientStatusCollection extends BaseDto {
 	@JsonProperty
 	private int recipientCount;
 
+	/** The current routing order. */
+	@JsonProperty
+	private int currentRoutingOrder;
+	
+	
 	/**
 	 * Gets the signers.
 	 *
@@ -209,6 +212,25 @@ public class RecipientStatusCollection extends BaseDto {
 	 */
 	public void setRecipientCount(int recipientCount) {
 		this.recipientCount = recipientCount;
+	}
+	
+	
+	/**
+	 * Gets the current routing order.
+	 *
+	 * @return the current routing order
+	 */
+	public int getCurrentRoutingOrder() {
+		return currentRoutingOrder;
+	}
+
+	/**
+	 * Sets the current routing order.
+	 *
+	 * @param currentRoutingOrder the new current routing order
+	 */
+	public void setCurrentRoutingOrder(int currentRoutingOrder) {
+		this.currentRoutingOrder = currentRoutingOrder;
 	}
 
 }

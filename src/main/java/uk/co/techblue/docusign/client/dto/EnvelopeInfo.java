@@ -26,6 +26,7 @@ import uk.co.techblue.docusign.client.BaseDto;
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
 import uk.co.techblue.docusign.jackson.ISO8601DateDeserializer;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EnvelopeInfo.
  */
@@ -33,9 +34,7 @@ import uk.co.techblue.docusign.jackson.ISO8601DateDeserializer;
 public class EnvelopeInfo extends BaseDto{
 
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3185383754308889035L;
 
 	/** The certificate uri. */
@@ -78,6 +77,10 @@ public class EnvelopeInfo extends BaseDto{
 	@JsonProperty
 	private Date statusChangedDateTime;
 
+	/** The templates uri. */
+	@JsonProperty
+	private String templatesUri;
+	
 	/**
 	 * Gets the certificate uri.
 	 * 
@@ -267,6 +270,25 @@ public class EnvelopeInfo extends BaseDto{
 	@JsonDeserialize(using = ISO8601DateDeserializer.class)
 	public void setStatusChangedDateTime(Date statusChangedDateTime) {
 		this.statusChangedDateTime = statusChangedDateTime;
+	}
+	
+
+	/**
+	 * Gets the templates uri.
+	 *
+	 * @return the templates uri
+	 */
+	public String getTemplatesUri() {
+		return templatesUri;
+	}
+
+	/**
+	 * Sets the templates uri.
+	 *
+	 * @param templatesUri the new templates uri
+	 */
+	public void setTemplatesUri(String templatesUri) {
+		this.templatesUri = templatesUri;
 	}
 
 }
