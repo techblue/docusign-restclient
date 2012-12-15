@@ -7,6 +7,7 @@
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>docusign-restclient-dto</artifactId>
+	<name>Docusign RESTful Client Data Transfer Objects</name>
 	<description>Docusign RESTful services Data transfer classes</description>
 	<dependencies>
 		<dependency>

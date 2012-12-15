@@ -7,6 +7,8 @@
 		<version>1.0.2-SNAPSHOT</version>
 	</parent>
 	<artifactId>docusign-restclient-core</artifactId>
+	<name>Docusign RESTful client core</name>
+	<description>Docusign RESTful services core API</description>
 	<dependencies>
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
