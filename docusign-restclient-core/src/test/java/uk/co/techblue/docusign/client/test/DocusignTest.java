@@ -79,43 +79,48 @@ public class DocusignTest {
 		}
 	}
 	
-	private static void testGettingRecipientStatus(DocuSignCredentials credentials) throws ServiceInitException {
+	@SuppressWarnings("unused")
+    private static void testGettingRecipientStatus(DocuSignCredentials credentials) throws ServiceInitException {
 		EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
 		try {
-			System.err.println(envelopeService.getRecipientStatus("a0feee1e-ba6b-4440-9ba3-f6ac51bf6ab7",true,true));
+			System.err.println(envelopeService.getRecipientStatus("<Envelope Id>",true,true));
 		} catch (EnvelopeException e) {
 			e.printStackTrace();
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private static void testGettingNotificationInfo(DocuSignCredentials credentials) throws ServiceInitException {
 		EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
 		try {
-			System.err.println(envelopeService.getNotificationInfo("cd150ac2-147c-481e-95eb-dae37edc1d5a"));
+			System.err.println(envelopeService.getNotificationInfo("<Envelope Id>"));
 		} catch (EnvelopeException e) {
 			e.printStackTrace();
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void testGettingCertificate(DocuSignCredentials credentials) throws ServiceInitException {
 		EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
 		try {
-			System.err.println(envelopeService.getCertificate("cd150ac2-147c-481e-95eb-dae37edc1d5a",true,false));
+			System.err.println(envelopeService.getCertificate("<Envelope Id>",true,false));
 		} catch (EnvelopeException e) {
 			e.printStackTrace();
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private static void testGettingCustomFields(DocuSignCredentials credentials) throws ServiceInitException {
 		EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
 		try {
-			System.err.println(envelopeService.getCustomFields("a0feee1e-ba6b-4440-9ba3-f6ac51bf6ab7"));
+			System.err.println(envelopeService.getCustomFields("<Envelope Id>"));
 		} catch (EnvelopeException e) {
 			e.printStackTrace();
 		}
 		
 	}
 
+	@SuppressWarnings("unused")
 	private static void testGettingEnvelopeStatus(
 			DocuSignCredentials credentials) throws ServiceInitException {
 		EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
@@ -164,20 +169,19 @@ public class DocusignTest {
 			System.err
 					.println("Sender View: "
 							+ cvService
-									.getEnvelopeSenderView("33872c34-da7e-415d-8239-d619a4176d9c"));
+									.getEnvelopeSenderView("<Envelope Id>"));
 
 			System.err.println("Recipient View: "
 					+ cvService.getEnvelopeRecipientView(
-							"cd150ac2-147c-481e-95eb-dae37edc1d5a",
+							"<Envelope Id>",
 							getRecipientViewRequest()));
 
 			System.err.println("Correction View: "
 					+ cvService.getEnvelopeCorrectionView(
-							"cd150ac2-147c-481e-95eb-dae37edc1d5a",
+							"<Envelope Id>",
 							getCorrectionViewRequest()));
 
 		} catch (ConsoleViewException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -216,7 +220,7 @@ public class DocusignTest {
 		EnvelopeService envService = new EnvelopeService(SERVER_URI,
 				credentials);
 		try {
-			envService.addDocumentToDraftEnvelope("33872c34-da7e-415d-8239-d619a4176d9c",
+			envService.addDocumentToDraftEnvelope("<Envelope Id>",
 					getDocument());
 		} catch (EnvelopeException e) {
 			e.printStackTrace();
@@ -230,7 +234,7 @@ public class DocusignTest {
 				credentials);
 		try {
 			System.out
-					.println(envService.getDocumentsCombined("2847d154-c539-4c9c-bf0f-3987e2c01238"));
+					.println(envService.getDocumentsCombined("<Envelope Id>"));
 //			System.out
 //			.println(envService.getEnvelope("e3b09d80-ac1a-4d46-a40b-bea9d7bb5996"));
 //			System.out
@@ -260,16 +264,17 @@ public class DocusignTest {
 				credentials);
 		try {
 			System.out
-					.println(envService.getEnvelope("a0feee1e-ba6b-4440-9ba3-f6ac51bf6ab7"));
+					.println(envService.getEnvelope("<Envelope Id>"));
 		} catch (EnvelopeException e) {
 			e.printStackTrace();
 		}
 	}
 	
+    @SuppressWarnings("unused")
     private static void testGetRecipient(DocuSignCredentials credentials) throws ServiceInitException {
         EnvelopeService envService = new EnvelopeService(SERVER_URI, credentials);
         try {
-            System.err.println(envService.getRecipientStatus("a0feee1e-ba6b-4440-9ba3-f6ac51bf6ab7"));
+            System.err.println(envService.getRecipientStatus("<Envelope Id>"));
         } catch (EnvelopeException e) {
             e.printStackTrace();
         }
@@ -289,7 +294,7 @@ public class DocusignTest {
 
 	private static List<Document> getDocumentList() {
 		List<Document> documentList = new ArrayList<Document>();
-		documentList.add(getMockDocument("test-techblue.txt", "1", "C:\\Users\\ajay\\Documents\\test-techblue.txt"));
+		documentList.add(getMockDocument("test-techblue.txt", "1", "/home/ajay/Documents/esign-test.txt"));
 		return documentList;
 	}
 
@@ -297,16 +302,15 @@ public class DocusignTest {
 		Document document = new Document();
 		document.setName(name);
 		document.setDocumentId(documentId);
-		// document.setPath("/home/ajay/Documents/VAFguidancenotesvaf1a-1k.pdf");
 		document.setPath(path);
 		return document;
 	}
 
 	private static Document getDocument() {
 		Document document = new Document();
-		document.setName("test-signature-2.txt");
+		document.setName("test-signature.txt");
 		document.setDocumentId("2");
-		document.setPath("C:\\Users\\ajay\\Documents\\imp.txt");
+		document.setPath("/home/ajay/Documents/esign-test.txt");
 		return document;
 	}
 
@@ -341,7 +345,7 @@ public class DocusignTest {
 		DocumentInfo document = new DocumentInfo();
 		document.setName("test-signature.txt");
 		document.setDocumentId("1");
-		document.setPath("C:\\Users\\ajay\\Documents\\imp.txt");
+		document.setPath("/home/ajay/Documents/esign-test.txt");
 		documentList.add(document);
 		return documentList;
 	}
@@ -352,7 +356,7 @@ public class DocusignTest {
 //		fields.add("landlord_id=1831");
 //		signer.setCustomFields(fields);
 		List<Signer> signerList = new ArrayList<Signer>();
-		signerList.add(getSigner("1","ajay.deshwal@techblue.co.uk","Ajay","1","Sign Here Ajay - Techblue"));
+		signerList.add(getSigner("1","<Signer Email>","<Signer Name>","1","Sign Here Ajay - Techblue"));
 		recipientCollection.setSigners(signerList);
 		return recipientCollection;
 	}
@@ -374,7 +378,8 @@ public class DocusignTest {
 		return signer1;
 	}
 
-	private static List<CustomField> getCustomFieldList() {
+	@SuppressWarnings("unused")
+    private static List<CustomField> getCustomFieldList() {
 	    List<CustomField> fieldList = new ArrayList<CustomField>();
 	    CustomField field = new CustomField();
 //	    field.setCustomFieldType(CustomFieldType.text);
@@ -427,7 +432,7 @@ public class DocusignTest {
 
 	private static TemplateSignatureRequest getTemplateSignatureRequest() {
 		TemplateSignatureRequest signatureRequest = new TemplateSignatureRequest();
-		signatureRequest.setTemplateId("75728aa4-bdcc-4b95-bb95-8d9533a418aa");
+		signatureRequest.setTemplateId("<Envelope ID>");
 		signatureRequest.setEmailBlurb("Ajay Please sign the document.");
 		signatureRequest.setEmailSubject("Please sign up this doc - "
 				+ (new Date()));
@@ -489,8 +494,8 @@ public class DocusignTest {
 
 	private static DocuSignCredentials getDocuSignCredentials() {
 		DocuSignCredentials credentials = new DocuSignCredentials(
-				"ajay.deshwal@techblue.co.uk", "hellboy",
-				"TECH-ddd8d95e-1846-4355-b898-112e82e7d362");
+				"<User Name>", "<Email>",
+				"<Integrator Key>");
 		return credentials;
 	}
 }
