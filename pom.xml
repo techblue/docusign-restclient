@@ -105,9 +105,28 @@
         <developer>
             <name>Ajay Deshwal</name>
             <email>ajay.deshwal@techblue.co.uk</email>
+            <timezone>+5:30</timezone>
             <roles>
-                <role>Author</role>
+                <role>Project Lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Dheeraj Arora</name>
+            <email>dheeraj.arora@techblue.co.uk</email>
+            <timezone>+5:30</timezone>
+            <roles>
+                <role>Developer</role>
             </roles>
         </developer>
     </developers>
+    <contributors>
+        <contributor>
+            <name>Vik Tara</name>
+            <email>vik@propco.co.uk</email>
+            <timezone>0</timezone>
+            <roles>
+                <role>Project Owner</role>
+            </roles>
+        </contributor>
+    </contributors>
 </project>
