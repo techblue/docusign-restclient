@@ -20,7 +20,7 @@
     </modules>
     <groupId>uk.co.techblue</groupId>
     <artifactId>docusign-restclient</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <name>Docusign RESTful client</name>
     <packaging>pom</packaging>
     <description>A client library to communicate with docusign restful services </description>

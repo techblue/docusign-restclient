@@ -4,7 +4,7 @@
     <parent>
         <groupId>uk.co.techblue</groupId>
         <artifactId>docusign-restclient</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.2</version>
     </parent>
     <artifactId>docusign-restclient-core</artifactId>
     <name>Docusign RESTful client core</name>
