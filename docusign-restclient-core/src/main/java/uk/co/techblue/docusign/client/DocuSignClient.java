@@ -25,53 +25,67 @@ import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 
 import uk.co.techblue.docusign.client.utils.DocuSignUtils;
+import uk.co.techblue.docusign.resteasy.providers.DocumentFileProvider;
 
 public class DocuSignClient {
 
-	private final static Logger logger = Logger.getLogger(DocuSignClient.class);
+    private final static Logger logger = Logger.getLogger(DocuSignClient.class);
 
-	@SuppressWarnings("unused")
-	private static void initializeProviderFactory() {
-		try {
-			ResteasyProviderFactory providerFactory = ResteasyProviderFactory
-					.getInstance();
-			Iterable<Class<?>> providerClasses = DocuSignUtils
-					.getClasses("uk.co.techblue.docusign.resteasy.providers");
-			for (Class<?> provider : providerClasses) {
-				if (provider.isAnnotationPresent(Provider.class)) {
-					providerFactory.registerProvider(provider);
-				}
-			}
-			RegisterBuiltin.register(providerFactory);
-		} catch (ClassNotFoundException cnfe) {
-			logger.error(
-					"Error occurred while registering custom resteasy providers",
-					cnfe);
-		} catch (IOException ioe) {
-			logger.error(
-					"Error occurred while registering custom resteasy providers",
-					ioe);
-		} catch (Exception e) {
-			logger.error(
-					"Error occurred while registering custom resteasy providers",
-					e);
-		}
-	}
+    static {
+        initializeProviderFactory();
+    }
 
-	/**
-	 * Gets the client service.
-	 * 
-	 * @param <T>
-	 *            the generic type
-	 * @param clazz
-	 *            the clazz
-	 * @param serverUri
-	 *            the server uri
-	 * @return the client service
-	 */
-	public static <T> T getClientService(final Class<T> clazz,
-			final String serverUri) {
-		logger.info("Generating REST resource proxy for: " + clazz.getName());
-		return ProxyFactory.create(clazz, serverUri);
-	}
+    private static void initializeProviderFactory() {
+        try {
+            final ResteasyProviderFactory providerFactory = ResteasyProviderFactory.getInstance();
+            registerResteasyProvider(providerFactory, DocumentFileProvider.class);
+            RegisterBuiltin.register(providerFactory);
+        } catch (Exception e) {
+            logger.error("Error occurred while registering custom resteasy providers", e);
+        }
+    }
+
+    private static void registerResteasyProvider(final ResteasyProviderFactory providerFactory, Class<?> providerClass) {
+        boolean registered = providerFactory.getProvider(providerClass) != null;
+        if (!registered) {
+            providerFactory.registerProvider(providerClass);
+            logger.info("Registered custom Provider with Resteasy:" + providerClass.getName());
+        } else {
+            logger.info("Provider is already registered with Resteasy. Ignoring registration request:"
+                    + providerClass.getName());
+        }
+    }
+
+    @SuppressWarnings("unused")
+    private static void initializeAutoScanProviderFactory() {
+        try {
+            final ResteasyProviderFactory providerFactory = ResteasyProviderFactory.getInstance();
+            final Iterable<Class<?>> providerClasses = DocuSignUtils.getClasses("uk.co.techblue.docusign.resteasy.providers");
+            for (final Class<?> provider : providerClasses) {
+                if (provider.isAnnotationPresent(Provider.class)) {
+                    providerFactory.registerProvider(provider);
+                }
+            }
+            RegisterBuiltin.register(providerFactory);
+        } catch (ClassNotFoundException cnfe) {
+            logger.error("Error occurred while registering custom resteasy providers", cnfe);
+        } catch (IOException ioe) {
+            logger.error("Error occurred while registering custom resteasy providers", ioe);
+        } catch (Exception e) {
+            logger.error("Error occurred while registering custom resteasy providers", e);
+        }
+    }
+
+    /**
+     * Gets the client service.
+     * 
+     * @param <T> the generic type
+     * @param clazz the clazz
+     * @param serverUri the server uri
+     * @return the client service
+     */
+    public static <T> T getClientService(final Class<T> clazz, final String serverUri) {
+        logger.info("Generating REST resource proxy for: " + clazz.getName());
+        return ProxyFactory.create(clazz, serverUri);
+    }
 }

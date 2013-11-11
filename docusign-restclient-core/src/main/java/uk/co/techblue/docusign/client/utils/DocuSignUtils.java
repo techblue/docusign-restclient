@@ -46,18 +46,18 @@ public class DocuSignUtils {
 	 * @return the multipart form data output
 	 */
 	public static MultipartFormDataOutput generateMultipartFormDataOutput(
-			DocumentSignatureRequest signatureRequest) {
-		MultipartFormDataOutput dataOut = new MultipartFormDataOutput();
+	        final DocumentSignatureRequest signatureRequest) {
+		final MultipartFormDataOutput dataOut = new MultipartFormDataOutput();
 //		dataOut.addFormData("request-type", "[\"send document for signature\"]",
 //				MediaType.APPLICATION_JSON_TYPE);
 		@SuppressWarnings("unused")
-		OutputPart metadataPart = dataOut.addFormData("envelope_definition",
+		final OutputPart metadataPart = dataOut.addFormData("envelope_definition",
 				signatureRequest, MediaType.APPLICATION_JSON_TYPE);
 		// metadataPart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
 		// "form-data");
-		for (Document document : signatureRequest.getDocuments()) {
-			FileDataSource dataSource = new FileDataSource(document.getPath());
-			OutputPart filePart = dataOut.addFormData(document.getName(),
+		for (final Document document : signatureRequest.getDocuments()) {
+		    final FileDataSource dataSource = new FileDataSource(document.getPath());
+		    final OutputPart filePart = dataOut.addFormData(document.getName(),
 					dataSource, MediaType.valueOf(dataSource.getContentType()));
 			filePart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
 					getContentDispositionHeader(document));
@@ -72,9 +72,9 @@ public class DocuSignUtils {
 	 *            the enum list
 	 * @return the comma separated value
 	 */
-	public static String getCommaSeparatedValue(List<? extends Enum<?>> enumList) {
-		StringBuffer stringBuffer = new StringBuffer();
-		for (Enum<?> element : enumList) {
+	public static String getCommaSeparatedValue(final List<? extends Enum<?>> enumList) {
+		final StringBuffer stringBuffer = new StringBuffer();
+		for (final Enum<?> element : enumList) {
 			if (stringBuffer.length() != 0) {
 				stringBuffer.append(",");
 			}
@@ -105,19 +105,19 @@ public class DocuSignUtils {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public static Iterable<Class<?>> getClasses(String packageName)
+	public static Iterable<Class<?>> getClasses(final String packageName)
 			throws ClassNotFoundException, IOException {
-		ClassLoader classLoader = Thread.currentThread()
+		final ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
-		String path = packageName.replace('.', '/');
-		Enumeration<URL> resources = classLoader.getResources(path);
-		List<File> dirs = new ArrayList<File>();
+		final String path = packageName.replace('.', '/');
+		final Enumeration<URL> resources = classLoader.getResources(path);
+		final List<File> dirs = new ArrayList<File>();
 		while (resources.hasMoreElements()) {
-			URL resource = resources.nextElement();
+			final URL resource = resources.nextElement();
 			dirs.add(new File(resource.getFile()));
 		}
-		List<Class<?>> classes = new ArrayList<Class<?>>();
-		for (File directory : dirs) {
+		final List<Class<?>> classes = new ArrayList<Class<?>>();
+		for (final File directory : dirs) {
 			classes.addAll(findClasses(directory, packageName));
 		}
 
@@ -135,7 +135,7 @@ public class DocuSignUtils {
 	 * @return The classes
 	 * @throws ClassNotFoundException
 	 */
-	public static List<Class<?>> findClasses(File directory, String packageName)
+	public static List<Class<?>> findClasses(final File directory, final String packageName)
 			throws ClassNotFoundException {
 		List<Class<?>> classes = null;
 		if (directory.exists()) {
@@ -157,11 +157,11 @@ public class DocuSignUtils {
 	 * @throws ClassNotFoundException
 	 *             the class not found exception
 	 */
-	private static List<Class<?>> findClassesInDirectory(File directory,
-			String packageName) throws ClassNotFoundException {
-		List<Class<?>> classes = new ArrayList<Class<?>>();
-		File[] files = directory.listFiles();
-		for (File file : files) {
+	private static List<Class<?>> findClassesInDirectory(final File directory,
+	        final String packageName) throws ClassNotFoundException {
+	    final List<Class<?>> classes = new ArrayList<Class<?>>();
+	    final File[] files = directory.listFiles();
+		for (final File file : files) {
 			if (file.isDirectory()) {
 				classes.addAll(findClasses(file,
 						packageName + "." + file.getName()));
@@ -196,22 +196,22 @@ public class DocuSignUtils {
 	 * @return the list
 	 * @throws ClassNotFoundException 
 	 */
-	private static List<Class<?>> findClassesInJar(String absolutePath,
-			String packageName) throws ClassNotFoundException {
-		List<Class<?>> classes = new ArrayList<Class<?>>();
+	private static List<Class<?>> findClassesInJar(final String absolutePath,
+	        final String packageName) throws ClassNotFoundException {
+	    final List<Class<?>> classes = new ArrayList<Class<?>>();
 		try {
-			String jarPath = absolutePath.replaceFirst("[.]jar[!].*", ".jar")
+		    final String jarPath = absolutePath.replaceFirst("[.]jar[!].*", ".jar")
 					.replaceFirst("file:", "");
-			String relPath = packageName.replace('.', '/');
-			JarFile jarFile = new JarFile(jarPath);
-			Enumeration<JarEntry> entries = jarFile.entries();
+		    final String relPath = packageName.replace('.', '/');
+		    final JarFile jarFile = new JarFile(jarPath);
+		    final Enumeration<JarEntry> entries = jarFile.entries();
 			while (entries.hasMoreElements()) {
-				JarEntry entry = entries.nextElement();
-				String entryName = entry.getName();
+			    final JarEntry entry = entries.nextElement();
+			    final String entryName = entry.getName();
 				if (entryName.startsWith(relPath)
 						&& entryName.length() > (relPath.length() + "/"
 								.length())) {
-					String className = entryName.replace('/', '.')
+				    final String className = entryName.replace('/', '.')
 							.replace('\\', '.').replace(".class", "");
 					classes.add(Class.forName(className));
 				}
