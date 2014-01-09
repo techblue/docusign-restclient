@@ -25,9 +25,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class TemplateRole extends BaseDto {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -8106974901588913285L;
 
 	/** The client user id. */
@@ -45,6 +42,10 @@ public class TemplateRole extends BaseDto {
     /** The role name. */
     @JsonProperty("roleName")
     private String roleName;
+    
+    /** The tabs. */
+    @JsonProperty
+    private DocumentTabCollection tabs;
 
     /**
      * Gets the client user id.
@@ -121,4 +122,24 @@ public class TemplateRole extends BaseDto {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
+    /**
+     * Gets the tabs.
+     * 
+     * @return the tabs
+     */
+    public DocumentTabCollection getTabs() {
+        return tabs;
+    }
+
+    /**
+     * Sets the tabs.
+     * 
+     * @param tabs the new tabs
+     */
+    public void setTabs(DocumentTabCollection tabs) {
+        this.tabs = tabs;
+    }
+    
+    
 }
