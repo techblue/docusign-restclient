@@ -20,7 +20,7 @@
     </modules>
     <groupId>uk.co.techblue</groupId>
     <artifactId>docusign-restclient</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <name>Docusign RESTful client</name>
     <packaging>pom</packaging>
     <description>A client library to communicate with docusign restful services </description>
@@ -39,6 +39,19 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <distributionManagement>
+        <repository>
+            <id>techblue-nexus-release</id>
+            <name>techblue-release-repository</name>
+            <url>${techblue.maven.repo.baseurl}/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>techblue-nexus-snapshot</id>
+            <name>techblue-snapshot-repository</name>
+            <url>${techblue.maven.repo.baseurl}/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <plugins>
