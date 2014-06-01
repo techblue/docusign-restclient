@@ -28,6 +28,8 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 import org.jboss.resteasy.plugins.providers.multipart.OutputPart;
 
 import uk.co.techblue.docusign.client.BaseService;
+import uk.co.techblue.docusign.client.dto.AuditEvent;
+import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
 import uk.co.techblue.docusign.client.dto.CustomField;
 import uk.co.techblue.docusign.client.dto.Document;
 import uk.co.techblue.docusign.client.dto.DocumentFile;
@@ -40,6 +42,7 @@ import uk.co.techblue.docusign.client.dto.EnvelopeNotificationInfo;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusQueryForm;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusResponse;
 import uk.co.techblue.docusign.client.dto.StatusChangeRequest;
+import uk.co.techblue.docusign.client.dto.VoidEnvelopeRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientStatusCollection;
 import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
@@ -114,8 +117,6 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
 	 * 
 	 * @param credentials
 	 *            the credentials
-	 * @param accountId
-	 *            the account id
 	 * @param envelopeId
 	 *            the envelope id
 	 * @param statusChangeRequest
@@ -128,6 +129,36 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
 		ClientResponse<?> clientResponse = resourceProxy.changeStatus(
 				credentials, envelopeId, statusChangeRequest);
 		validateResponseSuccess(clientResponse, EnvelopeException.class);
+	}
+
+	/**
+	 * Change envelope status.
+	 * 
+	 * @param envelopeId
+	 *            the envelope id
+	 * @throws EnvelopeException
+	 *             the envelope exception
+	 */
+	public void voidEnvelope(String envelopeId,
+			VoidEnvelopeRequest voidEnvelopeRequest) throws EnvelopeException {
+		ClientResponse<?> clientResponse = resourceProxy.voidEnvelope(
+				credentials, envelopeId, voidEnvelopeRequest);
+		validateResponseSuccess(clientResponse, EnvelopeException.class);
+	}
+
+	/**
+	 * Change envelope status.
+	 * 
+	 * @param envelopeId
+	 *            the envelope id
+	 * @throws EnvelopeException
+	 *            the envelope exception
+	 */
+	public AuditEventsResponse getAuditEvents(String envelopeId) throws EnvelopeException {
+		
+		ClientResponse<AuditEventsResponse> clientResponse = resourceProxy.getAuditEvents(credentials, envelopeId);
+		
+		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
 	}
 
 	/**

@@ -13,9 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package uk.co.techblue.docusign.client.utils;
+package uk.co.techblue.docusign.client.dto;
 
-public interface DocuSignConstants {
-    String HEADER_PARAM_AUTHENTICATION = "Authorization";
-    String RESOURCE_CONTEXT_PATH ="/";
+import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+/**
+ * The Class AuditEventsResponse.
+ */
+public class AuditEventsResponse  extends BaseDto  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1713401971162965662L;
+
+	/** The envelopes. */
+	@JsonProperty
+	private List<AuditEvent> auditEvents;
+
+	public List<AuditEvent> getAuditEvents() {
+		return auditEvents;
+	}
 }

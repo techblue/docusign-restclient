@@ -88,7 +88,7 @@ public abstract class Service<RT extends Resource> {
         if (clientResponse.getResponseStatus().getFamily() != Family.SUCCESSFUL) {
         	ErrorResponse errorResponse = null;
         	Exception cause = null;
-        	try{
+        	try {
         		errorResponse = clientResponse.getEntity(ErrorResponse.class);
         	} catch(ClientResponseFailure responseFailure) {
         		cause = responseFailure;

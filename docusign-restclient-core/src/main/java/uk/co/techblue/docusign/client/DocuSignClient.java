@@ -46,7 +46,7 @@ public class DocuSignClient {
     }
 
     private static void registerResteasyProvider(final ResteasyProviderFactory providerFactory, Class<?> providerClass) {
-        boolean registered = providerFactory.getProvider(providerClass) != null;
+        boolean registered = false; //EXARI: providerFactory.getClasses() .getInstance(providerClass) != null;
         if (!registered) {
             providerFactory.registerProvider(providerClass);
             logger.info("Registered custom Provider with Resteasy:" + providerClass.getName());

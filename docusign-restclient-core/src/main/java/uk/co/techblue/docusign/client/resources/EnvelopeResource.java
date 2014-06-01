@@ -36,6 +36,7 @@ import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
 import uk.co.techblue.docusign.client.Resource;
+import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
 import uk.co.techblue.docusign.client.dto.CustomField;
 import uk.co.techblue.docusign.client.dto.DocumentFile;
 import uk.co.techblue.docusign.client.dto.EnvelopeDetailInfo;
@@ -44,12 +45,21 @@ import uk.co.techblue.docusign.client.dto.EnvelopeNotificationInfo;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusQueryForm;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusResponse;
 import uk.co.techblue.docusign.client.dto.StatusChangeRequest;
+import uk.co.techblue.docusign.client.dto.VoidEnvelopeRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientStatusCollection;
 import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.utils.DocuSignConstants;
 
 @Path(DocuSignConstants.RESOURCE_CONTEXT_PATH)
 public interface EnvelopeResource extends Resource {
+
+	@PUT
+	@Path("envelopes/{envelopeId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ClientResponse<String> voidEnvelope(
+			@HeaderParam(DocuSignConstants.HEADER_PARAM_AUTHENTICATION) DocuSignCredentials credentials,
+			@PathParam("envelopeId") String envelopeId,
+			VoidEnvelopeRequest VoidEnvelopeRequest);
 
 	@PUT
 	@Path("envelopes/{envelopeId}/status")
@@ -67,6 +77,13 @@ public interface EnvelopeResource extends Resource {
 			@HeaderParam(FieldName.CONTENT_DISPOSITION) String contentDisposition,
 			@PathParam("envelopeId") String envelopeId,
 			@PathParam("documentId") String documentId, File docFile);
+
+	@GET
+	@Path("envelopes/{envelopeId}/audit_events")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ClientResponse<AuditEventsResponse> getAuditEvents(
+			@HeaderParam(DocuSignConstants.HEADER_PARAM_AUTHENTICATION) DocuSignCredentials credentials,
+			@PathParam("envelopeId") String envelopeId);
 
 	@GET
 	@Path("envelopes/{envelopeId}")
