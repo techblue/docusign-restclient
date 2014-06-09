@@ -11,7 +11,7 @@ import java.util.Map;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class AuditEvent {
-	private DateFormat iso8601DateFormat = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
+	private DateFormat iso8601DateFormat = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
 	public static final String LOG_TIME = "logTime";
 	public static final String SOURCE = "Source";
 	public static final String USERNAME = "UserName";
@@ -55,19 +55,18 @@ public class AuditEvent {
 		return getMap().get(key);
 	}
 	
-	public Date logTime() {
+	public Date getLogTime() {
 		String value = getEventField(LOG_TIME);
-		Date logTime = null;
+		Date datetime = null;
 		if (value != null) {
 			try {
-				logTime = iso8601DateFormat.parse(value);
-			} catch (ParseException e) {
-				/* Ignore it */
+				datetime = iso8601DateFormat.parse(value);
+			} 
+			catch (ParseException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return logTime;
+		return datetime;
 	}
 	
 	public String getMessage() {

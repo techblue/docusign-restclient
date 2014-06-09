@@ -18,12 +18,14 @@ package uk.co.techblue.docusign.client.resources;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.Resource;
+import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.utils.DocuSignConstants;
@@ -36,4 +38,11 @@ public interface TemplateResource extends Resource {
     @Path("templates")
     public ClientResponse<TemplateInfo> retrieveTemplates(
             @HeaderParam(DocuSignConstants.HEADER_PARAM_AUTHENTICATION) DocuSignCredentials credentials);
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("templates/{templateId}")
+    public ClientResponse<Template> retrieveTemplate (
+            @HeaderParam(DocuSignConstants.HEADER_PARAM_AUTHENTICATION) DocuSignCredentials credentials,
+    		@PathParam("templateId") String templateId);
 }

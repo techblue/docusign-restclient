@@ -28,6 +28,9 @@ public class Template extends Envelope {
 	@JsonProperty
 	private EnvelopeTemplateDefinition envelopeTemplateDefinition;
 
+	@JsonProperty("notification")
+	private EnvelopeNotificationInfo notificationTemplate;
+	
 	public EnvelopeTemplateDefinition getEnvelopeTemplateDefinition() {
 		return envelopeTemplateDefinition;
 	}
@@ -41,5 +44,14 @@ public class Template extends Envelope {
 	public void setStatus(Status status) {
 		throw new IllegalAccessError(
 				"Setting status is not allowed on a template");
+	}
+
+	public EnvelopeNotificationInfo getNotificationTemplate() {
+		return notificationTemplate;
+	}
+
+	public void setNotificationTemplate(
+			EnvelopeNotificationInfo notificationTemplate) {
+		this.notificationTemplate = notificationTemplate;
 	}
 }

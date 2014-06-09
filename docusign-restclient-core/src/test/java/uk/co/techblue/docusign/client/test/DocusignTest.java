@@ -35,6 +35,7 @@ import uk.co.techblue.docusign.client.dto.EnvelopeNotificationInfo;
 import uk.co.techblue.docusign.client.dto.EnvelopeReminder;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusQueryForm;
 import uk.co.techblue.docusign.client.dto.SignatureResponse;
+import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.dto.TemplateRole;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
@@ -67,9 +68,10 @@ public class DocusignTest {
             // testLoginService(credentials);
             // testEnvelopeStatusChange(credentials);
             // testTemplateService(credentials);
-        	testGettingAuditEvents(credentials);
+//        	testGettingAuditEvents(credentials);
 //            testSendingDocumentSignRequest(credentials);
 //            testSendTemplateSignRequest(credentials);
+        	testRetrieveTemplate(credentials);
             // testSignatureService(credentials);
             // testSendingDocument(credentials);
             // testGetEnvelope(credentials);
@@ -86,6 +88,22 @@ public class DocusignTest {
         } catch (ServiceInitException e) {
             e.printStackTrace();
         }
+    }
+
+    @SuppressWarnings("unused")
+    private static void testRetrieveTemplate(DocuSignCredentials credentials) throws ServiceInitException {
+        TemplateService templateService = new TemplateService(SERVER_URI, credentials);
+		try {
+			Template template = templateService.retrieveTemplate("beba756e-5826-43be-8755-861d429b8a94");
+        	RecipientCollection recsCollection = template.getRecipients();
+        	for (Signer signer : recsCollection.getSigners()) {
+        		System.out.println(signer);
+        	}
+		} 
+		catch (TemplateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     @SuppressWarnings("unused")
