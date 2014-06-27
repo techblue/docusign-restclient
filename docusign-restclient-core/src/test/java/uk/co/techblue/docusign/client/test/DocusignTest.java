@@ -215,7 +215,7 @@ public class DocusignTest {
             System.err
                 .println("Sender View: "
                     + cvService
-                        .getEnvelopeSenderView("<Envelope Id>"));
+                        .getEnvelopeSenderView("<Envelope Id>", null));
 
             System.err.println("Recipient View: "
                 + cvService.getEnvelopeRecipientView(

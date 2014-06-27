@@ -19,6 +19,7 @@ import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.BaseService;
 import uk.co.techblue.docusign.client.dto.CorrectionViewRequest;
+import uk.co.techblue.docusign.client.dto.EnvelopeSenderViewRequest;
 import uk.co.techblue.docusign.client.dto.UrlResponse;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientViewRequest;
 import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
@@ -85,10 +86,9 @@ public class ConsoleViewService extends BaseService<ConsoleViewResource> {
 	 * @throws ConsoleViewException
 	 *             the console view exception
 	 */
-	public UrlResponse getEnvelopeSenderView(String envelopeId)
+	public UrlResponse getEnvelopeSenderView(String envelopeId, EnvelopeSenderViewRequest envelopeSenderViewRequest)
 			throws ConsoleViewException {
-		ClientResponse<UrlResponse> clientResponse = resourceProxy
-				.getEnvelopeSenderView(credentials, envelopeId);
+		ClientResponse<UrlResponse> clientResponse = resourceProxy.getEnvelopeSenderView(credentials, envelopeId, envelopeSenderViewRequest);
 		return parseEntityFromResponse(clientResponse,
 				ConsoleViewException.class);
 	}

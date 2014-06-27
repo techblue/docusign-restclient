@@ -43,6 +43,7 @@ public enum Status {
 	/** The template. */
 	template,
 	/** The faxpending. */
-	faxpending
-
+	faxpending,
+	/** Autoresponded. */
+	autoresponded
 }
