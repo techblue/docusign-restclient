@@ -17,5 +17,6 @@ package uk.co.techblue.docusign.client.utils;
 
 public interface DocuSignConstants {
     String HEADER_PARAM_AUTHENTICATION = "Authorization";
+    String HEADER_PARAM_ACT_AS_USER = "X-DocuSign-Act-As-User";
     String RESOURCE_CONTEXT_PATH ="/";
 }

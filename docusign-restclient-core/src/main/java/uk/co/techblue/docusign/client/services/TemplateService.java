@@ -18,9 +18,9 @@ package uk.co.techblue.docusign.client.services;
 import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.BaseService;
+import uk.co.techblue.docusign.client.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
 import uk.co.techblue.docusign.client.exception.TemplateException;
@@ -74,12 +74,12 @@ public class TemplateService extends BaseService<TemplateResource> {
      *             the template exception
      */
     public TemplateInfo retrieveTemplates() throws TemplateException {
-        ClientResponse<TemplateInfo> clientResponse = resourceProxy.retrieveTemplates(credentials);
+        ClientResponse<TemplateInfo> clientResponse = resourceProxy.retrieveTemplates();
         return parseEntityFromResponse(clientResponse, TemplateException.class);
     }
 
     public Template retrieveTemplate(String templateId) throws TemplateException {
-        ClientResponse<Template> clientResponse = resourceProxy.retrieveTemplate(credentials, templateId);
+        ClientResponse<Template> clientResponse = resourceProxy.retrieveTemplate(templateId);
 
         return parseEntityFromResponse(clientResponse, TemplateException.class);
     }

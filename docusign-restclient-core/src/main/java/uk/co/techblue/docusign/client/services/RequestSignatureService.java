@@ -19,10 +19,10 @@ import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
 import uk.co.techblue.docusign.client.BaseService;
+import uk.co.techblue.docusign.client.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.DocumentSignatureRequest;
 import uk.co.techblue.docusign.client.dto.SignatureResponse;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
 import uk.co.techblue.docusign.client.exception.SignatureRequestException;
@@ -77,8 +77,7 @@ public class RequestSignatureService extends BaseService<RequestSignatureResourc
      */
     public SignatureResponse sendFromTemplate(TemplateSignatureRequest signatureRequest)
             throws SignatureRequestException {
-        ClientResponse<SignatureResponse> clientResponse = resourceProxy.sendFromTemplate(credentials,
-                signatureRequest);
+        ClientResponse<SignatureResponse> clientResponse = resourceProxy.sendFromTemplate(signatureRequest);
         return parseEntityFromResponse(clientResponse, SignatureRequestException.class);
     }
 
@@ -94,7 +93,7 @@ public class RequestSignatureService extends BaseService<RequestSignatureResourc
     public SignatureResponse sendDocument(DocumentSignatureRequest signatureRequest)
             throws SignatureRequestException {
         MultipartFormDataOutput dataOut = DocuSignUtils.generateMultipartFormDataOutput(signatureRequest);
-        ClientResponse<SignatureResponse> clientResponse = resourceProxy.sendDocument(credentials, dataOut);
+        ClientResponse<SignatureResponse> clientResponse = resourceProxy.sendDocument(dataOut);
         return parseEntityFromResponse(clientResponse, SignatureRequestException.class);
     }
 

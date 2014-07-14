@@ -18,11 +18,11 @@ package uk.co.techblue.docusign.client.services;
 import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.BaseService;
+import uk.co.techblue.docusign.client.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.CorrectionViewRequest;
 import uk.co.techblue.docusign.client.dto.EnvelopeSenderViewRequest;
 import uk.co.techblue.docusign.client.dto.UrlResponse;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientViewRequest;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.ConsoleViewException;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
@@ -71,8 +71,7 @@ public class ConsoleViewService extends BaseService<ConsoleViewResource> {
 	 *             the console view exception
 	 */
 	public UrlResponse getAuthenticationView() throws ConsoleViewException {
-		ClientResponse<UrlResponse> clientResponse = resourceProxy
-				.getAuthenticationView(credentials);
+		ClientResponse<UrlResponse> clientResponse = resourceProxy.getAuthenticationView();
 		return parseEntityFromResponse(clientResponse,
 				ConsoleViewException.class);
 	}
@@ -88,7 +87,7 @@ public class ConsoleViewService extends BaseService<ConsoleViewResource> {
 	 */
 	public UrlResponse getEnvelopeSenderView(String envelopeId, EnvelopeSenderViewRequest envelopeSenderViewRequest)
 			throws ConsoleViewException {
-		ClientResponse<UrlResponse> clientResponse = resourceProxy.getEnvelopeSenderView(credentials, envelopeId, envelopeSenderViewRequest);
+		ClientResponse<UrlResponse> clientResponse = resourceProxy.getEnvelopeSenderView(envelopeId, envelopeSenderViewRequest);
 		return parseEntityFromResponse(clientResponse,
 				ConsoleViewException.class);
 	}
@@ -108,8 +107,7 @@ public class ConsoleViewService extends BaseService<ConsoleViewResource> {
 			RecipientViewRequest recipientViewRequest)
 			throws ConsoleViewException {
 		ClientResponse<UrlResponse> clientResponse = resourceProxy
-				.getEnvelopeRecipientView(credentials, envelopeId,
-						recipientViewRequest);
+				.getEnvelopeRecipientView(envelopeId, recipientViewRequest);
 		return parseEntityFromResponse(clientResponse,
 				ConsoleViewException.class);
 	}
@@ -128,9 +126,7 @@ public class ConsoleViewService extends BaseService<ConsoleViewResource> {
 	public UrlResponse getEnvelopeCorrectionView(String envelopeId,
 			CorrectionViewRequest correctionViewRequest)
 			throws ConsoleViewException {
-		ClientResponse<UrlResponse> clientResponse = resourceProxy
-				.getEnvelopeCorrectionView(credentials, envelopeId,
-						correctionViewRequest);
+		ClientResponse<UrlResponse> clientResponse = resourceProxy.getEnvelopeCorrectionView(envelopeId, correctionViewRequest);
 		return parseEntityFromResponse(clientResponse,
 				ConsoleViewException.class);
 	}

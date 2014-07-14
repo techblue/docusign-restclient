@@ -18,7 +18,6 @@ package uk.co.techblue.docusign.client;
 import org.apache.commons.lang3.StringUtils;
 
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.LoginException;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
@@ -49,7 +48,7 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
      *             the service init exception
      */
     public BaseService(String serverUri, DocuSignCredentials credentials) throws ServiceInitException {
-        super(getRestBaseUri(serverUri, credentials));
+        super(getRestBaseUri(serverUri, credentials), credentials);
         this.credentials = credentials;
 
     }
@@ -66,7 +65,7 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
      */
     public BaseService(LoginAccount loginAccount, DocuSignCredentials credentials)
             throws ServiceInitException {
-        super(loginAccount.getBaseUrl());
+        super(loginAccount.getBaseUrl(), credentials);
         this.credentials = credentials;
     }
 
@@ -85,8 +84,7 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
             throws ServiceInitException {
         LoginAccount defaultAccount = getDefaultAccount(serverUri, credentials);
         if (defaultAccount == null) {
-            throw new ServiceInitException("Default account not found for docusign user '"
-                    + credentials.getUsername() + "'");
+            throw new ServiceInitException("Default account not found for docusign user");
         }
         String baseUrl = defaultAccount.getBaseUrl();
         if (StringUtils.isBlank(baseUrl)) {
@@ -109,23 +107,21 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
      */
     private static LoginAccount getDefaultAccount(String serverUri, DocuSignCredentials credentials)
             throws ServiceInitException {
-        LoginService loginService = new LoginService(serverUri);
+        LoginService loginService = new LoginService(serverUri, credentials);
         ClientInfo clientInfo = null;
         try {
-            clientInfo = loginService.getLoginInformation(credentials);
+            clientInfo = loginService.getLoginInformation();
         } catch (LoginException le) {
             throw new ServiceInitException(
                     "Error occurred while getting login information during initialization of DocuSign Service.",
                     le);
         }
         if (clientInfo == null) {
-            throw new ServiceInitException("Failed to retrieve client info against credentials.\n"
-                    + credentials);
+            throw new ServiceInitException("Failed to retrieve client info against credentials.\n");
         }
         if (clientInfo.getLoginAccounts() == null || clientInfo.getLoginAccounts().size() == 0) {
             throw new ServiceInitException(
-                    "Login accounts not found in client info retrirved against specified credentials.\n "
-                            + credentials + "\n" + clientInfo);
+                    "Login accounts not found in client info retrirved against specified credentials.\n " + clientInfo);
         }
         for (LoginAccount loginAccount : clientInfo.getLoginAccounts()) {
             if (loginAccount.isDefault()) {
@@ -133,7 +129,7 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
             }
         }
         throw new ServiceInitException("Default account not found against specified credentials.\n "
-                + credentials + "\n" + clientInfo);
+                + clientInfo);
     }
 
 }

@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import uk.co.techblue.docusign.client.DocuSignCredentials;
+import uk.co.techblue.docusign.client.TokenDocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.AuditEvent;
 import uk.co.techblue.docusign.client.dto.AuditEventField;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
@@ -45,7 +47,6 @@ import uk.co.techblue.docusign.client.dto.recipients.Signer;
 import uk.co.techblue.docusign.client.dto.tabs.SignHereTab;
 import uk.co.techblue.docusign.client.dto.tabs.TextTab;
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
 import uk.co.techblue.docusign.client.exception.ConsoleViewException;
 import uk.co.techblue.docusign.client.exception.EnvelopeException;
@@ -603,10 +604,10 @@ public class DocusignTest {
     }
 
     private static ClientInfo testLoginService(DocuSignCredentials credentials) {
-        LoginService loginService = new LoginService(SERVER_URI);
+        LoginService loginService = new LoginService(SERVER_URI, credentials);
         ClientInfo clientInfo = null;
         try {
-            clientInfo = loginService.getLoginInformation(credentials);
+            clientInfo = loginService.getLoginInformation();
             System.out.println("ClientInfo: " + clientInfo);
         } catch (LoginException e) {
             System.err.println("Error Response: " + e.getErrorResponse());
@@ -616,7 +617,7 @@ public class DocusignTest {
     }
 
     private static DocuSignCredentials getDocuSignCredentials() {
-        DocuSignCredentials credentials = new DocuSignCredentials("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "");
+        DocuSignCredentials credentials = new TokenDocuSignCredentials("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
         return credentials;
     }
 }
