@@ -19,7 +19,7 @@ import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
 import uk.co.techblue.docusign.client.BaseService;
-import uk.co.techblue.docusign.client.DocuSignCredentials;
+import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.DocumentSignatureRequest;
 import uk.co.techblue.docusign.client.dto.SignatureResponse;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package uk.co.techblue.docusign.client;
+package uk.co.techblue.docusign.client.credential;
 
 import org.jboss.resteasy.client.ClientRequest;
 
@@ -23,36 +23,37 @@ import uk.co.techblue.docusign.client.utils.DocuSignConstants;
 /**
  * The Class DocuSignCredentials.
  */
-public class TokenDocuSignCredentials implements DocuSignCredentials {
+public class TokenDocuSignCredential extends BaseDto implements DocuSignCredentials {
 
-	private static final long serialVersionUID = -4482376291980213269L;
-	
+    private static final long serialVersionUID = -4482376291980213269L;
+
     /** OAuth2 token */
     private String token;
-    
+
     /** username */
     private String username;
-    
+
     /** X-DocuSign-Act-As-User */
     private String xDocuSignActAsUser;
-    
-    public TokenDocuSignCredentials(String token, String username, String xDocuSignActAsUser) {
+
+    public TokenDocuSignCredential(final String token, final String username, final String xDocuSignActAsUser) {
         this.token = token;
         this.username = username;
         this.xDocuSignActAsUser = xDocuSignActAsUser;
     }
-    
+
+    @Override
     public String getUsername() {
-		return username;
-	}
+        return username;
+    }
 
     public String getXDocuSignActAsUser() {
-    	return xDocuSignActAsUser;
+        return xDocuSignActAsUser;
     }
-    
-    public void setHeader(ClientRequest request) {
-    	request.header(DocuSignConstants.HEADER_PARAM_AUTHENTICATION, "bearer " + token);
-    	request.header(DocuSignConstants.HEADER_PARAM_ACT_AS_USER, xDocuSignActAsUser);
+
+    @Override
+    public void setHeader(final ClientRequest request) {
+        request.header(DocuSignConstants.HEADER_PARAM_AUTHORIZATION, "bearer " + token);
+        request.header(DocuSignConstants.HEADER_PARAM_ACT_AS_USER, xDocuSignActAsUser);
     }
 }
-

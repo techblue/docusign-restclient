@@ -28,8 +28,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 import org.jboss.resteasy.plugins.providers.multipart.OutputPart;
 
 import uk.co.techblue.docusign.client.BaseService;
-import uk.co.techblue.docusign.client.DocuSignCredentials;
-import uk.co.techblue.docusign.client.dto.AuditEvent;
+import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
 import uk.co.techblue.docusign.client.dto.CustomField;
 import uk.co.techblue.docusign.client.dto.Document;
@@ -58,407 +57,344 @@ import uk.co.techblue.docusign.client.utils.DocuSignUtils;
  */
 public class EnvelopeService extends BaseService<EnvelopeResource> {
 
-	/**
-	 * Instantiates a new envelope service.
-	 * 
-	 * @param serverUri
-	 *            the server uri
-	 * @param credentials
-	 *            the credentials
-	 * @throws ServiceInitException
-	 *             the service init exception
-	 */
-	public EnvelopeService(String serverUri, DocuSignCredentials credentials)
-			throws ServiceInitException {
-		super(serverUri, credentials);
-	}
+    /**
+     * Instantiates a new envelope service.
+     * 
+     * @param serverUri the server uri
+     * @param credentials the credentials
+     * @throws ServiceInitException the service init exception
+     */
+    public EnvelopeService(final String serverUri, final DocuSignCredentials credentials)
+        throws ServiceInitException {
+        super(serverUri, credentials);
+    }
 
-	/**
-	 * Instantiates a new envelope service.
-	 * 
-	 * @param credentials
-	 *            the credentials
-	 * @param loginAccount
-	 *            the login account
-	 * @throws ServiceInitException
-	 *             the service init exception
-	 */
-	public EnvelopeService(DocuSignCredentials credentials,
-			LoginAccount loginAccount) throws ServiceInitException {
-		super(loginAccount, credentials);
-	}
+    /**
+     * Instantiates a new envelope service.
+     * 
+     * @param credentials the credentials
+     * @param loginAccount the login account
+     * @throws ServiceInitException the service init exception
+     */
+    public EnvelopeService(final DocuSignCredentials credentials,
+        final LoginAccount loginAccount) throws ServiceInitException {
+        super(loginAccount, credentials);
+    }
 
-	/**
-	 * Send from drafts.
-	 * 
-	 * @param credentials
-	 *            the credentials
-	 * @param accountId
-	 *            the account id
-	 * @param envelopeId
-	 *            the envelope id
-	 * @param statusChangeReason
-	 *            the status change reason
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public void sendFromDrafts(String envelopeId, String statusChangeReason)
-			throws EnvelopeException {
-		StatusChangeRequest statusChangeRequest = new StatusChangeRequest();
-		statusChangeRequest.setStatus(Status.sent);
-		statusChangeRequest.setStatusReason(statusChangeReason);
-		ClientResponse<?> clientResponse = resourceProxy.changeStatus(envelopeId, statusChangeRequest);
-		validateResponseSuccess(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Send from drafts.
+     * 
+     * @param credentials the credentials
+     * @param accountId the account id
+     * @param envelopeId the envelope id
+     * @param statusChangeReason the status change reason
+     * @throws EnvelopeException the envelope exception
+     */
+    public void sendFromDrafts(final String envelopeId, final String statusChangeReason)
+        throws EnvelopeException {
+        final StatusChangeRequest statusChangeRequest = new StatusChangeRequest();
+        statusChangeRequest.setStatus(Status.sent);
+        statusChangeRequest.setStatusReason(statusChangeReason);
+        final ClientResponse<?> clientResponse = resourceProxy.changeStatus(envelopeId, statusChangeRequest);
+        validateResponseSuccess(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Change envelope status.
-	 * 
-	 * @param credentials
-	 *            the credentials
-	 * @param envelopeId
-	 *            the envelope id
-	 * @param statusChangeRequest
-	 *            the status change request
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public void changeStatus(String envelopeId,
-			StatusChangeRequest statusChangeRequest) throws EnvelopeException {
-		ClientResponse<?> clientResponse = resourceProxy.changeStatus(envelopeId, statusChangeRequest);
-		validateResponseSuccess(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Change envelope status.
+     * 
+     * @param credentials the credentials
+     * @param envelopeId the envelope id
+     * @param statusChangeRequest the status change request
+     * @throws EnvelopeException the envelope exception
+     */
+    public void changeStatus(final String envelopeId,
+        final StatusChangeRequest statusChangeRequest) throws EnvelopeException {
+        final ClientResponse<?> clientResponse = resourceProxy.changeStatus(envelopeId, statusChangeRequest);
+        validateResponseSuccess(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Change envelope status.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public void voidEnvelope(String envelopeId,
-			VoidEnvelopeRequest voidEnvelopeRequest) throws EnvelopeException {
-		ClientResponse<?> clientResponse = resourceProxy.voidEnvelope(envelopeId, voidEnvelopeRequest);
-		validateResponseSuccess(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Change envelope status.
+     * 
+     * @param envelopeId the envelope id
+     * @throws EnvelopeException the envelope exception
+     */
+    public void voidEnvelope(final String envelopeId,
+        final VoidEnvelopeRequest voidEnvelopeRequest) throws EnvelopeException {
+        final ClientResponse<?> clientResponse = resourceProxy.voidEnvelope(envelopeId, voidEnvelopeRequest);
+        validateResponseSuccess(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Change envelope status.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @throws EnvelopeException
-	 *            the envelope exception
-	 */
-	public AuditEventsResponse getAuditEvents(String envelopeId) throws EnvelopeException {
-		
-		ClientResponse<AuditEventsResponse> clientResponse = resourceProxy.getAuditEvents(envelopeId);
-		
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Change envelope status.
+     * 
+     * @param envelopeId the envelope id
+     * @throws EnvelopeException the envelope exception
+     */
+    public AuditEventsResponse getAuditEvents(final String envelopeId) throws EnvelopeException {
 
-	/**
-	 * Adds a document to an existing envelope.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @param document
-	 *            the document
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public void addDocumentToDraftEnvelope(String envelopeId, Document document)
-			throws EnvelopeException {
-		FileDataSource fileDataSource = new FileDataSource(document.getPath());
-		String contentDisposition = DocuSignUtils
-				.getContentDispositionHeader(document);
-		ClientResponse<String> clientResponse;
-		clientResponse = resourceProxy.addDocumentToDraftEnvelope(contentDisposition, envelopeId, document.getDocumentId()
-						.toString(), fileDataSource.getFile());
-		validateResponseSuccess(clientResponse, EnvelopeException.class);
-	}
+        final ClientResponse<AuditEventsResponse> clientResponse = resourceProxy.getAuditEvents(envelopeId);
 
-	/**
-	 * Gets the envelope.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the envelope
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public EnvelopeDetailInfo getEnvelope(String envelopeId) throws EnvelopeException {
-		ClientResponse<EnvelopeDetailInfo> clientResponse = resourceProxy.getEnvelope(envelopeId);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Save to drafts.
-	 * 
-	 * @param envelope
-	 *            the envelope
-	 * @return the string
-	 * @throws SignatureRequestException
-	 *             the signature request exception
-	 */
-	public String saveToDrafts(Envelope envelope)
-			throws SignatureRequestException {
-		MultipartFormDataOutput dataOut = generateMultipartFormDataOutput(envelope);
-		ClientResponse<Map<String, String>> clientResponse = resourceProxy
-				.saveToDrafts(dataOut);
-		return parseEntityFromResponse(clientResponse,
-				SignatureRequestException.class).get("envelopeId");
-	}
+    /**
+     * Adds a document to an existing envelope.
+     * 
+     * @param envelopeId the envelope id
+     * @param document the document
+     * @throws EnvelopeException the envelope exception
+     */
+    public void addDocumentToDraftEnvelope(final String envelopeId, final Document document)
+        throws EnvelopeException {
+        final FileDataSource fileDataSource = new FileDataSource(document.getPath());
+        final String contentDisposition = DocuSignUtils
+            .getContentDispositionHeader(document);
+        ClientResponse<String> clientResponse;
+        clientResponse = resourceProxy.addDocumentToDraftEnvelope(contentDisposition, envelopeId, document.getDocumentId()
+            .toString(), fileDataSource.getFile());
+        validateResponseSuccess(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Generates multipart form data output.
-	 * 
-	 * @param envelope
-	 *            the envelope
-	 * @return the multipart form data output
-	 */
-	private MultipartFormDataOutput generateMultipartFormDataOutput(
-			Envelope envelope) {
-		MultipartFormDataOutput dataOut = new MultipartFormDataOutput();
-		dataOut.addFormData("request-type", "Save envelope as draft",
-				MediaType.APPLICATION_JSON_TYPE);
-		@SuppressWarnings("unused")
-		OutputPart metadataPart = dataOut.addFormData("envelope_definition",
-				envelope, MediaType.APPLICATION_JSON_TYPE);
-		// metadataPart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
-		// "form-data");
-		for (DocumentInfo document : envelope.getDocuments()) {
-			FileDataSource dataSource = new FileDataSource(document.getPath());
-			OutputPart filePart = dataOut.addFormData(document.getName(),
-					dataSource, MediaType.valueOf(dataSource.getContentType()));
-			filePart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
-					DocuSignUtils.getContentDispositionHeader(document));
-		}
-		return dataOut;
-	}
+    /**
+     * Gets the envelope.
+     * 
+     * @param envelopeId the envelope id
+     * @return the envelope
+     * @throws EnvelopeException the envelope exception
+     */
+    public EnvelopeDetailInfo getEnvelope(final String envelopeId) throws EnvelopeException {
+        final ClientResponse<EnvelopeDetailInfo> clientResponse = resourceProxy.getEnvelope(envelopeId);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Gets the envelope status changes.
-	 * 
-	 * @param statusQueryForm
-	 *            the status query form
-	 * @return the envelope status changes
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public EnvelopeStatusResponse getEnvelopeStatus(
-			EnvelopeStatusQueryForm statusQueryForm) throws EnvelopeException {
-		ClientResponse<EnvelopeStatusResponse> clientResponse = resourceProxy
-				.getEnvelopeStatus(statusQueryForm);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
-	
-	
-	/**
-	 * Gets the envelope status changes.
-	 * 
-	 * @param statusQueryForm
-	 *            the status query form
-	 * @return the envelope status changes
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public EnvelopeInfo getEnvelopeStatus(String envelopeId)
-			throws EnvelopeException {
-		List<String> envelopeIds = new ArrayList<String>();
-		envelopeIds.add(envelopeId);
-		EnvelopeStatusQueryForm statusQueryForm = new EnvelopeStatusQueryForm();
-		statusQueryForm.setEnvelopeIds(envelopeIds);
-		ClientResponse<EnvelopeStatusResponse> clientResponse = resourceProxy
-				.getEnvelopeStatus(statusQueryForm);
-		EnvelopeStatusResponse statusResponse = parseEntityFromResponse(
-				clientResponse, EnvelopeException.class);
-		if (statusResponse != null && statusResponse.getEnvelopes() != null
-				&& statusResponse.getEnvelopes().size() > 0) {
-			return statusResponse.getEnvelopes().get(0);
-		}
-		return null;
-	}
-	
-	/**
-	 * This retrieves a PDF containing the combined content of all documents and
-	 * the certificate.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the certificate
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public DocumentFile getCertificate(String envelopeId)
-			throws EnvelopeException {
-		ClientResponse<DocumentFile> clientResponse = resourceProxy
-				.getCertificate(envelopeId, null, null);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
-	
-	/**
-	 * This retrieves a PDF containing the combined content of all documents and
-	 * the certificate.
-	 * 
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @param watermark
-	 *            the watermark. If the account has the watermark feature
-	 *            enabled and the envelope is not complete, the watermark for
-	 *            the account is added to the PDF documents. This option can
-	 *            remove the watermark.
-	 * 
-	 * @param certificate
-	 *            the certificate. This option can remove the envelope signing
-	 *            certificate from the download.
-	 * 
-	 * @return the certificate
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public DocumentFile getCertificate(String envelopeId, Boolean watermark,
-			Boolean certificate) throws EnvelopeException {
-		ClientResponse<DocumentFile> clientResponse = resourceProxy
-				.getCertificate(envelopeId, watermark, certificate);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Save to drafts.
+     * 
+     * @param envelope the envelope
+     * @return the string
+     * @throws SignatureRequestException the signature request exception
+     */
+    public String saveToDrafts(final Envelope envelope)
+        throws SignatureRequestException {
+        final MultipartFormDataOutput dataOut = generateMultipartFormDataOutput(envelope);
+        final ClientResponse<Map<String, String>> clientResponse = resourceProxy
+            .saveToDrafts(dataOut);
+        return parseEntityFromResponse(clientResponse,
+            SignatureRequestException.class).get("envelopeId");
+    }
 
-	/**
-	 * Gets the documents combined.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the documents combined
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public DocumentFile getDocumentsCombined(String envelopeId)
-			throws EnvelopeException {
-		ClientResponse<DocumentFile> clientResponse = resourceProxy
-				.getDocumentsCombined(envelopeId);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Generates multipart form data output.
+     * 
+     * @param envelope the envelope
+     * @return the multipart form data output
+     */
+    private MultipartFormDataOutput generateMultipartFormDataOutput(
+        final Envelope envelope) {
+        final MultipartFormDataOutput dataOut = new MultipartFormDataOutput();
+        dataOut.addFormData("request-type", "Save envelope as draft",
+            MediaType.APPLICATION_JSON_TYPE);
+        dataOut.addFormData("envelope_definition",
+            envelope, MediaType.APPLICATION_JSON_TYPE);
+        // metadataPart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
+        // "form-data");
+        for (final DocumentInfo document : envelope.getDocuments()) {
+            final FileDataSource dataSource = new FileDataSource(document.getPath());
+            final OutputPart filePart = dataOut.addFormData(document.getName(),
+                dataSource, MediaType.valueOf(dataSource.getContentType()));
+            filePart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
+                DocuSignUtils.getContentDispositionHeader(document));
+        }
+        return dataOut;
+    }
 
-	/**
-	 * Gets the documents info.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the documents info
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public EnvelopeDocumentInfo getDocumentsInfo(String envelopeId)
-			throws EnvelopeException {
-		ClientResponse<EnvelopeDocumentInfo> clientResponse = resourceProxy
-				.getDocumentsInfo(envelopeId);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Gets the envelope status changes.
+     * 
+     * @param statusQueryForm the status query form
+     * @return the envelope status changes
+     * @throws EnvelopeException the envelope exception
+     */
+    public EnvelopeStatusResponse getEnvelopeStatus(
+        final EnvelopeStatusQueryForm statusQueryForm) throws EnvelopeException {
+        final ClientResponse<EnvelopeStatusResponse> clientResponse = resourceProxy
+            .getEnvelopeStatus(statusQueryForm);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
 
-	/**
-	 * Gets the document.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @param documentId
-	 *            the document id
-	 * @return the document
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public DocumentFile getDocument(String envelopeId, String documentId)
-			throws EnvelopeException {
-		ClientResponse<DocumentFile> clientResponse = resourceProxy
-				.getDocument(envelopeId, documentId);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
-	
-	/**
-	 * Gets information about the custom fields included in the envelope.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the custom fields
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public List<CustomField> getCustomFields(String envelopeId)
-			throws EnvelopeException {
-		ClientResponse<Map<String, List<CustomField>>> clientResponse = resourceProxy
-				.getCustomFields(envelopeId);
-		Map<String, List<CustomField>> customFieldResponse = parseEntityFromResponse(
-				clientResponse, EnvelopeException.class);
-		if (customFieldResponse != null) {
-			return customFieldResponse.get("customFields");
-		}
-		return null;
-	}
-	
-	/**
-	 * Gets the the reminder and expiration information for the envelope.
-	 * 
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the notification info
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public EnvelopeNotificationInfo getNotificationInfo(String envelopeId)
-			throws EnvelopeException {
-		ClientResponse<EnvelopeNotificationInfo> clientResponse = resourceProxy.getNotificationInfo(envelopeId);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
-	
-	/**
-	 * Gets the status for all recipients of a single envelope.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @return the recipient status
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public RecipientStatusCollection getRecipientStatus(String envelopeId)
-			throws EnvelopeException {
-		ClientResponse<RecipientStatusCollection> clientResponse = resourceProxy.getRecipientStatus(envelopeId, null, null);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
-	
-	/**
-	 * Gets the he status for all recipients of a single envelope.
-	 * 
-	 * @param envelopeId
-	 *            the envelope id
-	 * @param includeTabs
-	 *            If set to true, the tabs associated with the recipient are
-	 *            returned.
-	 * @param includeExtended
-	 *            If set to true, the extended properties are returned
-	 * 
-	 * @return the recipient status
-	 * @throws EnvelopeException
-	 *             the envelope exception
-	 */
-	public RecipientStatusCollection getRecipientStatus(String envelopeId,
-			Boolean includeTabs, Boolean includeExtended)
-			throws EnvelopeException {
-		ClientResponse<RecipientStatusCollection> clientResponse = resourceProxy.getRecipientStatus(envelopeId, includeTabs,
-						includeExtended);
-		return parseEntityFromResponse(clientResponse, EnvelopeException.class);
-	}
+    /**
+     * Gets the envelope status changes.
+     * 
+     * @param statusQueryForm the status query form
+     * @return the envelope status changes
+     * @throws EnvelopeException the envelope exception
+     */
+    public EnvelopeInfo getEnvelopeStatus(final String envelopeId)
+        throws EnvelopeException {
+        final List<String> envelopeIds = new ArrayList<String>();
+        envelopeIds.add(envelopeId);
+        final EnvelopeStatusQueryForm statusQueryForm = new EnvelopeStatusQueryForm();
+        statusQueryForm.setEnvelopeIds(envelopeIds);
+        final ClientResponse<EnvelopeStatusResponse> clientResponse = resourceProxy
+            .getEnvelopeStatus(statusQueryForm);
+        final EnvelopeStatusResponse statusResponse = parseEntityFromResponse(
+            clientResponse, EnvelopeException.class);
+        if (statusResponse != null && statusResponse.getEnvelopes() != null
+            && statusResponse.getEnvelopes().size() > 0) {
+            return statusResponse.getEnvelopes().get(0);
+        }
+        return null;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * uk.co.techblue.docusign.client.services.BaseService#getResourceClass()
-	 */
-	@Override
-	protected Class<EnvelopeResource> getResourceClass() {
-		return EnvelopeResource.class;
-	}
+    /**
+     * This retrieves a PDF containing the combined content of all documents and the certificate.
+     * 
+     * @param envelopeId the envelope id
+     * @return the certificate
+     * @throws EnvelopeException the envelope exception
+     */
+    public DocumentFile getCertificate(final String envelopeId)
+        throws EnvelopeException {
+        final ClientResponse<DocumentFile> clientResponse = resourceProxy
+            .getCertificate(envelopeId, null, null);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * This retrieves a PDF containing the combined content of all documents and the certificate.
+     * 
+     * 
+     * @param envelopeId the envelope id
+     * @param watermark the watermark. If the account has the watermark feature enabled and the envelope is not complete, the
+     *        watermark for the account is added to the PDF documents. This option can remove the watermark.
+     * 
+     * @param certificate the certificate. This option can remove the envelope signing certificate from the download.
+     * 
+     * @return the certificate
+     * @throws EnvelopeException the envelope exception
+     */
+    public DocumentFile getCertificate(final String envelopeId, final Boolean watermark,
+        final Boolean certificate) throws EnvelopeException {
+        final ClientResponse<DocumentFile> clientResponse = resourceProxy
+            .getCertificate(envelopeId, watermark, certificate);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * Gets the documents combined.
+     * 
+     * @param envelopeId the envelope id
+     * @return the documents combined
+     * @throws EnvelopeException the envelope exception
+     */
+    public DocumentFile getDocumentsCombined(final String envelopeId)
+        throws EnvelopeException {
+        final ClientResponse<DocumentFile> clientResponse = resourceProxy
+            .getDocumentsCombined(envelopeId);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * Gets the documents info.
+     * 
+     * @param envelopeId the envelope id
+     * @return the documents info
+     * @throws EnvelopeException the envelope exception
+     */
+    public EnvelopeDocumentInfo getDocumentsInfo(final String envelopeId)
+        throws EnvelopeException {
+        final ClientResponse<EnvelopeDocumentInfo> clientResponse = resourceProxy
+            .getDocumentsInfo(envelopeId);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * Gets the document.
+     * 
+     * @param envelopeId the envelope id
+     * @param documentId the document id
+     * @return the document
+     * @throws EnvelopeException the envelope exception
+     */
+    public DocumentFile getDocument(final String envelopeId, final String documentId)
+        throws EnvelopeException {
+        final ClientResponse<DocumentFile> clientResponse = resourceProxy
+            .getDocument(envelopeId, documentId);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * Gets information about the custom fields included in the envelope.
+     * 
+     * @param envelopeId the envelope id
+     * @return the custom fields
+     * @throws EnvelopeException the envelope exception
+     */
+    public List<CustomField> getCustomFields(final String envelopeId)
+        throws EnvelopeException {
+        final ClientResponse<Map<String, List<CustomField>>> clientResponse = resourceProxy
+            .getCustomFields(envelopeId);
+        final Map<String, List<CustomField>> customFieldResponse = parseEntityFromResponse(
+            clientResponse, EnvelopeException.class);
+        if (customFieldResponse != null) {
+            return customFieldResponse.get("customFields");
+        }
+        return null;
+    }
+
+    /**
+     * Gets the the reminder and expiration information for the envelope.
+     * 
+     * 
+     * @param envelopeId the envelope id
+     * @return the notification info
+     * @throws EnvelopeException the envelope exception
+     */
+    public EnvelopeNotificationInfo getNotificationInfo(final String envelopeId)
+        throws EnvelopeException {
+        final ClientResponse<EnvelopeNotificationInfo> clientResponse = resourceProxy.getNotificationInfo(envelopeId);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * Gets the status for all recipients of a single envelope.
+     * 
+     * @param envelopeId the envelope id
+     * @return the recipient status
+     * @throws EnvelopeException the envelope exception
+     */
+    public RecipientStatusCollection getRecipientStatus(final String envelopeId)
+        throws EnvelopeException {
+        final ClientResponse<RecipientStatusCollection> clientResponse = resourceProxy.getRecipientStatus(envelopeId, null, null);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /**
+     * Gets the he status for all recipients of a single envelope.
+     * 
+     * @param envelopeId the envelope id
+     * @param includeTabs If set to true, the tabs associated with the recipient are returned.
+     * @param includeExtended If set to true, the extended properties are returned
+     * 
+     * @return the recipient status
+     * @throws EnvelopeException the envelope exception
+     */
+    public RecipientStatusCollection getRecipientStatus(final String envelopeId,
+        final Boolean includeTabs, final Boolean includeExtended)
+        throws EnvelopeException {
+        final ClientResponse<RecipientStatusCollection> clientResponse = resourceProxy.getRecipientStatus(envelopeId, includeTabs,
+            includeExtended);
+        return parseEntityFromResponse(clientResponse, EnvelopeException.class);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see uk.co.techblue.docusign.client.services.BaseService#getResourceClass()
+     */
+    @Override
+    protected Class<EnvelopeResource> getResourceClass() {
+        return EnvelopeResource.class;
+    }
 }

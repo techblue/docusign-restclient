@@ -20,8 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import uk.co.techblue.docusign.client.DocuSignCredentials;
-import uk.co.techblue.docusign.client.TokenDocuSignCredentials;
+import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
+import uk.co.techblue.docusign.client.credential.TokenDocuSignCredential;
 import uk.co.techblue.docusign.client.dto.AuditEvent;
 import uk.co.techblue.docusign.client.dto.AuditEventField;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
@@ -63,105 +63,103 @@ import uk.co.techblue.docusign.client.services.TemplateService;
 public class DocusignTest {
     private static final String SERVER_URI = "https://demo.docusign.net/restapi/v2";
 
-    public static void main(String[] args) {
-        DocuSignCredentials credentials = getDocuSignCredentials();
+    public static void main(final String[] args) {
+        final DocuSignCredentials credentials = getDocuSignCredentials();
+        // try {
+        testLoginService(credentials);
+        // testEnvelopeStatusChange(credentials);
+        // testTemplateService(credentials);
+        // testGettingAuditEvents(credentials);
+        // testSendingDocumentSignRequest(credentials);
+        // testSendTemplateSignRequest(credentials);
+        // testRetrieveTemplate(credentials);
+        // testSignatureService(credentials);
+        // testSendingDocument(credentials);
+        // testGetEnvelope(credentials);
+        // testGetRecipient(credentials);
+        // testGetEnvelope(credentials);
+        // testGetDocument(credentials);
+        // testGettingConsoleViews(credentials);
+        // testSavingEnvelopeToDrafts(credentials);
+        // testGettingEnvelopeStatus(credentials);
+        // testGettingCustomFields(credentials);
+        // testGettingCertificate(credentials);
+        // testGettingNotificationInfo(credentials);
+        // testGettingRecipientStatus(credentials);
+        // } catch (final ServiceInitException e) {
+        // e.printStackTrace();
+        // }
+    }
+
+    @SuppressWarnings("unused")
+    private static void testRetrieveTemplate(final DocuSignCredentials credentials) throws ServiceInitException {
+        final TemplateService templateService = new TemplateService(SERVER_URI, credentials);
         try {
-            // testLoginService(credentials);
-            // testEnvelopeStatusChange(credentials);
-            // testTemplateService(credentials);
-//        	testGettingAuditEvents(credentials);
-//            testSendingDocumentSignRequest(credentials);
-//            testSendTemplateSignRequest(credentials);
-        	testRetrieveTemplate(credentials);
-            // testSignatureService(credentials);
-            // testSendingDocument(credentials);
-            // testGetEnvelope(credentials);
-            // testGetRecipient(credentials);
-            // testGetEnvelope(credentials);
-            // testGetDocument(credentials);
-            // testGettingConsoleViews(credentials);
-            // testSavingEnvelopeToDrafts(credentials);
-            // testGettingEnvelopeStatus(credentials);
-            // testGettingCustomFields(credentials);
-            // testGettingCertificate(credentials);
-            // testGettingNotificationInfo(credentials);
-            // testGettingRecipientStatus(credentials);
-        } catch (ServiceInitException e) {
+            final Template template = templateService.retrieveTemplate("beba756e-5826-43be-8755-861d429b8a94");
+            final RecipientCollection recsCollection = template.getRecipients();
+            for (final Signer signer : recsCollection.getSigners()) {
+                System.out.println(signer);
+            }
+        } catch (final TemplateException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testRetrieveTemplate(DocuSignCredentials credentials) throws ServiceInitException {
-        TemplateService templateService = new TemplateService(SERVER_URI, credentials);
-		try {
-			Template template = templateService.retrieveTemplate("beba756e-5826-43be-8755-861d429b8a94");
-        	RecipientCollection recsCollection = template.getRecipients();
-        	for (Signer signer : recsCollection.getSigners()) {
-        		System.out.println(signer);
-        	}
-		} 
-		catch (TemplateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-
-    @SuppressWarnings("unused")
-    private static void testGettingAuditEvents(DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+    private static void testGettingAuditEvents(final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         try {
-        	AuditEventsResponse auditEventsResponse = envelopeService.getAuditEvents("55ce29d2-093e-4355-8f30-de81f91aed86");
-        	List<AuditEvent> auditEvents = auditEventsResponse.getAuditEvents();
-        	for (AuditEvent ev : auditEvents) {
-        		System.out.println("\n");
-            	List<AuditEventField> eventFields = ev.getEventFields();
-            	for (AuditEventField field : eventFields) {
-            		System.out.println(field.getName() + ": " + field.getValue());
-            	}
-        	}
-        } 
-        catch (EnvelopeException e) {
+            final AuditEventsResponse auditEventsResponse = envelopeService.getAuditEvents("55ce29d2-093e-4355-8f30-de81f91aed86");
+            final List<AuditEvent> auditEvents = auditEventsResponse.getAuditEvents();
+            for (final AuditEvent ev : auditEvents) {
+                System.out.println("\n");
+                final List<AuditEventField> eventFields = ev.getEventFields();
+                for (final AuditEventField field : eventFields) {
+                    System.out.println(field.getName() + ": " + field.getValue());
+                }
+            }
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGettingRecipientStatus(DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+    private static void testGettingRecipientStatus(final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         try {
             System.err.println(envelopeService.getRecipientStatus("<Envelope Id>", true, true));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGettingNotificationInfo(DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+    private static void testGettingNotificationInfo(final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         try {
             System.err.println(envelopeService.getNotificationInfo("<Envelope Id>"));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGettingCertificate(DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+    private static void testGettingCertificate(final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         try {
             System.err.println(envelopeService.getCertificate("<Envelope Id>", true, false));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGettingCustomFields(DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+    private static void testGettingCustomFields(final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         try {
             System.err.println(envelopeService.getCustomFields("<Envelope Id>"));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
 
@@ -169,15 +167,15 @@ public class DocusignTest {
 
     @SuppressWarnings("unused")
     private static void testGettingEnvelopeStatus(
-        DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
-        EnvelopeStatusQueryForm statusQueryForm = new EnvelopeStatusQueryForm();
-        Calendar cal = Calendar.getInstance();
+        final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+        final EnvelopeStatusQueryForm statusQueryForm = new EnvelopeStatusQueryForm();
+        final Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, 2012);
         cal.set(Calendar.DATE, 25);
         cal.set(Calendar.MONTH, Calendar.JUNE);
         statusQueryForm.setFromDate(cal.getTime());
-        List<Status> statuses = new ArrayList<Status>();
+        final List<Status> statuses = new ArrayList<Status>();
         statuses.add(Status.completed);
         statusQueryForm.setStatuses(statuses);
         // List<String> envelopeIds = new ArrayList<String>();
@@ -187,7 +185,7 @@ public class DocusignTest {
         try {
             // System.err.println(envelopeService.getEnvelopeStatus("db903aac-ac16-4662-88ee-d1e07d1624a4"));
             System.err.println(envelopeService.getEnvelopeStatus(statusQueryForm));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
 
@@ -195,20 +193,20 @@ public class DocusignTest {
 
     @SuppressWarnings("unused")
     private static void testSavingEnvelopeToDrafts(
-        DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+        final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         try {
             envelopeService.saveToDrafts(getEnvelope());
-        } catch (SignatureRequestException e) {
+        } catch (final SignatureRequestException e) {
             e.printStackTrace();
         }
 
     }
 
     @SuppressWarnings("unused")
-    private static void testGettingConsoleViews(DocuSignCredentials credentials)
+    private static void testGettingConsoleViews(final DocuSignCredentials credentials)
         throws ServiceInitException {
-        ConsoleViewService cvService = new ConsoleViewService(SERVER_URI,
+        final ConsoleViewService cvService = new ConsoleViewService(SERVER_URI,
             credentials);
         try {
             // System.err.println("Authentication View: "+cvService.getAuthenticationView());
@@ -228,19 +226,19 @@ public class DocusignTest {
                     "<Envelope Id>",
                     getCorrectionViewRequest()));
 
-        } catch (ConsoleViewException e) {
+        } catch (final ConsoleViewException e) {
             e.printStackTrace();
         }
     }
 
     private static CorrectionViewRequest getCorrectionViewRequest() {
-        CorrectionViewRequest cvRequest = new CorrectionViewRequest();
+        final CorrectionViewRequest cvRequest = new CorrectionViewRequest();
         cvRequest.setSuppressNavigation(false);
         return cvRequest;
     }
 
     private static RecipientViewRequest getRecipientViewRequest() {
-        RecipientViewRequest recipientView = new RecipientViewRequest();
+        final RecipientViewRequest recipientView = new RecipientViewRequest();
         recipientView.setAuthenticationMethod("email");
         recipientView.setReturnUrl("http://demo.docusign.net");
         recipientView.setEmail("<Set Email ID>");
@@ -249,7 +247,7 @@ public class DocusignTest {
     }
 
     @SuppressWarnings("unused")
-    private static void testSendingDocument(DocuSignCredentials credentials)
+    private static void testSendingDocument(final DocuSignCredentials credentials)
         throws ServiceInitException {
 
         // RequestSignatureService reqSignService = new RequestSignatureService(
@@ -264,20 +262,20 @@ public class DocusignTest {
         // } catch (SignatureRequestException sre) {
         // sre.printStackTrace();
         // }
-        EnvelopeService envService = new EnvelopeService(SERVER_URI,
+        final EnvelopeService envService = new EnvelopeService(SERVER_URI,
             credentials);
         try {
             envService.addDocumentToDraftEnvelope("<Envelope Id>",
                 getDocument());
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGetDocument(DocuSignCredentials credentials)
+    private static void testGetDocument(final DocuSignCredentials credentials)
         throws ServiceInitException {
-        EnvelopeService envService = new EnvelopeService(SERVER_URI,
+        final EnvelopeService envService = new EnvelopeService(SERVER_URI,
             credentials);
         try {
             System.out
@@ -287,13 +285,13 @@ public class DocusignTest {
             // System.out
             // .println(envService.getDocument("e3b09d80-ac1a-4d46-a40b-bea9d7bb5996",1));
 
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGetEnvelope(DocuSignCredentials credentials)
+    private static void testGetEnvelope(final DocuSignCredentials credentials)
         throws ServiceInitException {
         /*
          * RequestSignatureService reqSignService = new RequestSignatureService( SERVER_URI, credentials);
@@ -303,46 +301,45 @@ public class DocusignTest {
          * (SignatureRequestException sre) { sre.printStackTrace(); }
          */
 
-        EnvelopeService envService = new EnvelopeService(SERVER_URI,
+        final EnvelopeService envService = new EnvelopeService(SERVER_URI,
             credentials);
         try {
             System.out
                 .println(envService.getEnvelope("<Envelope Id>"));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testGetRecipient(DocuSignCredentials credentials) throws ServiceInitException {
-        EnvelopeService envService = new EnvelopeService(SERVER_URI, credentials);
+    private static void testGetRecipient(final DocuSignCredentials credentials) throws ServiceInitException {
+        final EnvelopeService envService = new EnvelopeService(SERVER_URI, credentials);
         try {
             System.err.println(envService.getRecipientStatus("<Envelope Id>"));
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     private static void testSendingDocumentSignRequest(
-        DocuSignCredentials credentials) throws ServiceInitException {
-        RequestSignatureService rsService = new RequestSignatureService(
+        final DocuSignCredentials credentials) throws ServiceInitException {
+        final RequestSignatureService rsService = new RequestSignatureService(
             SERVER_URI, credentials);
-        DocumentSignatureRequest signatureRequest = getDocumentSignatureRequest();
+        final DocumentSignatureRequest signatureRequest = getDocumentSignatureRequest();
         try {
-             System.err.println(rsService.sendDocument(signatureRequest));
-        } 
-        catch (SignatureRequestException e) {
+            System.err.println(rsService.sendDocument(signatureRequest));
+        } catch (final SignatureRequestException e) {
             e.printStackTrace();
         }
     }
 
-    private static void testSendTemplateSignRequest(DocuSignCredentials credentials) throws ServiceInitException {
-        RequestSignatureService rsService = new RequestSignatureService(
+    private static void testSendTemplateSignRequest(final DocuSignCredentials credentials) throws ServiceInitException {
+        final RequestSignatureService rsService = new RequestSignatureService(
             SERVER_URI, credentials);
-        TemplateSignatureRequest signatureRequest = getMockTemplateSignatureRequest();
-        try{
+        final TemplateSignatureRequest signatureRequest = getMockTemplateSignatureRequest();
+        try {
             System.err.println(rsService.sendFromTemplate(signatureRequest));
-        } catch(SignatureRequestException e){
+        } catch (final SignatureRequestException e) {
             e.printStackTrace();
         }
     }
@@ -352,14 +349,14 @@ public class DocusignTest {
      */
     private static TemplateSignatureRequest getMockTemplateSignatureRequest() {
 
-        TemplateSignatureRequest signRequest = new TemplateSignatureRequest();
-        
-//        signRequest.setEmailBlurb("Please sign this document");
-//        signRequest.setEmailSubject("Please sign this document");
+        final TemplateSignatureRequest signRequest = new TemplateSignatureRequest();
+
+        // signRequest.setEmailBlurb("Please sign this document");
+        // signRequest.setEmailSubject("Please sign this document");
         signRequest.setStatus(Status.sent);
         signRequest.setTemplateId("599D3416-55C6-49D6-9F81-0C5F29050632");
         signRequest.setTemplateRoles(getMockTemplateRoles());
-        
+
         return signRequest;
     }
 
@@ -367,14 +364,14 @@ public class DocusignTest {
      * @return
      */
     private static List<TemplateRole> getMockTemplateRoles() {
-        List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
-        
-        TemplateRole role = new TemplateRole();
+        final List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
+
+        final TemplateRole role = new TemplateRole();
         role.setEmail("maltieri@exari.com");
         role.setName("Marco Altieri");
         role.setRoleName("signer");
         role.setTabs(getMockDocumentTabCollection());
-        
+
         templateRoles.add(role);
         return templateRoles;
     }
@@ -383,17 +380,17 @@ public class DocusignTest {
      * @return
      */
     private static DocumentTabCollection getMockDocumentTabCollection() {
-        DocumentTabCollection tabs = new DocumentTabCollection();
-        List<TextTab> textTabs = new ArrayList<TextTab>();
+        final DocumentTabCollection tabs = new DocumentTabCollection();
+        final List<TextTab> textTabs = new ArrayList<TextTab>();
         textTabs.add(getMockTextTab("CRL00765", "Data Field 17"));
         textTabs.add(getMockTextTab("00098765", "Data Field 18"));
         tabs.setTextTabs(textTabs);
-        
+
         return tabs;
     }
 
-    private static TextTab getMockTextTab(String value, String textTabLabel) {
-        TextTab textTab = new TextTab();
+    private static TextTab getMockTextTab(final String value, final String textTabLabel) {
+        final TextTab textTab = new TextTab();
         textTab.setLocked(true);
         textTab.setValue(value);
         textTab.setTabLabel(textTabLabel);
@@ -401,13 +398,13 @@ public class DocusignTest {
     }
 
     private static List<Document> getDocumentList() {
-        List<Document> documentList = new ArrayList<Document>();
+        final List<Document> documentList = new ArrayList<Document>();
         documentList.add(getMockDocument("docusign.txt", "1", "C:\\Users\\marco\\Desktop\\docusign.txt"));
         return documentList;
     }
 
-    private static Document getMockDocument(String name, String documentId, String path) {
-        Document document = new Document();
+    private static Document getMockDocument(final String name, final String documentId, final String path) {
+        final Document document = new Document();
         document.setName(name);
         document.setDocumentId(documentId);
         document.setPath(path);
@@ -415,21 +412,21 @@ public class DocusignTest {
     }
 
     private static Document getDocument() {
-        Document document = new Document();
+        final Document document = new Document();
         document.setName("test-signature.txt");
         document.setDocumentId("2");
         document.setPath("/home/ajay/Documents/esign-test.txt");
-        
+
         return document;
     }
 
     private static DocumentSignatureRequest getDocumentSignatureRequest() {
-        DocumentSignatureRequest signatureRequest = new DocumentSignatureRequest();
+        final DocumentSignatureRequest signatureRequest = new DocumentSignatureRequest();
         signatureRequest.setEmailBlurb("Please sign the document.");
         signatureRequest.setEmailSubject("Please sign the attached document");
         signatureRequest.setStatus(Status.sent);
         signatureRequest.setEnforceSignerVisibility(true);
-        RecipientCollection recipientCollection = getRecipientCollection();
+        final RecipientCollection recipientCollection = getRecipientCollection();
         signatureRequest.setRecipients(recipientCollection);
         signatureRequest.setDocuments(getDocumentList());
         // signatureRequest.setNotification(getNotificationInfo());
@@ -437,12 +434,12 @@ public class DocusignTest {
     }
 
     private static EnvelopeNotificationInfo getNotificationInfo() {
-        EnvelopeNotificationInfo notificationInfo = new EnvelopeNotificationInfo();
-        EnvelopeExpiration envExpiration = new EnvelopeExpiration();
+        final EnvelopeNotificationInfo notificationInfo = new EnvelopeNotificationInfo();
+        final EnvelopeExpiration envExpiration = new EnvelopeExpiration();
         envExpiration.setExpireEnabled(true);
         envExpiration.setExpireAfter(0);
         envExpiration.setExpireWarn(0);
-        EnvelopeReminder reminder = new EnvelopeReminder();
+        final EnvelopeReminder reminder = new EnvelopeReminder();
         reminder.setReminderEnabled(true);
         reminder.setReminderFrequency(0);
         reminder.setReminderDelay(0);
@@ -452,12 +449,12 @@ public class DocusignTest {
     }
 
     private static Envelope getEnvelope() {
-        Envelope signatureRequest = new Envelope();
+        final Envelope signatureRequest = new Envelope();
         signatureRequest.setEmailBlurb("Hey!! Please sign the document.");
         signatureRequest.setEmailSubject("Please sign up this document - "
             + (new Date()));
         signatureRequest.setStatus(Status.sent);
-        RecipientCollection recipientCollection = getRecipientCollection();
+        final RecipientCollection recipientCollection = getRecipientCollection();
         signatureRequest.setRecipients(recipientCollection);
         signatureRequest.setDocuments(getDocumentInfoList());
         return signatureRequest;
@@ -465,8 +462,8 @@ public class DocusignTest {
 
     private static List<DocumentInfo> getDocumentInfoList() {
 
-        List<DocumentInfo> documentList = new ArrayList<DocumentInfo>();
-        DocumentInfo document = new DocumentInfo();
+        final List<DocumentInfo> documentList = new ArrayList<DocumentInfo>();
+        final DocumentInfo document = new DocumentInfo();
         document.setName("test-signature.txt");
         document.setDocumentId("1");
         document.setPath("/home/ajay/Documents/esign-test.txt");
@@ -475,27 +472,27 @@ public class DocusignTest {
     }
 
     private static RecipientCollection getRecipientCollection() {
-        RecipientCollection recipientCollection = new RecipientCollection();
+        final RecipientCollection recipientCollection = new RecipientCollection();
         // List<String> fields = new ArrayList<String>();
         // fields.add("landlord_id=1831");
         // signer.setCustomFields(fields);
-        List<Signer> signerList = new ArrayList<Signer>();
+        final List<Signer> signerList = new ArrayList<Signer>();
         signerList.add(getSigner("1", "maltieri@exari.com", "Marco Altieri", "1", "Test"));
         recipientCollection.setSigners(signerList);
         return recipientCollection;
     }
 
-    private static Signer getSigner(String recipientId, String email, String name, String documentId, String anchorString) {
-        Signer signer1 = new Signer();
+    private static Signer getSigner(final String recipientId, final String email, final String name, final String documentId, final String anchorString) {
+        final Signer signer1 = new Signer();
         signer1.setRecipientId(recipientId);
         signer1.setEmail(email);
         signer1.setName(name);
-        SignHereTab signTab = new SignHereTab();
+        final SignHereTab signTab = new SignHereTab();
         signTab.setDocumentId(documentId);
         signTab.setAnchorString(anchorString);
         signTab.setAnchorIgnoreIfNotPresent(true);
-        DocumentTabCollection tabCollection1 = new DocumentTabCollection();
-        List<SignHereTab> tabList1 = new ArrayList<SignHereTab>();
+        final DocumentTabCollection tabCollection1 = new DocumentTabCollection();
+        final List<SignHereTab> tabList1 = new ArrayList<SignHereTab>();
         tabList1.add(signTab);
         tabCollection1.setSignHereTabs(tabList1);
         signer1.setTabs(tabCollection1);
@@ -504,8 +501,8 @@ public class DocusignTest {
 
     @SuppressWarnings("unused")
     private static List<CustomField> getCustomFieldList() {
-        List<CustomField> fieldList = new ArrayList<CustomField>();
-        CustomField field = new CustomField();
+        final List<CustomField> fieldList = new ArrayList<CustomField>();
+        final CustomField field = new CustomField();
         // field.setCustomFieldType(CustomFieldType.text);
         // field.setShow(false);
         field.setName("landlord_id");
@@ -515,67 +512,67 @@ public class DocusignTest {
     }
 
     @SuppressWarnings("unused")
-    private static void testEnvelopeStatusChange(DocuSignCredentials credentials)
+    private static void testEnvelopeStatusChange(final DocuSignCredentials credentials)
         throws ServiceInitException {
-        RequestSignatureService reqSignService = new RequestSignatureService(
+        final RequestSignatureService reqSignService = new RequestSignatureService(
             SERVER_URI, credentials);
-        TemplateSignatureRequest signatureRequest = getTemplateSignatureRequest();
+        final TemplateSignatureRequest signatureRequest = getTemplateSignatureRequest();
         signatureRequest.setStatus(Status.created);
         SignatureResponse response = null;
         try {
             response = reqSignService.sendFromTemplate(signatureRequest);
             System.out.println("SignatureResponse: " + response);
-        } catch (SignatureRequestException sre) {
+        } catch (final SignatureRequestException sre) {
             sre.printStackTrace();
         }
 
-        EnvelopeService envService = new EnvelopeService(SERVER_URI,
+        final EnvelopeService envService = new EnvelopeService(SERVER_URI,
             credentials);
         try {
             envService.sendFromDrafts(response.getEnvelopeId(),
                 "Need to get the agreement signed");
-        } catch (EnvelopeException e) {
+        } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unused")
-    private static void testSignatureService(DocuSignCredentials credentials)
+    private static void testSignatureService(final DocuSignCredentials credentials)
         throws ServiceInitException {
-        RequestSignatureService reqSignService = new RequestSignatureService(
+        final RequestSignatureService reqSignService = new RequestSignatureService(
             SERVER_URI, credentials);
-        TemplateSignatureRequest signatureRequest = getTemplateSignatureRequest();
+        final TemplateSignatureRequest signatureRequest = getTemplateSignatureRequest();
         try {
-            SignatureResponse response = reqSignService
+            final SignatureResponse response = reqSignService
                 .sendFromTemplate(signatureRequest);
             System.out.println("SignatureResponse: " + response);
-        } catch (SignatureRequestException sre) {
+        } catch (final SignatureRequestException sre) {
             sre.printStackTrace();
         }
     }
 
     private static TemplateSignatureRequest getTemplateSignatureRequest() {
-        TemplateSignatureRequest signatureRequest = new TemplateSignatureRequest();
+        final TemplateSignatureRequest signatureRequest = new TemplateSignatureRequest();
         signatureRequest.setTemplateId("<Envelope ID>");
         signatureRequest.setEmailBlurb("Ajay Please sign the document.");
         signatureRequest.setEmailSubject("Please sign up this doc - "
             + (new Date()));
         signatureRequest.setEnforceSignerVisibility(true);
         signatureRequest.setStatus(Status.sent);
-        List<TemplateRole> templateRoles = getTestTemplateRoles();
+        final List<TemplateRole> templateRoles = getTestTemplateRoles();
         signatureRequest.setTemplateRoles(templateRoles);
         return signatureRequest;
     }
 
     private static List<TemplateRole> getTestTemplateRoles() {
-        List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
-        TemplateRole roleA = new TemplateRole();
+        final List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
+        final TemplateRole roleA = new TemplateRole();
         roleA.setName("Ajay Deshwal");
         roleA.setEmail("<Set Email ID>");
         roleA.setRoleName("Manager");
         templateRoles.add(roleA);
 
-        TemplateRole roleB = new TemplateRole();
+        final TemplateRole roleB = new TemplateRole();
         roleB.setName("Vik Tara");
         roleB.setEmail("<Set Email Id>");
         roleB.setRoleName("Borrower");
@@ -585,31 +582,31 @@ public class DocusignTest {
     }
 
     @SuppressWarnings("unused")
-    private static String getAccountId(DocuSignCredentials credentials) {
-        ClientInfo clientInfo = testLoginService(credentials);
+    private static String getAccountId(final DocuSignCredentials credentials) {
+        final ClientInfo clientInfo = testLoginService(credentials);
         return clientInfo.getLoginAccounts().get(0).getAccountId();
     }
 
     @SuppressWarnings("unused")
-    private static void testTemplateService(DocuSignCredentials credentials)
+    private static void testTemplateService(final DocuSignCredentials credentials)
         throws ServiceInitException {
-        TemplateService templateService = new TemplateService(SERVER_URI,
+        final TemplateService templateService = new TemplateService(SERVER_URI,
             credentials);
         try {
-            TemplateInfo template = templateService.retrieveTemplates();
+            final TemplateInfo template = templateService.retrieveTemplates();
             System.out.println("Template: " + template);
-        } catch (TemplateException e) {
+        } catch (final TemplateException e) {
             e.printStackTrace();
         }
     }
 
-    private static ClientInfo testLoginService(DocuSignCredentials credentials) {
-        LoginService loginService = new LoginService(SERVER_URI, credentials);
+    private static ClientInfo testLoginService(final DocuSignCredentials credentials) {
+        final LoginService loginService = new LoginService(SERVER_URI, credentials);
         ClientInfo clientInfo = null;
         try {
             clientInfo = loginService.getLoginInformation();
             System.out.println("ClientInfo: " + clientInfo);
-        } catch (LoginException e) {
+        } catch (final LoginException e) {
             System.err.println("Error Response: " + e.getErrorResponse());
             e.printStackTrace();
         }
@@ -617,7 +614,9 @@ public class DocusignTest {
     }
 
     private static DocuSignCredentials getDocuSignCredentials() {
-        DocuSignCredentials credentials = new TokenDocuSignCredentials("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
+        final DocuSignCredentials credentials = new TokenDocuSignCredential("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
+        // final DocuSignCredentials credentials = new BasicDocusignCredential("dheeraj.arora@techblue.co.uk", "hellboy",
+        // "TECH-ca1df08a-66d8-41bb-9226-5aeb9a921dbe");
         return credentials;
     }
 }

@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response.Status.Family;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ClientResponseFailure;
 
+import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.ErrorResponse;
 import uk.co.techblue.docusign.client.exception.DocuSignException;
 
@@ -32,9 +33,18 @@ public abstract class Service<RT extends Resource> {
     /** The resource proxy. */
     protected final RT resourceProxy;
 
-    public Service(String restBaseUri, DocuSignCredentials credentials) {
+    public Service(final String restBaseUri, final DocuSignCredentials credentials) {
         this.restBaseUri = restBaseUri;
         this.resourceProxy = getResourceProxy(getResourceClass(), restBaseUri, credentials);
+    }
+
+    /**
+     * Gets the rest base uri.
+     * 
+     * @return the rest base uri
+     */
+    public String getRestBaseUri() {
+        return restBaseUri;
     }
 
     /**
@@ -47,20 +57,15 @@ public abstract class Service<RT extends Resource> {
     /**
      * Gets the entity from response.
      * 
-     * @param <T>
-     *            the Entity type
-     * @param <EX>
-     *            the Exception type to throw if parsing fails
-     * @param clientResponse
-     *            the client response
-     * @param exceptionClazz
-     *            the exception class to throw if parsing fails
+     * @param <T> the Entity type
+     * @param <EX> the Exception type to throw if parsing fails
+     * @param clientResponse the client response
+     * @param exceptionClazz the exception class to throw if parsing fails
      * @return the entity
-     * @throws EX
-     *             a subclass of docusign exception
+     * @throws EX a subclass of docusign exception
      */
-    protected <T, EX extends DocuSignException> T parseEntityFromResponse(ClientResponse<T> clientResponse,
-            Class<EX> exceptionClazz) throws EX {
+    protected <T, EX extends DocuSignException> T parseEntityFromResponse(final ClientResponse<T> clientResponse,
+        final Class<EX> exceptionClazz) throws EX {
         T entity = null;
         try {
             validateResponseSuccess(clientResponse, exceptionClazz);
@@ -74,47 +79,43 @@ public abstract class Service<RT extends Resource> {
     /**
      * Validate response success.
      * 
-     * @param <EX>
-     *            the generic type
-     * @param clientResponse
-     *            the client response
-     * @param exceptionClazz
-     *            the exception clazz
-     * @throws EX
-     *             the eX
+     * @param <EX> the generic type
+     * @param clientResponse the client response
+     * @param exceptionClazz the exception clazz
+     * @throws EX the eX
      */
-    protected <EX extends DocuSignException> void validateResponseSuccess(ClientResponse<?> clientResponse,
-            Class<EX> exceptionClazz) throws EX {
+    protected <EX extends DocuSignException> void validateResponseSuccess(final ClientResponse<?> clientResponse,
+        final Class<EX> exceptionClazz) throws EX {
         if (clientResponse.getResponseStatus().getFamily() != Family.SUCCESSFUL) {
-        	ErrorResponse errorResponse = null;
-        	Exception cause = null;
-        	try {
-        		errorResponse = clientResponse.getEntity(ErrorResponse.class);
-        	} catch(ClientResponseFailure responseFailure) {
-        		cause = responseFailure;
-        	}
-            EX exception = null;
-            String genericErrorMsg = "Error occurred while creating new instance of exception class of type "
-                    + exceptionClazz.getCanonicalName() + " to throw the following error:\n" + errorResponse;
+            ErrorResponse errorResponse = null;
+            Exception cause = null;
             try {
-            	if(cause != null){
-            		exception = exceptionClazz.getConstructor(String.class,Throwable.class).newInstance(cause.getMessage(),cause);
-            	} else {
-            		exception = exceptionClazz.getConstructor(String.class).newInstance(
-                            "Request processing failed. HTTP Status: " + clientResponse.getStatus() + "\n Error:"
-                                    + errorResponse);
-            	}
-            } catch (IllegalArgumentException iae) {
+                errorResponse = clientResponse.getEntity(ErrorResponse.class);
+            } catch (final ClientResponseFailure responseFailure) {
+                cause = responseFailure;
+            }
+            EX exception = null;
+            final String genericErrorMsg = "Error occurred while creating new instance of exception class of type "
+                + exceptionClazz.getCanonicalName() + " to throw the following error:\n" + errorResponse;
+            try {
+                if (cause != null) {
+                    exception = exceptionClazz.getConstructor(String.class, Throwable.class).newInstance(cause.getMessage(), cause);
+                } else {
+                    exception = exceptionClazz.getConstructor(String.class).newInstance(
+                        "Request processing failed. HTTP Status: " + clientResponse.getStatus() + "\n Error:"
+                            + errorResponse);
+                }
+            } catch (final IllegalArgumentException iae) {
                 throw new IllegalStateException(genericErrorMsg, iae);
-            } catch (SecurityException se) {
+            } catch (final SecurityException se) {
                 throw new IllegalStateException(genericErrorMsg, se);
-            } catch (InstantiationException ie) {
+            } catch (final InstantiationException ie) {
                 throw new IllegalStateException(genericErrorMsg, ie);
-            } catch (IllegalAccessException iacce) {
+            } catch (final IllegalAccessException iacce) {
                 throw new IllegalStateException(genericErrorMsg, iacce);
-            } catch (InvocationTargetException ite) {
+            } catch (final InvocationTargetException ite) {
                 throw new IllegalStateException(genericErrorMsg, ite);
-            } catch (NoSuchMethodException nsme) {
+            } catch (final NoSuchMethodException nsme) {
                 throw new IllegalStateException(genericErrorMsg, nsme);
             }
             exception.setErrorResponse(errorResponse);
@@ -125,15 +126,12 @@ public abstract class Service<RT extends Resource> {
     /**
      * Gets the resource proxy.
      * 
-     * @param <T>
-     *            the generic resource type
-     * @param clazz
-     *            the resource class
-     * @param serverUri
-     *            the server uri
+     * @param <T> the generic resource type
+     * @param clazz the resource class
+     * @param serverUri the server uri
      * @return the resource proxy
      */
-    protected <T> T getResourceProxy(Class<T> clazz, String serverUri, DocuSignCredentials credentials) {
+    protected <T> T getResourceProxy(final Class<T> clazz, final String serverUri, final DocuSignCredentials credentials) {
         return DocuSignClient.getClientService(clazz, serverUri, credentials);
     }
 }

@@ -17,6 +17,7 @@ package uk.co.techblue.docusign.client;
 
 import org.apache.commons.lang3.StringUtils;
 
+import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.LoginException;

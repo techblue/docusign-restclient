@@ -17,8 +17,8 @@ package uk.co.techblue.docusign.client.services;
 
 import org.jboss.resteasy.client.ClientResponse;
 
-import uk.co.techblue.docusign.client.DocuSignCredentials;
 import uk.co.techblue.docusign.client.Service;
+import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.user.ChangePasswordRequest;
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
 import uk.co.techblue.docusign.client.exception.LoginException;

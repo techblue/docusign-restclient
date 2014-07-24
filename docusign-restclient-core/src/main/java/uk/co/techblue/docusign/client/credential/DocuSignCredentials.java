@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package uk.co.techblue.docusign.client.utils;
+package uk.co.techblue.docusign.client.credential;
+
+import org.jboss.resteasy.client.ClientRequest;
 
 /**
- * The Interface DocuSignConstants.
+ * The Interface DocuSignCredentials.
  * 
- * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
+ * @author <a href="mailto:maltieri@exari.com">Marco Altieri</a>
  */
-public interface DocuSignConstants {
+public interface DocuSignCredentials {
 
-    /** The header param authorization. */
-    String HEADER_PARAM_AUTHORIZATION = "Authorization";
+    /**
+     * Sets the header.
+     * 
+     * @param request the new header
+     */
+    public void setHeader(ClientRequest request);
 
-    /** The header param act as user. */
-    String HEADER_PARAM_ACT_AS_USER = "X-DocuSign-Act-As-User";
-
-    /** The resource context path. */
-    String RESOURCE_CONTEXT_PATH = "/";
-
-    /** The header param authentication. */
-    String HEADER_PARAM_AUTHENTICATION = "X-DocuSign-Authentication";
+    /**
+     * Gets the username.
+     * 
+     * @return the username
+     */
+    public String getUsername();
 }
