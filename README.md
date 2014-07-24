@@ -1,4 +1,4 @@
-Docusign RESTful Client (V1, branch docusign-v1)
+Docusign RESTful Client
 ===================
 
 [DocuSign](http://www.docusign.com/) is an electronic signature and document workflow automation service provider that facilitates end user to electronically sign, manage and verify documents.
@@ -75,16 +75,4 @@ Signature response, among other useful information, will contain newly created e
 ```java
 response.getEnvelopeId();
 response.getUri();
-```
-
-For details on rest methods and parameters descripts, please go through docusign [REST service guide](http://www.docusign.com/sites/default/files/REST_API_Guide_v1.pdf).
-
-To add this library as a maven dependency add following in you project's pom.xml:
-
-```xml
-<dependency>
-    <groupId>uk.co.techblue</groupId>
-    <artifactId>docusign-restclient</artifactId>
-    <version>1.0.1</version>
-</dependency>
 ```
