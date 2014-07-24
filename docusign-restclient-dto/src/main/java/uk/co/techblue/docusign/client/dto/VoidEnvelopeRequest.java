@@ -21,37 +21,60 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
 
-@SuppressWarnings("serial")
+/**
+ * The Void Envelope Request dto.
+ */
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class Template extends Envelope {
+public class VoidEnvelopeRequest extends BaseDto {
 
-	@JsonProperty
-	private EnvelopeTemplateDefinition envelopeTemplateDefinition;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8832541999826152323L;
 
-	@JsonProperty("notification")
-	private EnvelopeNotificationInfo notificationTemplate;
-	
-	public EnvelopeTemplateDefinition getEnvelopeTemplateDefinition() {
-		return envelopeTemplateDefinition;
-	}
+	/** The status. */
+    @JsonProperty("status")
+    private Status status = Status.voided;
 
-	public void setEnvelopeTemplateDefinition(
-			EnvelopeTemplateDefinition envelopeTemplateDefinition) {
-		this.envelopeTemplateDefinition = envelopeTemplateDefinition;
-	}
+    /** The status reason. */
+    @JsonProperty("voidedReason")
+    private String voidedReason;
 
-	@Override
-	public void setStatus(Status status) {
-		throw new IllegalAccessError(
-				"Setting status is not allowed on a template");
-	}
+    /**
+     * Gets the status.
+     * 
+     * @return the status
+     */
+    public Status getStatus() {
+        return status;
+    }
 
-	public EnvelopeNotificationInfo getNotificationTemplate() {
-		return notificationTemplate;
-	}
+    /**
+     * Sets the status.
+     * 
+     * @param status
+     *            the new status
+     */
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
-	public void setNotificationTemplate(
-			EnvelopeNotificationInfo notificationTemplate) {
-		this.notificationTemplate = notificationTemplate;
-	}
+    /**
+     * Gets the reason to void.
+     * 
+     * @return the reason to void
+     */
+    public String getVoidedReason() {
+        return voidedReason;
+    }
+
+    /**
+     * Sets the reason to void.
+     * 
+     * @param voidedReason
+     *            the reason to void
+     */
+    public void setVoidedReason(String voidedReason) {
+        this.voidedReason = voidedReason;
+    }
 }

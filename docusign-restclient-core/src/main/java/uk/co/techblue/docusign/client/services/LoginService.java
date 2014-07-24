@@ -17,10 +17,10 @@ package uk.co.techblue.docusign.client.services;
 
 import org.jboss.resteasy.client.ClientResponse;
 
+import uk.co.techblue.docusign.client.DocuSignCredentials;
 import uk.co.techblue.docusign.client.Service;
 import uk.co.techblue.docusign.client.dto.user.ChangePasswordRequest;
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.exception.LoginException;
 import uk.co.techblue.docusign.client.exception.UserAccountException;
 import uk.co.techblue.docusign.client.resources.LoginResource;
@@ -39,8 +39,8 @@ public class LoginService extends Service<LoginResource> {
 	 * @param serverUri
 	 *            the server uri
 	 */
-	public LoginService(final String serverUri) {
-		super(serverUri);
+	public LoginService(final String serverUri, DocuSignCredentials credentials) {
+		super(serverUri, credentials);
 	}
 
 	/**
@@ -52,10 +52,10 @@ public class LoginService extends Service<LoginResource> {
 	 * @throws LoginException
 	 *             the login exception
 	 */
-	public ClientInfo getLoginInformation(DocuSignCredentials credentials)
+	public ClientInfo getLoginInformation()
 			throws LoginException {
 		ClientResponse<ClientInfo> clientResponse = resourceProxy
-				.getLoginInformation(credentials);
+				.getLoginInformation();
 		return parseEntityFromResponse(clientResponse, LoginException.class);
 	}
 
@@ -68,11 +68,9 @@ public class LoginService extends Service<LoginResource> {
 	 *            the change password request
 	 * @throws UserAccountException
 	 */
-	public void changePassword(DocuSignCredentials credentials,
-			ChangePasswordRequest changePasswordRequest)
+	public void changePassword(ChangePasswordRequest changePasswordRequest)
 			throws UserAccountException {
-		ClientResponse<?> clientResponse = resourceProxy.changePassword(
-				credentials, changePasswordRequest);
+		ClientResponse<?> clientResponse = resourceProxy.changePassword(changePasswordRequest);
 		validateResponseSuccess(clientResponse, UserAccountException.class);
 	}
 

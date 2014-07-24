@@ -27,14 +27,14 @@ import uk.co.techblue.docusign.client.exception.DocuSignException;
 
 public abstract class Service<RT extends Resource> {
     /** The rest base uri. */
-    protected final String restBaseUri;
+    private final String restBaseUri;
 
     /** The resource proxy. */
     protected final RT resourceProxy;
 
-    public Service(String restBaseUri) {
+    public Service(String restBaseUri, DocuSignCredentials credentials) {
         this.restBaseUri = restBaseUri;
-        this.resourceProxy = getResourceProxy(getResourceClass(), restBaseUri);
+        this.resourceProxy = getResourceProxy(getResourceClass(), restBaseUri, credentials);
     }
 
     /**
@@ -88,7 +88,7 @@ public abstract class Service<RT extends Resource> {
         if (clientResponse.getResponseStatus().getFamily() != Family.SUCCESSFUL) {
         	ErrorResponse errorResponse = null;
         	Exception cause = null;
-        	try{
+        	try {
         		errorResponse = clientResponse.getEntity(ErrorResponse.class);
         	} catch(ClientResponseFailure responseFailure) {
         		cause = responseFailure;
@@ -133,7 +133,7 @@ public abstract class Service<RT extends Resource> {
      *            the server uri
      * @return the resource proxy
      */
-    protected <T> T getResourceProxy(Class<T> clazz, String serverUri) {
-        return DocuSignClient.getClientService(clazz, serverUri);
+    protected <T> T getResourceProxy(Class<T> clazz, String serverUri, DocuSignCredentials credentials) {
+        return DocuSignClient.getClientService(clazz, serverUri, credentials);
     }
 }

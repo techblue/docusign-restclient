@@ -18,7 +18,6 @@ package uk.co.techblue.docusign.client.dto;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-
 /**
  * The Class EnvelopeNotificationInfo.
  */

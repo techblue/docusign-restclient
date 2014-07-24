@@ -19,7 +19,12 @@ import java.io.IOException;
 
 import javax.ws.rs.ext.Provider;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.jboss.resteasy.client.ClientRequest;
+import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.jboss.resteasy.logging.Logger;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
@@ -46,7 +51,7 @@ public class DocuSignClient {
     }
 
     private static void registerResteasyProvider(final ResteasyProviderFactory providerFactory, Class<?> providerClass) {
-        boolean registered = providerFactory.getProvider(providerClass) != null;
+        boolean registered = false; //EXARI: providerFactory.getClasses() .getInstance(providerClass) != null;
         if (!registered) {
             providerFactory.registerProvider(providerClass);
             logger.info("Registered custom Provider with Resteasy:" + providerClass.getName());
@@ -84,8 +89,19 @@ public class DocuSignClient {
      * @param serverUri the server uri
      * @return the client service
      */
-    public static <T> T getClientService(final Class<T> clazz, final String serverUri) {
+    public static <T> T getClientService(final Class<T> clazz, final String serverUri, final DocuSignCredentials credentials) {
         logger.info("Generating REST resource proxy for: " + clazz.getName());
-        return ProxyFactory.create(clazz, serverUri);
+
+        HttpClient httpClient = new DefaultHttpClient();
+        ApacheHttpClient4Executor executor = new ApacheHttpClient4Executor(httpClient) {
+            @SuppressWarnings("rawtypes")
+			@Override
+            public ClientResponse execute(ClientRequest request) throws Exception {
+                credentials.setHeader(request);
+                return super.execute(request);
+            }           
+        };
+
+        return ProxyFactory.create(clazz, serverUri, executor);
     }
 }

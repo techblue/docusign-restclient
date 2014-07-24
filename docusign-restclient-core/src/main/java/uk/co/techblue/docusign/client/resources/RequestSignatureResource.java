@@ -28,7 +28,6 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 import uk.co.techblue.docusign.client.Resource;
 import uk.co.techblue.docusign.client.dto.SignatureResponse;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
-import uk.co.techblue.docusign.client.dto.user.DocuSignCredentials;
 import uk.co.techblue.docusign.client.utils.DocuSignConstants;
 
 @Path(DocuSignConstants.RESOURCE_CONTEXT_PATH)
@@ -39,7 +38,6 @@ public interface RequestSignatureResource extends Resource {
     @Path("envelopes")
     @Consumes(MediaType.APPLICATION_JSON)
     ClientResponse<SignatureResponse> sendFromTemplate(
-            @HeaderParam(DocuSignConstants.HEADER_PARAM_AUTHENTICATION) DocuSignCredentials credentials,
             TemplateSignatureRequest signatureRequest);
 
     @POST
@@ -47,7 +45,6 @@ public interface RequestSignatureResource extends Resource {
     @Path("envelopes")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     ClientResponse<SignatureResponse> sendDocument(
-            @HeaderParam(DocuSignConstants.HEADER_PARAM_AUTHENTICATION) DocuSignCredentials credentials,
             MultipartFormDataOutput formDataOutput);
 
 }

@@ -15,6 +15,8 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.recipients;
 
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -52,6 +54,26 @@ public class Signer extends Recipient {
 	/** The tabs. */
 	@JsonProperty
 	private DocumentTabCollection tabs;
+
+	/** Excluded documents. */
+	@JsonProperty
+	private List<String> excludedDocuments;
+
+	/** 
+	 * Gets the list of excluded documents (list of IDs)
+	 * @return List of IDs of excluded documents
+	 */
+	public List<String> getExcludedDocuments() {
+		return excludedDocuments;
+	}
+
+	/** 
+	 * Sets the list of excluded documents (list of IDs)
+	 * @param excludedDocuments the list of IDs of the excluded documents
+	 */
+	public void setExcludedDocuments(List<String> excludedDocuments) {
+		this.excludedDocuments = excludedDocuments;
+	}
 
 	/**
 	 * Gets the host email.
