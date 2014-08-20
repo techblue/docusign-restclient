@@ -196,6 +196,7 @@ public class DocuSignUtils {
 	 * @return the list
 	 * @throws ClassNotFoundException 
 	 */
+	@SuppressWarnings("resource")
 	private static List<Class<?>> findClassesInJar(final String absolutePath,
 	        final String packageName) throws ClassNotFoundException {
 	    final List<Class<?>> classes = new ArrayList<Class<?>>();

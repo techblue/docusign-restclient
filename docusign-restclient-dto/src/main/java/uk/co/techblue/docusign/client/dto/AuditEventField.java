@@ -1,7 +1,5 @@
 package uk.co.techblue.docusign.client.dto;
 
-import java.util.List;
-
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class AuditEventField {
