@@ -1,0 +1,29 @@
+﻿pick 8a4f1a5 Add header for "on behalf of" only if it is set.
+pick 07756ba Added a cache for restBaseUri to BaseService. Instances of DocusignCredentials are used as keys.
+pick d1d3c95 Abstract class for Tabs that have the methods to get/set the recipientId
+f 85518a5 Abstract class for tabs
+pick 36e3db2 Tabs & HttpClient connections
+pick 7f58d69 Support port redirect
+pick 1247c5a Use different port for each DocuSign server
+pick 82ec660 Removed unnecessary imports. Fix for UTC date parsing 
+f e959697 Added comments
+pick 7edafe7 Deleted .gitignore and .project
+
+# Rebase 7d5dd3a..7edafe7 onto 7d5dd3a
+#
+# Commands:
+#  p, pick = use commit
+#  r, reword = use commit, but edit the commit message
+#  e, edit = use commit, but stop for amending
+#  s, squash = use commit, but meld into previous commit
+#  f, fixup = like "squash", but discard this commit's log message
+#  x, exec = run command (the rest of the line) using shell
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+

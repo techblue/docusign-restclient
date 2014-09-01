@@ -21,33 +21,34 @@ package uk.co.techblue.docusign.client.envelope.attributes;
  * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
  */
 public enum Status {
-
-    /** The sent. */
-    sent,
-    /** The created. */
-    created,
-    /** The voided. */
-    voided,
-    /** The Deleted. */
-    deleted,
-    /** The Delivered. */
-    delivered,
-    /** The Signed. */
-    signed,
-    /** The Completed. */
-    completed,
-    /** The Declined. */
-    declined,
-    /** The Timed out. */
-    timedOut,
-    /** The Processing. */
-    processing,
-    /** The template. */
-    template,
-    /** The faxpending. */
-    faxpending,
-    /** Autoresponded. */
-    autoresponded,
-    /** The changed. */
-    changed;
+	/** The sent. */
+	sent,
+	/** The created. */
+	created,
+	/** The voided. */
+	voided,
+	/** The Deleted. */
+	deleted, 
+	/** The Delivered. */
+	delivered, 
+	/** The Signed. */
+	signed, 
+	/** The Completed. */
+	completed, 
+	/** The Declined. */
+	declined, 
+	/** The Timed out. */
+	timedOut, 
+	/** The Processing. */
+	processing,
+	/** The template. */
+	template,
+	/** The faxpending. */
+	faxpending,
+	/** Autoresponded. */
+	autoresponded,
+    /** Changed. */
+    changed,
+	/** Correct */
+	correct
 }

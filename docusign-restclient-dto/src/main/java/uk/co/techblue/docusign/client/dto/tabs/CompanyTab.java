@@ -25,7 +25,7 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
  * Place this tag on the document where you want the recipient’s company name to appear.
  */
 @SuppressWarnings("serial")
-public class CompanyTab extends Tab {
+public class CompanyTab extends AbstractRecipientTab {
 
     /** The conditional parent label. */
     private String conditionalParentLabel;

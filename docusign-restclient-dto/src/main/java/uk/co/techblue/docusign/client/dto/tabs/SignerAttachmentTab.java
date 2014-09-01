@@ -25,7 +25,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  */
 @SuppressWarnings("serial")
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class SignerAttachmentTab extends Tab {
+public class SignerAttachmentTab extends AbstractRecipientTab {
 	/** The conditional parent label. */
 	@JsonProperty
 	private String conditionalParentLabel;

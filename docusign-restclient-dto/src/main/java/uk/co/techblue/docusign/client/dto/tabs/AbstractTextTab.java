@@ -20,7 +20,7 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
  */
 @SuppressWarnings("serial")
 @JsonSerialize(include = Inclusion.NON_NULL)
-public abstract class AbstractTextTab extends Tab {
+public abstract class AbstractTextTab extends AbstractRecipientTab {
 
     /** The conditional parent label. */
     @JsonProperty

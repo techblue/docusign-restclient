@@ -28,7 +28,7 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
  */
 @SuppressWarnings("serial")
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class TitleTab extends Tab {
+public class TitleTab extends AbstractRecipientTab {
     /** The conditional parent label. */
     @JsonProperty
     private String conditionalParentLabel;
@@ -448,5 +448,4 @@ public class TitleTab extends Tab {
     public void setWidth(final Integer width) {
         this.width = width;
     }
-
 }
