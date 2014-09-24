@@ -245,7 +245,6 @@ public class DocuSignClient {
 
 						params.setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 					}
-					
 				}
 			}
 		}
@@ -269,7 +268,8 @@ public class DocuSignClient {
 	 * @return the client service
 	 */
 	public static <T> T getClientService(final Class<T> clazz,
-			String serverUri, final DocuSignCredentials credentials) {
+			final String serverUri, final DocuSignCredentials credentials) {
+
 		logger.info("Generating REST resource proxy for: " + clazz.getName());
 
 		HttpClient httpClient = getHttpClient();
@@ -286,6 +286,7 @@ public class DocuSignClient {
 		};
 
 		String connectionPortRedirect = httpClientConfiguration.getConnectionPortRedirect();
+		String reqServerUri = serverUri;
 		if (connectionPortRedirect != null && "true".equals(connectionPortRedirect)) {
 			Matcher m = Pattern.compile("(.*)://([^/]*)(/.*)+").matcher(serverUri);
 			if (m.matches()) {
@@ -298,11 +299,11 @@ public class DocuSignClient {
 				String key = CONNECTION_URL + "." + host;
 				String redirectPort = httpClientConfiguration.getString(key, null);
 				if (redirectPort != null) {
-					serverUri = protocol + "://" + host + ":" + redirectPort + path;
+					reqServerUri = protocol + "://" + host + ":" + redirectPort + path;
 				}
 			}
 		}
 		
-		return ProxyFactory.create(clazz, serverUri, executor);
+		return ProxyFactory.create(clazz, reqServerUri, executor);
 	}
 }

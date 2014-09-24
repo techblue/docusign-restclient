@@ -227,7 +227,7 @@ public class ApproveTab extends AbstractRecipientTab {
         this.font = font;
     }
 
-	/**
+    /**
 	 * Gets the font color.
 	 * 
 	 * @return the font color
