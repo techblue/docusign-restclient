@@ -15,6 +15,8 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -38,6 +40,7 @@ import uk.co.techblue.docusign.client.dto.tabs.RadioGroupTab;
 import uk.co.techblue.docusign.client.dto.tabs.SSNTab;
 import uk.co.techblue.docusign.client.dto.tabs.SignHereTab;
 import uk.co.techblue.docusign.client.dto.tabs.SignerAttachmentTab;
+import uk.co.techblue.docusign.client.dto.tabs.Tab;
 import uk.co.techblue.docusign.client.dto.tabs.TextTab;
 import uk.co.techblue.docusign.client.dto.tabs.TitleTab;
 import uk.co.techblue.docusign.client.dto.tabs.ZipTab;
@@ -517,4 +520,41 @@ public class DocumentTabCollection extends BaseDto {
 		this.zipTabs = zipTabs;
 	}
 
+	@SuppressWarnings("serial")
+	public List<Tab> getAllTabs() {
+		List<Tab> tabs = new ArrayList<Tab>() {
+
+			@Override
+			public boolean addAll(Collection<? extends Tab> coll) {
+				boolean changed = false;
+				if (coll != null) {
+					changed = super.addAll(coll);
+				}
+				
+				return changed;
+			}
+		};
+		
+		tabs.addAll(initialHereTabs);
+		tabs.addAll(emailTabs);
+		tabs.addAll(fullNameTabs);
+		tabs.addAll(approveTabs);
+		tabs.addAll(checkboxTabs);
+		tabs.addAll(companyTabs);
+		tabs.addAll(dateSignedTabs);
+		tabs.addAll(declineTabs);
+		tabs.addAll(envelopeIdTabs);
+		tabs.addAll(listTabs);
+		tabs.addAll(noteTabs);
+		tabs.addAll(numberTabs);
+		tabs.addAll(radioGroupTabs);
+		tabs.addAll(signHereTabs);
+		tabs.addAll(signerAttachmentTabs);
+		tabs.addAll(ssnTabs);
+		tabs.addAll(textTabs);
+		tabs.addAll(titleTabs);
+		tabs.addAll(zipTabs);
+
+		return tabs;
+	}
 }

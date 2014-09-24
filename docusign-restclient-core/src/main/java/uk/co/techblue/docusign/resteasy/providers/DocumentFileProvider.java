@@ -40,7 +40,6 @@ import org.apache.james.mime4j.field.FieldName;
 import org.jboss.resteasy.logging.Logger;
 import org.jboss.resteasy.plugins.providers.ProviderHelper;
 
-import uk.co.techblue.docusign.client.DocuSignClient;
 import uk.co.techblue.docusign.client.dto.DocumentFile;
 
 @Provider
@@ -57,7 +56,7 @@ public class DocumentFileProvider implements MessageBodyReader<DocumentFile> {
 
 	private String downloadDirectory = null; // by default temp dir, consider allowing it to be defined at runtime
 
-	private final static Logger logger = Logger.getLogger(DocuSignClient.class);
+	private final static Logger logger = Logger.getLogger(DocumentFileProvider.class);
 
 	public boolean isReadable(Class<?> type, Type genericType,
 			Annotation[] annotations, MediaType mediaType) {
