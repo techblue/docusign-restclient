@@ -169,6 +169,11 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
         return valueOf(this);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see uk.co.techblue.docusign.client.credential.DocuSignCredentials#setHeader(org.jboss.resteasy.client.ClientRequest)
+     */
     @Override
     public void setHeader(final ClientRequest request) {
         request.header(DocuSignConstants.HEADER_PARAM_AUTHENTICATION, this);

@@ -16,12 +16,13 @@
 package uk.co.techblue.docusign.client.test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.text.WordUtils;
+
+import uk.co.techblue.docusign.client.credential.BasicDocusignCredential;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
-import uk.co.techblue.docusign.client.credential.TokenDocuSignCredential;
 import uk.co.techblue.docusign.client.dto.AuditEvent;
 import uk.co.techblue.docusign.client.dto.AuditEventField;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
@@ -66,7 +67,7 @@ public class DocusignTest {
     public static void main(final String[] args) {
         final DocuSignCredentials credentials = getDocuSignCredentials();
         // try {
-        testLoginService(credentials);
+        // testLoginService(credentials);
         // testEnvelopeStatusChange(credentials);
         // testTemplateService(credentials);
         // testGettingAuditEvents(credentials);
@@ -89,6 +90,21 @@ public class DocusignTest {
         // } catch (final ServiceInitException e) {
         // e.printStackTrace();
         // }
+        try {
+            // testSendTemplateSignRequest(credentials);
+            // final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
+            // System.out.println(envelopeService.getRecipientStatus("5aa6d353-80c1-4242-98ec-f382596bcc7c", true, true));
+            // testGetDocument(credentials);
+            // testGettingEnvelopeStatus(credentials);
+            testGettingConsoleViews(credentials);
+        } catch (final ServiceInitException e) {
+            e.printStackTrace();
+        }
+        // catch (final EnvelopeException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+
     }
 
     @SuppressWarnings("unused")
@@ -170,18 +186,17 @@ public class DocusignTest {
         final DocuSignCredentials credentials) throws ServiceInitException {
         final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
         final EnvelopeStatusQueryForm statusQueryForm = new EnvelopeStatusQueryForm();
-        final Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, 2012);
-        cal.set(Calendar.DATE, 25);
-        cal.set(Calendar.MONTH, Calendar.JUNE);
-        statusQueryForm.setFromDate(cal.getTime());
-        final List<Status> statuses = new ArrayList<Status>();
-        statuses.add(Status.completed);
-        statusQueryForm.setStatuses(statuses);
-        // List<String> envelopeIds = new ArrayList<String>();
-        // envelopeIds.add("a0feee1e-ba6b-4440-9ba3-f6ac51bf6ab7");
-        // statusQueryForm.setEnvelopeIds(envelopeIds);
-        // statusQueryForm.setEnvelopeId("db903aac-ac16-4662-88ee-d1e07d1624a4");
+        // final Calendar cal = Calendar.getInstance();
+        // cal.set(Calendar.YEAR, 2014);
+        // cal.set(Calendar.DATE, 15);
+        // cal.set(Calendar.MONTH, Calendar.SEPTEMBER);
+        // statusQueryForm.setFromDate(cal.getTime());
+        // final List<Status> statuses = new ArrayList<Status>();
+        // statuses.add(Status.completed);
+        // statusQueryForm.setStatuses(statuses);
+        final List<String> envelopeIds = new ArrayList<String>();
+        envelopeIds.add("461af76a-12db-409a-9a66-5ce2d7113d2e");
+        statusQueryForm.setEnvelopeIds(envelopeIds);
         try {
             // System.err.println(envelopeService.getEnvelopeStatus("db903aac-ac16-4662-88ee-d1e07d1624a4"));
             System.err.println(envelopeService.getEnvelopeStatus(statusQueryForm));
@@ -211,20 +226,20 @@ public class DocusignTest {
         try {
             // System.err.println("Authentication View: "+cvService.getAuthenticationView());
 
-            System.err
-                .println("Sender View: "
-                    + cvService
-                        .getEnvelopeSenderView("<Envelope Id>", null));
+            // System.err
+            // .println("Sender View: "
+            // + cvService
+            // .getEnvelopeSenderView("<Envelope Id>", null));
 
             System.err.println("Recipient View: "
                 + cvService.getEnvelopeRecipientView(
-                    "<Envelope Id>",
+                    "a10f550e-ba01-49e0-a96a-abd6b5a1d40f",
                     getRecipientViewRequest()));
 
-            System.err.println("Correction View: "
-                + cvService.getEnvelopeCorrectionView(
-                    "<Envelope Id>",
-                    getCorrectionViewRequest()));
+            // System.err.println("Correction View: "
+            // + cvService.getEnvelopeCorrectionView(
+            // "<Envelope Id>",
+            // getCorrectionViewRequest()));
 
         } catch (final ConsoleViewException e) {
             e.printStackTrace();
@@ -241,8 +256,9 @@ public class DocusignTest {
         final RecipientViewRequest recipientView = new RecipientViewRequest();
         recipientView.setAuthenticationMethod("email");
         recipientView.setReturnUrl("http://demo.docusign.net");
-        recipientView.setEmail("<Set Email ID>");
-        recipientView.setUserName("Ajay Deshwal");
+        recipientView.setEmail("ritesh.wadhwa@techblue.co.uk");
+        recipientView.setUserName("Mr. Ritesh Wadhwa");
+        recipientView.setClientUserId("31");
         return recipientView;
     }
 
@@ -279,7 +295,7 @@ public class DocusignTest {
             credentials);
         try {
             System.out
-                .println(envService.getDocumentsCombined("<Envelope Id>"));
+                .println(envService.getDocumentsCombined("4ba2d260-694e-4712-9e8a-8a8fd126a69e"));
             // System.out
             // .println(envService.getEnvelope("e3b09d80-ac1a-4d46-a40b-bea9d7bb5996"));
             // System.out
@@ -354,9 +370,8 @@ public class DocusignTest {
         // signRequest.setEmailBlurb("Please sign this document");
         // signRequest.setEmailSubject("Please sign this document");
         signRequest.setStatus(Status.sent);
-        signRequest.setTemplateId("599D3416-55C6-49D6-9F81-0C5F29050632");
+        signRequest.setTemplateId("4911B504-4F4E-4DE9-863B-2FE7E280C548");
         signRequest.setTemplateRoles(getMockTemplateRoles());
-
         return signRequest;
     }
 
@@ -367,12 +382,19 @@ public class DocusignTest {
         final List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
 
         final TemplateRole role = new TemplateRole();
-        role.setEmail("maltieri@exari.com");
-        role.setName("Marco Altieri");
-        role.setRoleName("signer");
+        role.setEmail("dheeraj.arora@techblue.co.uk");
+        role.setName("Dheeraj Arora");
+        role.setRoleName("landlordSigner");
         role.setTabs(getMockDocumentTabCollection());
 
+        final TemplateRole role1 = new TemplateRole();
+        role1.setEmail("dheeraj6188@gmail.com");
+        role1.setName("Drj");
+        role1.setRoleName("tenantSigner");
+        role1.setTabs(getMockDocumentTabCollection());
+
         templateRoles.add(role);
+        templateRoles.add(role1);
         return templateRoles;
     }
 
@@ -382,18 +404,48 @@ public class DocusignTest {
     private static DocumentTabCollection getMockDocumentTabCollection() {
         final DocumentTabCollection tabs = new DocumentTabCollection();
         final List<TextTab> textTabs = new ArrayList<TextTab>();
-        textTabs.add(getMockTextTab("CRL00765", "Data Field 17"));
-        textTabs.add(getMockTextTab("00098765", "Data Field 18"));
+        textTabs.add(getMockPropertyAddress("21-23 Clemens Street, Leamington Spa, CV31 2DW"));
+        textTabs.add(getMockTextTab("21-23 Clemens Street, Leamington Spa, CV31 2DW", "landlordAddress"));
+        textTabs.add(getMockTextTab("70 St. Andrew Street, Lincoln, LN5 7UG", "tenantAddress"));
+        textTabs.add(getMockTextTab("Nitin Jain", "tenantName"));
+        textTabs.add(getMockTextTab("Dheeraj Arora", "landlordName"));
+        textTabs.add(getMockTextTab("20", "tenancyStartDay"));
+        textTabs.add(getMockTextTab("09", "tenancyStartMonth"));
+        textTabs.add(getMockTextTab("2014", "tenancyStartYear"));
         tabs.setTextTabs(textTabs);
 
         return tabs;
     }
 
     private static TextTab getMockTextTab(final String value, final String textTabLabel) {
+
         final TextTab textTab = new TextTab();
-        textTab.setLocked(true);
+        // textTab.setLocked(true);
         textTab.setValue(value);
+
         textTab.setTabLabel(textTabLabel);
+        return textTab;
+    }
+
+    private static TextTab getMockPropertyAddress(final String value) {
+        final TextTab textTab = new TextTab();
+        textTab.setAnchorString("<<property_address>>");
+        textTab.setRequired(true);
+        textTab.setLocked(true);
+        textTab.setBold(true);
+        textTab.setValue(value);
+        return textTab;
+    }
+
+    private static TextTab getMockInitialsHere(final String value, final String anchorText) {
+        final TextTab textTab = new TextTab();
+        textTab.setAnchorString(anchorText);
+        textTab.setRequired(true);
+        textTab.setLocked(true);
+        textTab.setBold(true);
+        textTab.setAnchorXOffset(60);
+        textTab.setAnchorYOffset(-3);
+        textTab.setValue(WordUtils.initials(value));
         return textTab;
     }
 
@@ -614,9 +666,9 @@ public class DocusignTest {
     }
 
     private static DocuSignCredentials getDocuSignCredentials() {
-        final DocuSignCredentials credentials = new TokenDocuSignCredential("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
-        // final DocuSignCredentials credentials = new BasicDocusignCredential("dheeraj.arora@techblue.co.uk", "hellboy",
-        // "TECH-ca1df08a-66d8-41bb-9226-5aeb9a921dbe");
+        // final DocuSignCredentials credentials = new TokenDocuSignCredential("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
+        final DocuSignCredentials credentials = new BasicDocusignCredential("dheeraj.arora@techblue.co.uk", "Techblue!",
+            "TECH-ca1df08a-66d8-41bb-9226-5aeb9a921dbe");
         return credentials;
     }
 }

@@ -23,15 +23,16 @@ import uk.co.techblue.docusign.client.envelope.attributes.Status;
 
 /**
  * The base class for all kinds of signature requests.
+ * 
+ * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
  */
 @JsonSerialize(include = Inclusion.NON_NULL)
 public abstract class SignatureRequest extends BaseDto {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -1000127674564831038L;
 
-	/** The email blurb. */
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -1000127674564831038L;
+
+    /** The email blurb. */
     @JsonProperty("emailBlurb")
     private String emailBlurb;
 
@@ -42,10 +43,10 @@ public abstract class SignatureRequest extends BaseDto {
     /** The status. */
     @JsonProperty("status")
     private Status status;
-    
+
     /** The enforce signer visibility. */
-	@JsonProperty
-	private Boolean enforceSignerVisibility;
+    @JsonProperty
+    private Boolean enforceSignerVisibility;
 
     /**
      * Gets the email blurb.
@@ -59,10 +60,9 @@ public abstract class SignatureRequest extends BaseDto {
     /**
      * Sets the email blurb.
      * 
-     * @param emailBlurb
-     *            the new email blurb
+     * @param emailBlurb the new email blurb
      */
-    public void setEmailBlurb(String emailBlurb) {
+    public void setEmailBlurb(final String emailBlurb) {
         this.emailBlurb = emailBlurb;
     }
 
@@ -78,10 +78,9 @@ public abstract class SignatureRequest extends BaseDto {
     /**
      * Sets the email subject.
      * 
-     * @param emailSubject
-     *            the new email subject
+     * @param emailSubject the new email subject
      */
-    public void setEmailSubject(String emailSubject) {
+    public void setEmailSubject(final String emailSubject) {
         this.emailSubject = emailSubject;
     }
 
@@ -97,33 +96,29 @@ public abstract class SignatureRequest extends BaseDto {
     /**
      * Sets the status.
      * 
-     * @param status
-     *            the new status
+     * @param status the new status
      */
-    public void setStatus(Status status) {
+    public void setStatus(final Status status) {
         this.status = status;
     }
-    
-    /**
-	 * Gets the enforce signer visibility.
-	 * 
-	 * @return the enforce signer visibility
-	 */
-	public Boolean getEnforceSignerVisibility() {
-		return enforceSignerVisibility;
-	}
 
-	/**
-	 * Sets the enforce signer visibility. It true, the signer is required to
-	 * have a signature or initial tab on the document or that the document has
-	 * no signers in order to view it. Account must have Document Visibility
-	 * enabled to use this.
-	 * 
-	 * @param enforceSignerVisibility
-	 *            the new enforce signer visibility
-	 */
-	public void setEnforceSignerVisibility(Boolean enforceSignerVisibility) {
-		this.enforceSignerVisibility = enforceSignerVisibility;
-	}
+    /**
+     * Gets the enforce signer visibility.
+     * 
+     * @return the enforce signer visibility
+     */
+    public Boolean getEnforceSignerVisibility() {
+        return enforceSignerVisibility;
+    }
+
+    /**
+     * Sets the enforce signer visibility. It true, the signer is required to have a signature or initial tab on the document or
+     * that the document has no signers in order to view it. Account must have Document Visibility enabled to use this.
+     * 
+     * @param enforceSignerVisibility the new enforce signer visibility
+     */
+    public void setEnforceSignerVisibility(final Boolean enforceSignerVisibility) {
+        this.enforceSignerVisibility = enforceSignerVisibility;
+    }
 
 }

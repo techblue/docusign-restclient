@@ -29,20 +29,20 @@ import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class DocumentSignatureRequest extends SignatureRequest {
 
-
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/** The recipients. */
+    /** The recipients. */
     @JsonProperty("recipients")
     private RecipientCollection recipients;
-    
+
     /** The documents. */
     @JsonProperty("documents")
     private List<Document> documents;
     
+    /** The custom fields. */
     @JsonProperty
     private List<CustomField> customFields;
 
@@ -58,10 +58,9 @@ public class DocumentSignatureRequest extends SignatureRequest {
     /**
      * Sets the documents.
      * 
-     * @param documents
-     *            the new documents
+     * @param documents the new documents
      */
-    public void setDocuments(List<Document> documents) {
+    public void setDocuments(final List<Document> documents) {
         this.documents = documents;
     }
 
@@ -77,10 +76,9 @@ public class DocumentSignatureRequest extends SignatureRequest {
     /**
      * Sets the recipients.
      * 
-     * @param recipients
-     *            the new recipients
+     * @param recipients the new recipients
      */
-    public void setRecipients(RecipientCollection recipients) {
+    public void setRecipients(final RecipientCollection recipients) {
         this.recipients = recipients;
     }
 

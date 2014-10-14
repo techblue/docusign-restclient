@@ -21,13 +21,16 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 /**
  * The class to represent Template Role.
+ * 
+ * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
  */
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class TemplateRole extends BaseDto {
 
-	private static final long serialVersionUID = -8106974901588913285L;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -8106974901588913285L;
 
-	/** The client user id. */
+    /** The client user id. */
     @JsonProperty("clientUserId")
     private String clientUserId;
 
@@ -42,7 +45,11 @@ public class TemplateRole extends BaseDto {
     /** The role name. */
     @JsonProperty("roleName")
     private String roleName;
-    
+
+    /** The routing order. */
+    @JsonProperty("routingOrder")
+    private String routingOrder;
+
     /** The tabs. */
     @JsonProperty
     private DocumentTabCollection tabs;
@@ -59,10 +66,9 @@ public class TemplateRole extends BaseDto {
     /**
      * Sets the client user id.
      * 
-     * @param clientUserId
-     *            the new client user id
+     * @param clientUserId the new client user id
      */
-    public void setClientUserId(String clientUserId) {
+    public void setClientUserId(final String clientUserId) {
         this.clientUserId = clientUserId;
     }
 
@@ -78,10 +84,9 @@ public class TemplateRole extends BaseDto {
     /**
      * Sets the email.
      * 
-     * @param email
-     *            the new email
+     * @param email the new email
      */
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -97,10 +102,9 @@ public class TemplateRole extends BaseDto {
     /**
      * Sets the name.
      * 
-     * @param name
-     *            the new name
+     * @param name the new name
      */
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -116,11 +120,28 @@ public class TemplateRole extends BaseDto {
     /**
      * Sets the role name.
      * 
-     * @param roleName
-     *            the new role name
+     * @param roleName the new role name
      */
-    public void setRoleName(String roleName) {
+    public void setRoleName(final String roleName) {
         this.roleName = roleName;
+    }
+
+    /**
+     * Gets the routing order.
+     * 
+     * @return the routing order
+     */
+    public String getRoutingOrder() {
+        return routingOrder;
+    }
+
+    /**
+     * Sets the routing order.
+     * 
+     * @param routingOrder the new routing order
+     */
+    public void setRoutingOrder(final String routingOrder) {
+        this.routingOrder = routingOrder;
     }
 
     /**
@@ -137,9 +158,8 @@ public class TemplateRole extends BaseDto {
      * 
      * @param tabs the new tabs
      */
-    public void setTabs(DocumentTabCollection tabs) {
+    public void setTabs(final DocumentTabCollection tabs) {
         this.tabs = tabs;
     }
-    
-    
+
 }
