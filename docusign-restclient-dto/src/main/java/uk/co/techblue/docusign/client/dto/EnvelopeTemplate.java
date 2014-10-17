@@ -23,6 +23,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import uk.co.techblue.docusign.jackson.ISO8601DateDeserializer;
+import uk.co.techblue.docusign.jackson.ISO8601DateSerializer;
 
 /**
  * The Envelope Template.
@@ -129,6 +130,7 @@ public class EnvelopeTemplate extends BaseDto {
      * 
      * @return the last modified
      */
+    @JsonSerialize(using = ISO8601DateSerializer.class)
     public Date getLastModified() {
         return lastModified;
     }

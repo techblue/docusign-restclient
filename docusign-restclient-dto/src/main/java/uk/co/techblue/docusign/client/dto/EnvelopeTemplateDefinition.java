@@ -18,8 +18,11 @@ package uk.co.techblue.docusign.client.dto;
 import java.util.Date;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import uk.co.techblue.docusign.jackson.ISO8601DateDeserializer;
+import uk.co.techblue.docusign.jackson.ISO8601DateSerializer;
 
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class EnvelopeTemplateDefinition extends BaseDto {
@@ -61,10 +64,12 @@ public class EnvelopeTemplateDefinition extends BaseDto {
 		this.description = description;
 	}
 
+    @JsonSerialize(using = ISO8601DateSerializer.class)
 	public Date getLastModified() {
 		return lastModified;
 	}
 
+    @JsonDeserialize(using = ISO8601DateDeserializer.class)
 	public void setLastModified(Date lastModified) {
 		this.lastModified = lastModified;
 	}

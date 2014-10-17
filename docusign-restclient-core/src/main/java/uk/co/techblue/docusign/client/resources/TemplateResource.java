@@ -15,7 +15,9 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.resources;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,6 +26,7 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.Resource;
+import uk.co.techblue.docusign.client.dto.PostedTemplate;
 import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.utils.DocuSignConstants;
@@ -35,6 +38,12 @@ public interface TemplateResource extends Resource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("templates")
     public ClientResponse<TemplateInfo> retrieveTemplates();
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("templates")
+    public ClientResponse<PostedTemplate> postTemplate(Template template);
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
