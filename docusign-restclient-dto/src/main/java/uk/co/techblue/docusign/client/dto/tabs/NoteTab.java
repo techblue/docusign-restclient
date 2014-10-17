@@ -15,14 +15,9 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.tabs;
 
-import java.awt.Font;
-
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-
-import uk.co.techblue.docusign.client.envelope.attributes.FontColor;
-import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
 
 /**
  * Place this tag on the document where you want to place additional
@@ -58,15 +53,15 @@ public class NoteTab extends Tab {
 
 	/** The font. */
 	@JsonProperty
-	private Font font;
+	private String font;
 
 	/** The font color. */
 	@JsonProperty
-	private FontColor fontColor;
+	private String fontColor;
 
 	/** The font size. */
 	@JsonProperty
-	private FontSize fontSize;
+	private String fontSize;
 
 	/** The italic. */
 	@JsonProperty
@@ -225,7 +220,7 @@ public class NoteTab extends Tab {
 	 * 
 	 * @return the font
 	 */
-	public Font getFont() {
+	public String getFont() {
 		return font;
 	}
 
@@ -236,7 +231,7 @@ public class NoteTab extends Tab {
 	 * @param font
 	 *            the font
 	 */
-	public void setFont(Font font) {
+	public void setFont(String font) {
 		this.font = font;
 	}
 
@@ -245,7 +240,7 @@ public class NoteTab extends Tab {
 	 * 
 	 * @return the font color
 	 */
-	public FontColor getFontColor() {
+	public String getFontColor() {
 		return fontColor;
 	}
 
@@ -255,7 +250,7 @@ public class NoteTab extends Tab {
 	 * @param fontColor
 	 *            the new font color
 	 */
-	public void setFontColor(FontColor fontColor) {
+	public void setFontColor(String fontColor) {
 		this.fontColor = fontColor;
 	}
 
@@ -264,7 +259,7 @@ public class NoteTab extends Tab {
 	 * 
 	 * @return the font size
 	 */
-	public FontSize getFontSize() {
+	public String getFontSize() {
 		return fontSize;
 	}
 
@@ -275,7 +270,7 @@ public class NoteTab extends Tab {
 	 * @param fontSize
 	 *            the new font size
 	 */
-	public void setFontSize(FontSize fontSize) {
+	public void setFontSize(String fontSize) {
 		this.fontSize = fontSize;
 	}
 

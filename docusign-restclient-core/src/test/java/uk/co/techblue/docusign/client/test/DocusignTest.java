@@ -16,6 +16,7 @@
 package uk.co.techblue.docusign.client.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +43,7 @@ import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.dto.TemplateRole;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
+import uk.co.techblue.docusign.client.dto.TextCustomField;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientViewRequest;
 import uk.co.techblue.docusign.client.dto.recipients.Signer;
@@ -557,8 +559,10 @@ public class DocusignTest {
         final CustomField field = new CustomField();
         // field.setCustomFieldType(CustomFieldType.text);
         // field.setShow(false);
-        field.setName("landlord_id");
-        field.setValue("1831");
+        TextCustomField tcf = new TextCustomField();
+        tcf.setName("landlord_id");
+        tcf.setValue("1831");
+        field.setTextCustomFields(Arrays.asList(tcf));
         fieldList.add(field);
         return fieldList;
     }

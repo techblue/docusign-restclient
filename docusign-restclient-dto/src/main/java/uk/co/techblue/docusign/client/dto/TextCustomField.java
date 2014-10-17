@@ -16,27 +16,57 @@
 package uk.co.techblue.docusign.client.dto;
 
 import org.codehaus.jackson.annotate.JsonProperty;
-
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import uk.co.techblue.docusign.client.envelope.attributes.CustomFieldType;
-
-import java.util.List;
 
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
-public class CustomField extends BaseDto {
+public class TextCustomField extends BaseDto {
+    
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3282799554508340487L;
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = -3282799554508340487L;
+	@JsonProperty("name")
+	private String name;
 
-    private List<TextCustomField> textCustomFields;
+	@JsonProperty("value")
+	private String value;
 
-    public List<TextCustomField> getTextCustomFields() {
-        return textCustomFields;
-    }
+	@JsonProperty("required")
+	private String required;
 
-    public void setTextCustomFields(List<TextCustomField> textCustomFields) {
-        this.textCustomFields = textCustomFields;
-    }
+	@JsonProperty("show")
+	private Boolean show;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getRequired() {
+		return required;
+	}
+
+	public void setRequired(String required) {
+		this.required = required;
+	}
+
+	public Boolean getShow() {
+		return show;
+	}
+
+	public void setShow(Boolean show) {
+		this.show = show;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
 }
