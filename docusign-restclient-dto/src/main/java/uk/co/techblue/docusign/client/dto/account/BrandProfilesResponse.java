@@ -17,6 +17,8 @@ package uk.co.techblue.docusign.client.dto.account;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import uk.co.techblue.docusign.client.dto.BaseDto;
 
 /**
@@ -30,12 +32,15 @@ public class BrandProfilesResponse extends BaseDto {
     private static final long serialVersionUID = 6049906735972853153L;
 
     /** The brands. */
+    @JsonProperty
     private List<BrandInfo> brands;
 
     /** The recipient brand id default. */
+    @JsonProperty
     private String recipientBrandIdDefault;
 
     /** The sender brand id default. */
+    @JsonProperty
     private String senderBrandIdDefault;
 
     /**

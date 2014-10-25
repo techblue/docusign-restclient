@@ -18,6 +18,8 @@ package uk.co.techblue.docusign.client.dto.account;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import uk.co.techblue.docusign.client.dto.BaseDto;
 
 /**
@@ -31,6 +33,7 @@ public class BrandDeleteRequest extends BaseDto {
     private static final long serialVersionUID = -7183004048231476762L;
 
     /** The brands. */
+    @JsonProperty
     private List<Map<String, String>> brands;
 
     /**

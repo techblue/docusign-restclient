@@ -15,6 +15,8 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.account;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import uk.co.techblue.docusign.client.dto.BaseDto;
 
 /**
@@ -28,12 +30,15 @@ public class BrandInfo extends BaseDto {
     private static final long serialVersionUID = 5497225665411881579L;
 
     /** The brand company. */
+    @JsonProperty
     private String brandCompany;
 
     /** The brand id. */
+    @JsonProperty
     private String brandId;
 
     /** The brand name. */
+    @JsonProperty
     private String brandName;
 
     /**
