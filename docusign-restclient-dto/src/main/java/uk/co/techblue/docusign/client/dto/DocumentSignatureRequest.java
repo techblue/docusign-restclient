@@ -29,9 +29,7 @@ import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class DocumentSignatureRequest extends SignatureRequest {
 
-    /**
-	 * 
-	 */
+    /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1L;
 
     /** The recipients. */
@@ -41,10 +39,14 @@ public class DocumentSignatureRequest extends SignatureRequest {
     /** The documents. */
     @JsonProperty("documents")
     private List<Document> documents;
-    
+
     /** The custom fields. */
     @JsonProperty
     private List<CustomField> customFields;
+
+    /** The reminder notifications. */
+    @JsonProperty("notification")
+    private EnvelopeNotificationInfo notifications;
 
     /**
      * Gets the documents.
@@ -93,16 +95,32 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * <b>Optional</b><br/>
-     * Allows the sender to send custom data about the recipient. This
-     * information is returned in the envelope status but otherwise not used by
-     * DocuSign.
+     * Allows the sender to send custom data about the recipient. This information is returned in the envelope status but
+     * otherwise not used by DocuSign.
      * 
      * 
-     * @param customFields
-     *            the new custom fields
+     * @param customFields the new custom fields
      */
     public void setCustomFields(List<CustomField> customFields) {
         this.customFields = customFields;
     }
-    
+
+    /**
+     * Gets the notifications.
+     * 
+     * @return the notifications
+     */
+    public EnvelopeNotificationInfo getNotifications() {
+        return notifications;
+    }
+
+    /**
+     * Sets the notifications.
+     * 
+     * @param notifications the new notifications
+     */
+    public void setNotifications(EnvelopeNotificationInfo notifications) {
+        this.notifications = notifications;
+    }
+
 }
