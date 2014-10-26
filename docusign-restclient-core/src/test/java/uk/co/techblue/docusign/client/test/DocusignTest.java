@@ -17,7 +17,9 @@ package uk.co.techblue.docusign.client.test;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -42,6 +44,7 @@ import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.dto.TemplateRole;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
+import uk.co.techblue.docusign.client.dto.account.BrandDeleteRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientViewRequest;
 import uk.co.techblue.docusign.client.dto.recipients.Signer;
@@ -49,12 +52,14 @@ import uk.co.techblue.docusign.client.dto.tabs.SignHereTab;
 import uk.co.techblue.docusign.client.dto.tabs.TextTab;
 import uk.co.techblue.docusign.client.dto.user.ClientInfo;
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
+import uk.co.techblue.docusign.client.exception.AccountException;
 import uk.co.techblue.docusign.client.exception.ConsoleViewException;
 import uk.co.techblue.docusign.client.exception.EnvelopeException;
 import uk.co.techblue.docusign.client.exception.LoginException;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
 import uk.co.techblue.docusign.client.exception.SignatureRequestException;
 import uk.co.techblue.docusign.client.exception.TemplateException;
+import uk.co.techblue.docusign.client.services.AccountService;
 import uk.co.techblue.docusign.client.services.ConsoleViewService;
 import uk.co.techblue.docusign.client.services.EnvelopeService;
 import uk.co.techblue.docusign.client.services.LoginService;
@@ -66,45 +71,46 @@ public class DocusignTest {
 
     public static void main(final String[] args) {
         final DocuSignCredentials credentials = getDocuSignCredentials();
-        // try {
-        // testLoginService(credentials);
-        // testEnvelopeStatusChange(credentials);
-        // testTemplateService(credentials);
-        // testGettingAuditEvents(credentials);
-        // testSendingDocumentSignRequest(credentials);
-        // testSendTemplateSignRequest(credentials);
-        // testRetrieveTemplate(credentials);
-        // testSignatureService(credentials);
-        // testSendingDocument(credentials);
-        // testGetEnvelope(credentials);
-        // testGetRecipient(credentials);
-        // testGetEnvelope(credentials);
-        // testGetDocument(credentials);
-        // testGettingConsoleViews(credentials);
-        // testSavingEnvelopeToDrafts(credentials);
-        // testGettingEnvelopeStatus(credentials);
-        // testGettingCustomFields(credentials);
-        // testGettingCertificate(credentials);
-        // testGettingNotificationInfo(credentials);
-        // testGettingRecipientStatus(credentials);
-        // } catch (final ServiceInitException e) {
-        // e.printStackTrace();
-        // }
+
+        // testGetAccountBrandingProfiles(credentials);
+        testDeleteBrandProfiles(credentials);
+
+    }
+
+    private static void testGetAccountBrandingProfiles(final DocuSignCredentials credentials) {
         try {
-            // testSendTemplateSignRequest(credentials);
-            // final EnvelopeService envelopeService = new EnvelopeService(SERVER_URI, credentials);
-            // System.out.println(envelopeService.getRecipientStatus("5aa6d353-80c1-4242-98ec-f382596bcc7c", true, true));
-            // testGetDocument(credentials);
-            // testGettingEnvelopeStatus(credentials);
-            testGettingConsoleViews(credentials);
+            final AccountService accountService = new AccountService(SERVER_URI, credentials);
+            System.out.println(accountService.getBrandProfiles());
         } catch (final ServiceInitException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final AccountException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        // catch (final EnvelopeException e) {
-        // // TODO Auto-generated catch block
-        // e.printStackTrace();
-        // }
+    }
 
+    private static void testDeleteBrandProfiles(final DocuSignCredentials credentials) {
+        try {
+            final AccountService accountService = new AccountService(SERVER_URI, credentials);
+            accountService.deleteBrandProfiles(getMockBrandDeleteRequest());
+        } catch (final ServiceInitException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (final AccountException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private static BrandDeleteRequest getMockBrandDeleteRequest() {
+        final BrandDeleteRequest brandDeleteRequest = new BrandDeleteRequest();
+        final List<Map<String, String>> brands = new ArrayList<Map<String, String>>();
+        final Map<String, String> brandId = new HashMap<String, String>();
+        brandId.put("brandId", "19b9d8a6-de01-42bf-81db-2d0dd4abd01d");
+        brands.add(brandId);
+        brandDeleteRequest.setBrands(brands);
+        return brandDeleteRequest;
     }
 
     @SuppressWarnings("unused")
@@ -195,7 +201,7 @@ public class DocusignTest {
         // statuses.add(Status.completed);
         // statusQueryForm.setStatuses(statuses);
         final List<String> envelopeIds = new ArrayList<String>();
-        envelopeIds.add("461af76a-12db-409a-9a66-5ce2d7113d2e");
+        envelopeIds.add("febd6921-28ac-4b50-8e3c-a1bea7b8ecab");
         statusQueryForm.setEnvelopeIds(envelopeIds);
         try {
             // System.err.println(envelopeService.getEnvelopeStatus("db903aac-ac16-4662-88ee-d1e07d1624a4"));
@@ -667,7 +673,7 @@ public class DocusignTest {
 
     private static DocuSignCredentials getDocuSignCredentials() {
         // final DocuSignCredentials credentials = new TokenDocuSignCredential("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
-        final DocuSignCredentials credentials = new BasicDocusignCredential("dheeraj.arora@techblue.co.uk", "Techblue!",
+        final DocuSignCredentials credentials = new BasicDocusignCredential("dheeraj.arora@techblue.co.uk", "",
             "TECH-ca1df08a-66d8-41bb-9226-5aeb9a921dbe");
         return credentials;
     }
