@@ -29,7 +29,13 @@ public interface BrandResource extends Resource {
     @Path("/brands")
     @Produces(MediaType.APPLICATION_JSON)
     public ClientResponse<EsignBranding> getAllEsignBrands();
-    
+
+    /**
+     * Delete all esign brands.
+     * 
+     * @param esignBranding the esign branding
+     * @return the client response
+     */
     @DELETE
     @Path("/brands")
     @Produces(MediaType.APPLICATION_JSON)
@@ -46,5 +52,19 @@ public interface BrandResource extends Resource {
     @Path("/groups/{groupid}/brands")
     @Produces(MediaType.APPLICATION_JSON)
     public ClientResponse<EsignBranding> getEsignBrandsByGroupId(@PathParam("groupid") final String groupId);
+
+    /**
+     * Delete esign brands by group id.
+     * 
+     * @param groupId the group id
+     * @param esignBranding the esign branding
+     * @return the client response
+     */
+    @DELETE
+    @Path("/groups/{groupid}/brands")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ClientResponse<EsignBranding> deleteEsignBrandsByGroupId(@PathParam("groupid") final String groupId,
+            final EsignBranding esignBranding);
 
 }
