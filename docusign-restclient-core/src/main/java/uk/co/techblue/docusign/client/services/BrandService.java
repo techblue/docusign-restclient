@@ -54,7 +54,19 @@ public class BrandService extends BaseService<BrandResource> {
      * @throws EnvelopeException the envelope exception
      */
     public EsignBranding getAllEsignBrandings() throws EnvelopeException {
-        final ClientResponse<EsignBranding> esignBrandingResponse = resourceProxy.getEsignBrandings();
+        final ClientResponse<EsignBranding> esignBrandingResponse = resourceProxy.getAllEsignBrands();
+        return parseEntityFromResponse(esignBrandingResponse, EnvelopeException.class);
+    }
+    
+    /**
+     * Delete esign brand.
+     *
+     * @param esignBranding the esign branding
+     * @return the esign branding
+     * @throws EnvelopeException the envelope exception
+     */
+    public EsignBranding deleteEsignBrand(final EsignBranding esignBranding) throws EnvelopeException{
+        final ClientResponse<EsignBranding> esignBrandingResponse = resourceProxy.deleteAllEsignBrands(esignBranding);
         return parseEntityFromResponse(esignBrandingResponse, EnvelopeException.class);
     }
 }
