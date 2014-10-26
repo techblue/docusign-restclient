@@ -4,7 +4,7 @@ import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.BaseService;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
-import uk.co.techblue.docusign.client.dto.EsignBranding;
+import uk.co.techblue.docusign.client.dto.EsignBrandingInfo;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.EnvelopeException;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
@@ -53,8 +53,8 @@ public class BrandService extends BaseService<BrandResource> {
      * @return the all esign brandings
      * @throws EnvelopeException the envelope exception
      */
-    public EsignBranding getAllEsignBrandings() throws EnvelopeException {
-        final ClientResponse<EsignBranding> esignBrandingResponse = resourceProxy.getAllEsignBrands();
+    public EsignBrandingInfo getAllEsignBrandings() throws EnvelopeException {
+        final ClientResponse<EsignBrandingInfo> esignBrandingResponse = resourceProxy.getAllEsignBrandProfiles();
         return parseEntityFromResponse(esignBrandingResponse, EnvelopeException.class);
     }
     
@@ -65,8 +65,9 @@ public class BrandService extends BaseService<BrandResource> {
      * @return the esign branding
      * @throws EnvelopeException the envelope exception
      */
-    public EsignBranding deleteEsignBrand(final EsignBranding esignBranding) throws EnvelopeException{
-        final ClientResponse<EsignBranding> esignBrandingResponse = resourceProxy.deleteAllEsignBrands(esignBranding);
+    public EsignBrandingInfo deleteEsignBrand(final EsignBrandingInfo esignBranding) throws EnvelopeException{
+        final ClientResponse<EsignBrandingInfo> esignBrandingResponse = resourceProxy.deleteEsignBrandProfile(esignBranding);
         return parseEntityFromResponse(esignBrandingResponse, EnvelopeException.class);
     }
+    
 }

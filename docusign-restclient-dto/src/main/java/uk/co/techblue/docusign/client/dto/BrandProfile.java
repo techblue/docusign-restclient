@@ -8,7 +8,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  * The Class BrandInfo.
  */
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class BrandInfo extends BaseDto {
+public class BrandProfile extends BaseDto {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3881131715091661108L;

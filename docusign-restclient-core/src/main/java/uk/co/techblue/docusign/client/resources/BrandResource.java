@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import org.jboss.resteasy.client.ClientResponse;
 
 import uk.co.techblue.docusign.client.Resource;
-import uk.co.techblue.docusign.client.dto.EsignBranding;
+import uk.co.techblue.docusign.client.dto.EsignBrandingInfo;
 import uk.co.techblue.docusign.client.utils.DocuSignConstants;
 
 /**
@@ -29,7 +29,7 @@ public interface BrandResource extends Resource {
     @GET
     @Path("/brands")
     @Produces(MediaType.APPLICATION_JSON)
-    public ClientResponse<EsignBranding> getAllEsignBrands();
+    public ClientResponse<EsignBrandingInfo> getAllEsignBrandProfiles();
 
     /**
      * Delete all esign brands.
@@ -41,7 +41,7 @@ public interface BrandResource extends Resource {
     @Path("/brands")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ClientResponse<EsignBranding> deleteAllEsignBrands(final EsignBranding esignBranding);
+    public ClientResponse<EsignBrandingInfo> deleteEsignBrandProfile(final EsignBrandingInfo esignBranding);
 
     /**
      * Gets the esign brands by group id.
@@ -52,7 +52,7 @@ public interface BrandResource extends Resource {
     @GET
     @Path("/groups/{groupid}/brands")
     @Produces(MediaType.APPLICATION_JSON)
-    public ClientResponse<EsignBranding> getEsignBrandsByGroupId(@PathParam("groupid") final String groupId);
+    public ClientResponse<EsignBrandingInfo> getEsignBrandProfilesByGroupId(@PathParam("groupid") final String groupId);
 
     /**
      * Delete esign brands by group id.
@@ -65,8 +65,8 @@ public interface BrandResource extends Resource {
     @Path("/groups/{groupid}/brands")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ClientResponse<EsignBranding> deleteEsignBrandsByGroupId(@PathParam("groupid") final String groupId,
-            final EsignBranding esignBranding);
+    public ClientResponse<EsignBrandingInfo> deleteEsignBrandProfilesByGroupId(@PathParam("groupid") final String groupId,
+            final EsignBrandingInfo esignBranding);
 
     /**
      * Update esign brands by group id.
@@ -79,7 +79,7 @@ public interface BrandResource extends Resource {
     @Path("/groups/{groupid}/brands")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ClientResponse<EsignBranding> updateEsignBrandsByGroupId(@PathParam("groupid") final String groupId,
-            final EsignBranding esignBranding);
+    public ClientResponse<EsignBrandingInfo> updateEsignBrandProfilesByGroupId(@PathParam("groupid") final String groupId,
+            final EsignBrandingInfo esignBranding);
 
 }

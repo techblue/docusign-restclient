@@ -10,44 +10,26 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  * The Class EsignBranding.
  */
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class EsignBranding extends BaseDto {
+public class EsignBrandingInfo extends BaseDto {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 1754432120650147035L;
-    
+
     /** The default recipient brand id. */
-    @JsonProperty(value="recipientBrandIdDefault")
+    @JsonProperty(value = "recipientBrandIdDefault")
     private String defaultRecipientBrandId;
-    
+
     /** The default sender brand id. */
-    @JsonProperty(value="senderBrandIdDefault")
+    @JsonProperty(value = "senderBrandIdDefault")
     private String defaultSenderBrandId;
 
     /** The brand infos. */
-    @JsonProperty(value="brands")
-    private List<BrandInfo> brandInfos;
-
-    /**
-     * Gets the brand infos.
-     * 
-     * @return the brand infos
-     */
-    public List<BrandInfo> getBrandInfos() {
-        return brandInfos;
-    }
-
-    /**
-     * Sets the brand infos.
-     * 
-     * @param brandInfos the new brand infos
-     */
-    public void setBrandInfos(List<BrandInfo> brandInfos) {
-        this.brandInfos = brandInfos;
-    }
+    @JsonProperty(value = "brands")
+    private List<BrandProfile> brandProfiles;
 
     /**
      * Gets the default recipient brand id.
-     *
+     * 
      * @return the default recipient brand id
      */
     public String getDefaultRecipientBrandId() {
@@ -56,7 +38,7 @@ public class EsignBranding extends BaseDto {
 
     /**
      * Sets the default recipient brand id.
-     *
+     * 
      * @param defaultRecipientBrandId the new default recipient brand id
      */
     public void setDefaultRecipientBrandId(String defaultRecipientBrandId) {
@@ -65,7 +47,7 @@ public class EsignBranding extends BaseDto {
 
     /**
      * Gets the default sender brand id.
-     *
+     * 
      * @return the default sender brand id
      */
     public String getDefaultSenderBrandId() {
@@ -74,11 +56,29 @@ public class EsignBranding extends BaseDto {
 
     /**
      * Sets the default sender brand id.
-     *
+     * 
      * @param defaultSenderBrandId the new default sender brand id
      */
     public void setDefaultSenderBrandId(String defaultSenderBrandId) {
         this.defaultSenderBrandId = defaultSenderBrandId;
+    }
+
+    /**
+     * Gets the brand profiles.
+     * 
+     * @return the brand profiles
+     */
+    public List<BrandProfile> getBrandProfiles() {
+        return brandProfiles;
+    }
+
+    /**
+     * Sets the brand profiles.
+     * 
+     * @param brandProfiles the new brand profiles
+     */
+    public void setBrandProfiles(List<BrandProfile> brandProfiles) {
+        this.brandProfiles = brandProfiles;
     }
 
 }
