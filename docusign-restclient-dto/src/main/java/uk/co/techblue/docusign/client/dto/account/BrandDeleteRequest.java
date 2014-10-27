@@ -32,7 +32,10 @@ public class BrandDeleteRequest extends BaseDto {
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -7183004048231476762L;
 
-    /** The brands. */
+    /**
+     * The brands. The map only accept the brand Ids, below if the format: map.put("brandId", "<<docusignBrandProfileId>>")
+     **/
+
     @JsonProperty
     private List<Map<String, String>> brands;
 
