@@ -17,9 +17,7 @@ package uk.co.techblue.docusign.client.test;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -44,6 +42,7 @@ import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.dto.TemplateRole;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
+import uk.co.techblue.docusign.client.dto.account.Brand;
 import uk.co.techblue.docusign.client.dto.account.BrandDeleteRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientViewRequest;
@@ -105,10 +104,10 @@ public class DocusignTest {
 
     private static BrandDeleteRequest getMockBrandDeleteRequest() {
         final BrandDeleteRequest brandDeleteRequest = new BrandDeleteRequest();
-        final List<Map<String, String>> brands = new ArrayList<Map<String, String>>();
-        final Map<String, String> brandId = new HashMap<String, String>();
-        brandId.put("brandId", "19b9d8a6-de01-42bf-81db-2d0dd4abd01d");
-        brands.add(brandId);
+        final List<Brand> brands = new ArrayList<Brand>();
+        final Brand brand = new Brand();
+        brand.setBrandId("19b9d8a6-de01-42bf-81db-2d0dd4abd01d");
+        brands.add(brand);
         brandDeleteRequest.setBrands(brands);
         return brandDeleteRequest;
     }

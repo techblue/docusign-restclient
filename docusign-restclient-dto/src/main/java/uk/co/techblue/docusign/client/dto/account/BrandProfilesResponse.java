@@ -33,7 +33,7 @@ public class BrandProfilesResponse extends BaseDto {
 
     /** The brands. */
     @JsonProperty
-    private List<BrandInfo> brands;
+    private List<BrandProfile> brands;
 
     /** The recipient brand id default. */
     @JsonProperty
@@ -48,7 +48,7 @@ public class BrandProfilesResponse extends BaseDto {
      * 
      * @return the brands
      */
-    public List<BrandInfo> getBrands() {
+    public List<BrandProfile> getBrands() {
         return brands;
     }
 
@@ -57,7 +57,7 @@ public class BrandProfilesResponse extends BaseDto {
      * 
      * @param brands the new brands
      */
-    public void setBrands(final List<BrandInfo> brands) {
+    public void setBrands(final List<BrandProfile> brands) {
         this.brands = brands;
     }
 
