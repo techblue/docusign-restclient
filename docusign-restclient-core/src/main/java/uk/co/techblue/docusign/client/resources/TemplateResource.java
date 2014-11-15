@@ -23,8 +23,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.jboss.resteasy.client.ClientResponse;
 
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 import uk.co.techblue.docusign.client.Resource;
 import uk.co.techblue.docusign.client.dto.PostedTemplate;
 import uk.co.techblue.docusign.client.dto.Template;

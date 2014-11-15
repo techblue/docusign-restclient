@@ -15,10 +15,14 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.ws.rs.core.Response.Status.Family;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ClientResponseFailure;
 
@@ -70,6 +74,14 @@ public abstract class Service<RT extends Resource> {
         try {
             validateResponseSuccess(clientResponse, exceptionClazz);
             entity = clientResponse.getEntity();
+            ObjectMapper mapper = new ObjectMapper();
+            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(entity));
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             clientResponse.releaseConnection();
         }

@@ -15,10 +15,17 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.services;
 
+import org.apache.james.mime4j.field.FieldName;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.jboss.resteasy.client.ClientResponse;
 
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
+import org.jboss.resteasy.plugins.providers.multipart.OutputPart;
 import uk.co.techblue.docusign.client.BaseService;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
+import uk.co.techblue.docusign.client.dto.Document;
+import uk.co.techblue.docusign.client.dto.DocumentInfo;
+import uk.co.techblue.docusign.client.dto.Envelope;
 import uk.co.techblue.docusign.client.dto.PostedTemplate;
 import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
@@ -26,6 +33,13 @@ import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.exception.ServiceInitException;
 import uk.co.techblue.docusign.client.exception.TemplateException;
 import uk.co.techblue.docusign.client.resources.TemplateResource;
+import uk.co.techblue.docusign.client.utils.DocuSignUtils;
+
+import javax.activation.FileDataSource;
+import javax.ws.rs.core.MediaType;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * The Class TemplateService.
@@ -81,6 +95,14 @@ public class TemplateService extends BaseService<TemplateResource> {
     }
 
     public PostedTemplate postTemplate(Template template) throws TemplateException {
+        //final MultipartFormDataOutput dataOut = generateMultipartFormDataOutput(documents);
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            System.out.println(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(template));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ClientResponse<PostedTemplate> clientResponse = resourceProxy.postTemplate(template);
         return parseEntityFromResponse(clientResponse, TemplateException.class);
     }
@@ -93,6 +115,31 @@ public class TemplateService extends BaseService<TemplateResource> {
     @Override
     protected Class<TemplateResource> getResourceClass() {
         return TemplateResource.class;
+    }
+
+    /**
+     * Generates multipart form data output.
+     *
+     * @param documents the document
+     * @return the multipart form data output
+     */
+    private MultipartFormDataOutput generateMultipartFormDataOutput(
+        final List<Document> documents) {
+        final MultipartFormDataOutput dataOut = new MultipartFormDataOutput();
+        dataOut.addFormData("request-type", "template",
+            MediaType.APPLICATION_JSON_TYPE);
+        dataOut.addFormData("envelope_definition",
+            documents, MediaType.APPLICATION_JSON_TYPE);
+        // metadataPart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
+        // "form-data");
+        for (final Document document : documents) {
+            final FileDataSource dataSource = new FileDataSource(document.getPath());
+            final OutputPart filePart = dataOut.addFormData(document.getName(),
+                dataSource, MediaType.valueOf(dataSource.getContentType()));
+            filePart.getHeaders().putSingle(FieldName.CONTENT_DISPOSITION,
+                DocuSignUtils.getContentDispositionHeader(document));
+        }
+        return dataOut;
     }
 
 }
