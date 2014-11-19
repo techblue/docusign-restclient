@@ -49,7 +49,7 @@ public class Envelope extends BaseDto {
 
 	/** The custom fields. */
 	@JsonProperty
-	private List<CustomField> customFields;
+	private CustomFields customFields;
 
 	/** The documents. */
 	@JsonProperty
@@ -153,7 +153,7 @@ public class Envelope extends BaseDto {
 	 * 
 	 * @return the custom fields
 	 */
-	public List<CustomField> getCustomFields() {
+	public CustomFields getCustomFields() {
 		return customFields;
 	}
 
@@ -163,7 +163,7 @@ public class Envelope extends BaseDto {
 	 * @param customFields
 	 *            the new custom fields
 	 */
-	public void setCustomFields(List<CustomField> customFields) {
+	public void setCustomFields(CustomFields customFields) {
 		this.customFields = customFields;
 	}
 
