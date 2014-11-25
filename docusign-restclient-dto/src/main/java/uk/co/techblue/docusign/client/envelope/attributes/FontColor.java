@@ -15,6 +15,39 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.envelope.attributes;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonValue;
+
 public enum FontColor {
-	Black, BrightBlue, BrightRed, DarkGreen, DarkRed, Gold, Green, NavyBlue, Purple, White
+	Black("black"),
+	BrightBlue("brightblue"),
+	BrightRed("brightred"),
+	DarkGreen("darkgreen"),
+	DarkRed("darkred"),
+	Gold("gold"),
+	Green("green"),
+	NavyBlue("navyblue"),
+	Purple("purple"),
+	White("white");
+
+	private String key;
+
+	FontColor(String key) {
+		this.key = key.toLowerCase();
+	}
+
+	@JsonCreator
+	public static FontColor newInstance(String key) {
+		for (FontColor f : values()) {
+			if (key.toLowerCase().equals(f.getFontColor())) {
+				return f;
+			}
+		}
+		return null;
+	}
+
+	@JsonValue
+	public String getFontColor() {
+		return key;
+	}
 }

@@ -15,6 +15,42 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.envelope.attributes;
 
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonValue;
+
 public enum Font {
-	Arial, ArialNarrow, Calibri, CourierNew, Garamond, Georgia, Helvetica, LucidaConsole, Tahoma, TimesNewRoman, Trebuchet, Verdana
+
+	Arial("arial"),
+	ArialNarrow("arialnarrow"),
+	Calibri("calibri"),
+	CourierNew("couriernew"),
+	Garamond("garamond"),
+	Georgia("georgia"),
+	Helvetica("helvetica"),
+	LucidaConsole("lucidaconsole"),
+	Tahoma("tahoma"),
+	TimesNewRoman("timesnewroman"),
+	Trebuchet("trebuchet"),
+	Verdana("verdana");
+
+	private String key;
+
+	Font(String key) {
+		this.key = key.toLowerCase();
+	}
+
+	@JsonCreator
+	public static Font newInstance(String key) {
+		for (Font f : values()) {
+			if (key.toLowerCase().equals(f.getFont())) {
+				return f;
+			}
+		}
+		return null;
+	}
+
+	@JsonValue
+	public String getFont() {
+		return key;
+	}
 }
