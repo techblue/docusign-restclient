@@ -5,6 +5,16 @@ Docusign RESTful Client
 
 This project provides a java rest client api which consumes docusign RESTful services. Demo services can be viewed/executed @ [iodocs](http://iodocs.docusign.com/)
 
+##Maven
+Following declaration can be used to add this library as a maven dependency:
+```xml
+<dependency>
+    <groupId>uk.co.techblue</groupId>
+    <artifactId>docusign-restclient</artifactId>
+    <version>2.0.4-SNAPSHOT</version>
+</dependency>
+```
+
 ##Usage
 
 
@@ -26,7 +36,7 @@ DocuSignCredentials credentials = new DocuSignCredentials("<Docusign Username>",
 - Each Service instantiation takes service endpoint URI and credentials as parameters. RequestSignature Service encapsulates all flavours of signature request rest methods. Initialize it with docusign demo rest services endpoint.
 
 ```java
-String serviceURI = "https://demo.docusign.net/restapi/v1";
+String serviceURI = "https://demo.docusign.net/restapi/v2";
 RequestSignatureService signatureService = new RequestSignatureService(serviceURI, credentials);
 ```
 
