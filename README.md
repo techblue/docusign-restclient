@@ -10,8 +10,8 @@ Following declaration can be used to add this library as a maven dependency:
 ```xml
 <dependency>
     <groupId>uk.co.techblue</groupId>
-    <artifactId>docusign-restclient</artifactId>
-    <version>2.0.4-SNAPSHOT</version>
+    <artifactId>docusign-restclient-core</artifactId>
+    <version>2.0.3</version>
 </dependency>
 ```
 
