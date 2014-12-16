@@ -48,6 +48,10 @@ public class DocumentSignatureRequest extends SignatureRequest {
     @JsonProperty("notification")
     private EnvelopeNotificationInfo notifications;
 
+    /** The brand id. */
+    @JsonProperty
+    private String brandId;
+
     /**
      * Gets the documents.
      * 
@@ -101,7 +105,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
      * 
      * @param customFields the new custom fields
      */
-    public void setCustomFields(List<CustomField> customFields) {
+    public void setCustomFields(final List<CustomField> customFields) {
         this.customFields = customFields;
     }
 
@@ -119,8 +123,26 @@ public class DocumentSignatureRequest extends SignatureRequest {
      * 
      * @param notifications the new notifications
      */
-    public void setNotifications(EnvelopeNotificationInfo notifications) {
+    public void setNotifications(final EnvelopeNotificationInfo notifications) {
         this.notifications = notifications;
+    }
+
+    /**
+     * Gets the brand id.
+     * 
+     * @return the brand id
+     */
+    public String getBrandId() {
+        return brandId;
+    }
+
+    /**
+     * Sets the brand id.
+     * 
+     * @param brandId the new brand id
+     */
+    public void setBrandId(final String brandId) {
+        this.brandId = brandId;
     }
 
 }
