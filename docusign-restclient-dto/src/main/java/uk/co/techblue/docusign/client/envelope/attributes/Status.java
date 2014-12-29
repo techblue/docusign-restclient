@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2012 Technology Blueprint Ltd
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,33 +17,37 @@ package uk.co.techblue.docusign.client.envelope.attributes;
 
 /**
  * The Enum for envelope status.
+ *
+ * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
  */
 public enum Status {
 
-	/** The sent. */
-	sent,
-	/** The created. */
-	created,
-	/** The voided. */
-	voided,
-	/** The Deleted. */
-	deleted, 
-	/** The Delivered. */
-	delivered, 
-	/** The Signed. */
-	signed, 
-	/** The Completed. */
-	completed, 
-	/** The Declined. */
-	declined, 
-	/** The Timed out. */
-	timedOut, 
-	/** The Processing. */
-	processing,
-	/** The template. */
-	template,
-	/** The faxpending. */
-	faxpending,
-	/** Autoresponded. */
-	autoresponded
+    /** The sent. */
+    sent,
+    /** The created. */
+    created,
+    /** The voided. */
+    voided,
+    /** The Deleted. */
+    deleted,
+    /** The Delivered. */
+    delivered,
+    /** The Signed. */
+    signed,
+    /** The Completed. */
+    completed,
+    /** The Declined. */
+    declined,
+    /** The Timed out. */
+    timedOut,
+    /** The Processing. */
+    processing,
+    /** The template. */
+    template,
+    /** The faxpending. */
+    faxpending,
+    /** Autoresponded. */
+    autoresponded,
+    /** The changed. */
+    changed;
 }
