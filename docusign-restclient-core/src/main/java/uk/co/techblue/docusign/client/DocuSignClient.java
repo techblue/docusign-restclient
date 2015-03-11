@@ -245,6 +245,7 @@ public class DocuSignClient {
 
 						params.setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 					}
+					
 				}
 			}
 		}
