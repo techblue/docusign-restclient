@@ -18,6 +18,8 @@ package uk.co.techblue.docusign.client;
 import java.io.IOException;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.ws.rs.ext.Provider;
 
@@ -72,6 +74,7 @@ public class DocuSignClient {
 	private final static String PROXY_PORT_PROPERTY = "docusign.https.proxyPort";
 	private final static String CONNECTION_TIMEOUT = "docusign.connection.timeout";
 	private static final String CONNECTION_DEFAULT_MAX_PER_ROUTE = "docusign.max.per.route";
+	private final static String CONNECTION_URL = "docusign.connection.port.redirect";
 	private static HttpClientConfiguration httpClientConfiguration;
 	
 	private static HttpClient client = null;
@@ -176,7 +179,9 @@ public class DocuSignClient {
 			}
 			catch (NumberFormatException nfe) {
 				/* Ignore */
-				nfe.printStackTrace();
+				if (nfe.getMessage() != null) {
+					logger.debug(nfe.getMessage());
+				}
 			}
 			
 			return value;
@@ -196,6 +201,10 @@ public class DocuSignClient {
 	
 		private String getProxyHost() {
 			return getString(PROXY_HOST_PROPERTY, null);
+		}
+
+		private String getConnectionPortRedirect() {
+			return getString(CONNECTION_URL, null);
 		}
 	}
 	
@@ -227,6 +236,7 @@ public class DocuSignClient {
 
 						params.setParameter(ConnRoutePNames.DEFAULT_PROXY, proxy);
 					}
+					
 				}
 			}
 		}
@@ -250,7 +260,7 @@ public class DocuSignClient {
 	 * @return the client service
 	 */
 	public static <T> T getClientService(final Class<T> clazz,
-			final String serverUri, final DocuSignCredentials credentials) {
+			String serverUri, final DocuSignCredentials credentials) {
 		logger.info("Generating REST resource proxy for: " + clazz.getName());
 
 		HttpClient httpClient = getHttpClient();
@@ -266,6 +276,20 @@ public class DocuSignClient {
 			}
 		};
 
+		String connectionPortRedirect = httpClientConfiguration.getConnectionPortRedirect();
+		if (connectionPortRedirect != null) {
+			Matcher m = Pattern.compile("(.*)://([^/]*)(/.*)+").matcher(serverUri);
+			if (m.matches()) {
+				String protocol = m.group(1);
+				String host = m.group(2);
+				String path = m.group(3);
+				if (host.indexOf(":") > 0) {
+					host = host.substring(0, host.indexOf(":"));
+				}
+				serverUri = protocol + "://" + host + ":" + connectionPortRedirect + path;
+			}
+		}
+		
 		return ProxyFactory.create(clazz, serverUri, executor);
 	}
 }
