@@ -15,6 +15,7 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.credential;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jboss.resteasy.client.ClientRequest;
 
 import uk.co.techblue.docusign.client.dto.BaseDto;
@@ -39,6 +40,9 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
     /** The Constant TAG_INTEGRATOR_KEY. */
     private static final String TAG_INTEGRATOR_KEY = "IntegratorKey";
 
+    /** The Constant SEND_ON_BEHALF_OF. */
+    private static final String SEND_ON_BEHALF_OF = "SendOnBehalfOf";
+
     /** The username. */
     private String username;
 
@@ -47,6 +51,9 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
 
     /** The integrator key. */
     private String integratorKey;
+
+    /** The send on behalf of. */
+    private String sendOnBehalfOf;
 
     /**
      * Instantiates a new docu sign credentials.
@@ -59,6 +66,19 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
         this.username = username;
         this.password = password;
         this.integratorKey = integratorKey;
+    }
+
+    /**
+     * Instantiates a new docu sign credentials.
+     *
+     * @param username the username
+     * @param password the password
+     * @param integratorKey the integrator key
+     * @param sendOnBehalfOf the user to send on behalf of
+     */
+    public BasicDocusignCredential(final String username, final String password, final String integratorKey, final String sendOnBehalfOf) {
+        this(username, password, integratorKey);
+        this.sendOnBehalfOf = sendOnBehalfOf;
     }
 
     /**
@@ -83,6 +103,12 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
         buffer.append(wrapInAngularBrackets(TAG_INTEGRATOR_KEY, false));
         buffer.append(String.valueOf(credentials.getIntegratorKey()));
         buffer.append(wrapInAngularBrackets(TAG_INTEGRATOR_KEY, true));
+
+        if(StringUtils.isBlank(credentials.getSendOnBehalfOf())) {
+            buffer.append(wrapInAngularBrackets(SEND_ON_BEHALF_OF, false));
+            buffer.append(String.valueOf(credentials.getSendOnBehalfOf()));
+            buffer.append(wrapInAngularBrackets(SEND_ON_BEHALF_OF, true));
+        }
 
         buffer.append(wrapInAngularBrackets(rootElement, true));
         return buffer.toString();
@@ -157,6 +183,24 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
      */
     public void setIntegratorKey(final String integratorKey) {
         this.integratorKey = integratorKey;
+    }
+
+    /**
+     * Gets the send on behalf of value.
+     *
+     * @return the send on behalf of value
+     */
+    public String getSendOnBehalfOf() {
+        return sendOnBehalfOf;
+    }
+
+    /**
+     * Sets the send on behalf of value.
+     *
+     * @param sendOnBehalfOf the new send on behalf of value
+     */
+    public void setSendOnBehalfOf(final String sendOnBehalfOf) {
+        this.sendOnBehalfOf = sendOnBehalfOf;
     }
 
     /*
