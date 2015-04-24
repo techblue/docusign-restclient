@@ -11,7 +11,7 @@ Following declaration can be used to add this library as a maven dependency:
 <dependency>
     <groupId>uk.co.techblue</groupId>
     <artifactId>docusign-restclient-core</artifactId>
-    <version>2.0.3</version>
+    <version>2.0.4</version>
 </dependency>
 ```
 
