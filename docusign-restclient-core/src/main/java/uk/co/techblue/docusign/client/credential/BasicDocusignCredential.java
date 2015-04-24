@@ -104,7 +104,7 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
         buffer.append(String.valueOf(credentials.getIntegratorKey()));
         buffer.append(wrapInAngularBrackets(TAG_INTEGRATOR_KEY, true));
 
-        if(StringUtils.isBlank(credentials.getSendOnBehalfOf())) {
+        if(!StringUtils.isBlank(credentials.getSendOnBehalfOf())) {
             buffer.append(wrapInAngularBrackets(SEND_ON_BEHALF_OF, false));
             buffer.append(String.valueOf(credentials.getSendOnBehalfOf()));
             buffer.append(wrapInAngularBrackets(SEND_ON_BEHALF_OF, true));
