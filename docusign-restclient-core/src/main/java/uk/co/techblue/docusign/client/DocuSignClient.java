@@ -277,7 +277,7 @@ public class DocuSignClient {
 		};
 
 		String connectionPortRedirect = httpClientConfiguration.getConnectionPortRedirect();
-		if (connectionPortRedirect != null) {
+		if (connectionPortRedirect != null && "true".equals(connectionPortRedirect)) {
 			Matcher m = Pattern.compile("(.*)://([^/]*)(/.*)+").matcher(serverUri);
 			if (m.matches()) {
 				String protocol = m.group(1);
@@ -286,7 +286,11 @@ public class DocuSignClient {
 				if (host.indexOf(":") > 0) {
 					host = host.substring(0, host.indexOf(":"));
 				}
-				serverUri = protocol + "://" + host + ":" + connectionPortRedirect + path;
+				String key = CONNECTION_URL + "." + host;
+				String redirectPort = httpClientConfiguration.getString(key, null);
+				if (redirectPort != null) {
+					serverUri = protocol + "://" + host + ":" + redirectPort + path;
+				}
 			}
 		}
 		
