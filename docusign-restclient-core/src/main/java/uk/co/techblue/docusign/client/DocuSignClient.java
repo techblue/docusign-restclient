@@ -44,7 +44,16 @@ import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.utils.DocuSignUtils;
 import uk.co.techblue.docusign.resteasy.providers.DocumentFileProvider;
-
+/**
+ * The HTTP client can be configured adding in the classpath the following properties file:
+ * uk.co.techblue.docusign.client.DocuSignClient.properties
+ * The configuration allows to set the timeout and the maximum number of connections per route:
+ *     docusign.connection.timeout=20000
+ *     docusign.max.per.route=50
+ * It can also configure a proxy:
+ *    docusign.https.proxyHost=<IP address or hostname of the proxy>
+ *    docusign.https.proxyPort=listening port of the proxy
+ */
 public class DocuSignClient {
 	public static void main(String[] args) throws ClientProtocolException,
 			IOException {
