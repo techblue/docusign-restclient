@@ -22,102 +22,102 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
 @JsonSerialize(include = Inclusion.NON_NULL)
 public abstract class AbstractTextTab extends AbstractRecipientTab {
 
-	/** The conditional parent label. */
-	@JsonProperty
-	private String conditionalParentLabel;
+    /** The conditional parent label. */
+    @JsonProperty
+    private String conditionalParentLabel;
 
-	/** The conditional parent value. */
-	@JsonProperty
-	private String conditionalParentValue;
+    /** The conditional parent value. */
+    @JsonProperty
+    private String conditionalParentValue;
 
-	/** The recipient id. */
-	@JsonProperty
-	private String recipientId;
+    /** The recipient id. */
+    @JsonProperty
+    private String recipientId;
 
-	/** The template locked. */
-	@JsonProperty
-	private Boolean templateLocked;
+    /** The template locked. */
+    @JsonProperty
+    private Boolean templateLocked;
 
-	/** The template required. */
-	@JsonProperty
-	private Boolean templateRequired;
+    /** The template required. */
+    @JsonProperty
+    private Boolean templateRequired;
 
-	/** The bold. */
-	@JsonProperty
-	private Boolean bold;
+    /** The bold. */
+    @JsonProperty
+    private Boolean bold;
 
     /** The font. */
     @JsonProperty
     private Font font;
 
-	/** The font color. */
-	@JsonProperty
-	private FontColor fontColor;
+    /** The font color. */
+    @JsonProperty
+    private FontColor fontColor;
 
-	/** The font size. */
-	@JsonProperty
-	private FontSize fontSize;
+    /** The font size. */
+    @JsonProperty
+    private FontSize fontSize;
 
-	/** The italic. */
-	@JsonProperty
-	private Boolean italic;
+    /** The italic. */
+    @JsonProperty
+    private Boolean italic;
 
-	/** The underline. */
-	@JsonProperty
-	private Boolean underline;
+    /** The underline. */
+    @JsonProperty
+    private Boolean underline;
 
-	/** The conceal value on document. */
-	@JsonProperty
-	private Boolean concealValueOnDocument;
+    /** The conceal value on document. */
+    @JsonProperty
+    private Boolean concealValueOnDocument;
 
-	/** The disable auto size. */
-	@JsonProperty
-	private Boolean disableAutoSize;
+    /** The disable auto size. */
+    @JsonProperty
+    private Boolean disableAutoSize;
 
-	/** The locked. */
-	@JsonProperty
-	private Boolean locked;
+    /** The locked. */
+    @JsonProperty
+    private Boolean locked;
 
-	/** The name. */
-	@JsonProperty
-	private String name;
+    /** The name. */
+    @JsonProperty
+    private String name;
 
-	/** The required. */
-	@JsonProperty
-	private Boolean required;
+    /** The required. */
+    @JsonProperty
+    private Boolean required;
 
-	/** The value. */
-	@JsonProperty
-	private String value;
+    /** The value. */
+    @JsonProperty
+    private String value;
 
-	/** The merge field xml. */
-	@JsonProperty
-	private String mergeFieldXml;
+    /** The merge field xml. */
+    @JsonProperty
+    private String mergeFieldXml;
 
-	/** The require initial on shared change. */
-	@JsonProperty
-	private Boolean requireInitialOnSharedChange;
+    /** The require initial on shared change. */
+    @JsonProperty
+    private Boolean requireInitialOnSharedChange;
 
-	/** The shared. */
-	@JsonProperty
-	private Boolean shared;
+    /** The shared. */
+    @JsonProperty
+    private Boolean shared;
 
-	/** The width. */
-	@JsonProperty
-	private Integer width;
+    /** The width. */
+    @JsonProperty
+    private Integer width;
 
-	/** The height. */
-	@JsonProperty
-	private Integer height;
+    /** The height. */
+    @JsonProperty
+    private Integer height;
 
-	/**
-	 * Gets the conditional parent label.
-	 * 
-	 * @return the conditional parent label
-	 */
-	public String getConditionalParentLabel() {
-		return conditionalParentLabel;
-	}
+    /**
+     * Gets the conditional parent label.
+     * 
+     * @return the conditional parent label
+     */
+    public String getConditionalParentLabel() {
+        return conditionalParentLabel;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -131,14 +131,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.conditionalParentLabel = conditionalParentLabel;
     }
 
-	/**
-	 * Gets the conditional parent value.
-	 * 
-	 * @return the conditional parent value
-	 */
-	public String getConditionalParentValue() {
-		return conditionalParentValue;
-	}
+    /**
+     * Gets the conditional parent value.
+     * 
+     * @return the conditional parent value
+     */
+    public String getConditionalParentValue() {
+        return conditionalParentValue;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -152,14 +152,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.conditionalParentValue = conditionalParentValue;
     }
 
-	/**
-	 * Gets the recipient id.
-	 * 
-	 * @return the recipient id
-	 */
-	public String getRecipientId() {
-		return recipientId;
-	}
+    /**
+     * Gets the recipient id.
+     * 
+     * @return the recipient id
+     */
+    public String getRecipientId() {
+        return recipientId;
+    }
 
     /**
      * Sets the recipient id. This specifies the recipient associated with the tab. Must refer to an existing recipient’s ID
@@ -172,14 +172,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.recipientId = recipientId;
     }
 
-	/**
-	 * Gets the template locked.
-	 * 
-	 * @return the template locked
-	 */
-	public Boolean getTemplateLocked() {
-		return templateLocked;
-	}
+    /**
+     * Gets the template locked.
+     * 
+     * @return the template locked
+     */
+    public Boolean getTemplateLocked() {
+        return templateLocked;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -193,14 +193,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.templateLocked = templateLocked;
     }
 
-	/**
-	 * Gets the template required.
-	 * 
-	 * @return the template required
-	 */
-	public Boolean getTemplateRequired() {
-		return templateRequired;
-	}
+    /**
+     * Gets the template required.
+     * 
+     * @return the template required
+     */
+    public Boolean getTemplateRequired() {
+        return templateRequired;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -213,14 +213,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.templateRequired = templateRequired;
     }
 
-	/**
-	 * Gets the bold.
-	 * 
-	 * @return the bold
-	 */
-	public Boolean getBold() {
-		return bold;
-	}
+    /**
+     * Gets the bold.
+     * 
+     * @return the bold
+     */
+    public Boolean getBold() {
+        return bold;
+    }
 
     /**
      * If true, the information in the tab is bold.
@@ -250,14 +250,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.font = font;
     }
 
-	/**
-	 * Gets the font color.
-	 * 
-	 * @return the font color
-	 */
-	public FontColor getFontColor() {
-		return fontColor;
-	}
+    /**
+     * Gets the font color.
+     * 
+     * @return the font color
+     */
+    public FontColor getFontColor() {
+        return fontColor;
+    }
 
     /**
      * Sets the font color used for the information in the tab .
@@ -268,14 +268,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.fontColor = fontColor;
     }
 
-	/**
-	 * Gets the font size.
-	 * 
-	 * @return the font size
-	 */
-	public FontSize getFontSize() {
-		return fontSize;
-	}
+    /**
+     * Gets the font size.
+     * 
+     * @return the font size
+     */
+    public FontSize getFontSize() {
+        return fontSize;
+    }
 
     /**
      * Sets the font size used for the information in the tab.
@@ -287,14 +287,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.fontSize = fontSize;
     }
 
-	/**
-	 * Gets the italic.
-	 * 
-	 * @return the italic
-	 */
-	public Boolean getItalic() {
-		return italic;
-	}
+    /**
+     * Gets the italic.
+     * 
+     * @return the italic
+     */
+    public Boolean getItalic() {
+        return italic;
+    }
 
     /**
      * If true, the information in the tab is italic.
@@ -306,14 +306,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.italic = italic;
     }
 
-	/**
-	 * Gets the underline.
-	 * 
-	 * @return the underline
-	 */
-	public Boolean getUnderline() {
-		return underline;
-	}
+    /**
+     * Gets the underline.
+     * 
+     * @return the underline
+     */
+    public Boolean getUnderline() {
+        return underline;
+    }
 
     /**
      * If true, the information in the tab is underlined.
@@ -325,14 +325,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.underline = underline;
     }
 
-	/**
-	 * Gets the conceal value on document.
-	 * 
-	 * @return the conceal value on document
-	 */
-	public Boolean getConcealValueOnDocument() {
-		return concealValueOnDocument;
-	}
+    /**
+     * Gets the conceal value on document.
+     * 
+     * @return the conceal value on document
+     */
+    public Boolean getConcealValueOnDocument() {
+        return concealValueOnDocument;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -347,14 +347,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.concealValueOnDocument = concealValueOnDocument;
     }
 
-	/**
-	 * Gets the disable auto size.
-	 * 
-	 * @return the disable auto size
-	 */
-	public Boolean getDisableAutoSize() {
-		return disableAutoSize;
-	}
+    /**
+     * Gets the disable auto size.
+     * 
+     * @return the disable auto size
+     */
+    public Boolean getDisableAutoSize() {
+        return disableAutoSize;
+    }
 
     /**
      * Disables the auto sizing of single line text boxes in the signing screen when the signer.
@@ -365,14 +365,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.disableAutoSize = disableAutoSize;
     }
 
-	/**
-	 * Gets the locked.
-	 * 
-	 * @return the locked
-	 */
-	public Boolean getLocked() {
-		return locked;
-	}
+    /**
+     * Gets the locked.
+     * 
+     * @return the locked
+     */
+    public Boolean getLocked() {
+        return locked;
+    }
 
     /**
      * If true, the Signer cannot change the data in the tab.
@@ -384,14 +384,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.locked = locked;
     }
 
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Gets the name.
+     * 
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
     /**
      * Sets the names associated with the tab type.
@@ -403,14 +403,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.name = name;
     }
 
-	/**
-	 * Gets the required.
-	 * 
-	 * @return the required
-	 */
-	public Boolean getRequired() {
-		return required;
-	}
+    /**
+     * Gets the required.
+     * 
+     * @return the required
+     */
+    public Boolean getRequired() {
+        return required;
+    }
 
     /**
      * If true, the signer is required to fill out this tab.
@@ -421,14 +421,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.required = required;
     }
 
-	/**
-	 * Gets the value.
-	 * 
-	 * @return the value
-	 */
-	public String getValue() {
-		return value;
-	}
+    /**
+     * Gets the value.
+     * 
+     * @return the value
+     */
+    public String getValue() {
+        return value;
+    }
 
     /**
      * Sets the value. This element specifies the value of the tab.
@@ -440,14 +440,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.value = value;
     }
 
-	/**
-	 * Gets the merge field xml.
-	 * 
-	 * @return the merge field xml
-	 */
-	public String getMergeFieldXml() {
-		return mergeFieldXml;
-	}
+    /**
+     * Gets the merge field xml.
+     * 
+     * @return the merge field xml
+     */
+    public String getMergeFieldXml() {
+        return mergeFieldXml;
+    }
 
     /**
      * Sets the merge field xml. <b>Reserved for future use</b>
@@ -458,14 +458,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.mergeFieldXml = mergeFieldXml;
     }
 
-	/**
-	 * Gets the require initial on shared change.
-	 * 
-	 * @return the require initial on shared change
-	 */
-	public Boolean getRequireInitialOnSharedChange() {
-		return requireInitialOnSharedChange;
-	}
+    /**
+     * Gets the require initial on shared change.
+     * 
+     * @return the require initial on shared change
+     */
+    public Boolean getRequireInitialOnSharedChange() {
+        return requireInitialOnSharedChange;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -480,14 +480,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.requireInitialOnSharedChange = requireInitialOnSharedChange;
     }
 
-	/**
-	 * Gets the shared.
-	 * 
-	 * @return the shared
-	 */
-	public Boolean getShared() {
-		return shared;
-	}
+    /**
+     * Gets the shared.
+     * 
+     * @return the shared
+     */
+    public Boolean getShared() {
+        return shared;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -500,14 +500,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.shared = shared;
     }
 
-	/**
-	 * Gets the width.
-	 * 
-	 * @return the width
-	 */
-	public Integer getWidth() {
-		return width;
-	}
+    /**
+     * Gets the width.
+     * 
+     * @return the width
+     */
+    public Integer getWidth() {
+        return width;
+    }
 
     /**
      * Sets the width of the tab.
@@ -518,14 +518,14 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
         this.width = width;
     }
 
-	/**
-	 * Gets the height.
-	 * 
-	 * @return the height
-	 */
-	public Integer getHeight() {
-		return height;
-	}
+    /**
+     * Gets the height.
+     * 
+     * @return the height
+     */
+    public Integer getHeight() {
+        return height;
+    }
 
     /**
      * Sets the height of the tab.
@@ -535,4 +535,5 @@ public abstract class AbstractTextTab extends AbstractRecipientTab {
     public void setHeight(final Integer height) {
         this.height = height;
     }
+
 }

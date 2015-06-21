@@ -29,63 +29,62 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
 @SuppressWarnings("serial")
 @JsonSerialize(include = Inclusion.NON_NULL)
 public class FullNameTab extends AbstractRecipientTab {
+    /** The conditional parent label. */
+    @JsonProperty
+    private String conditionalParentLabel;
 
-	/** The conditional parent label. */
-	@JsonProperty
-	private String conditionalParentLabel;
+    /** The conditional parent value. */
+    @JsonProperty
+    private String conditionalParentValue;
 
-	/** The conditional parent value. */
-	@JsonProperty
-	private String conditionalParentValue;
+    /** The recipient id. */
+    @JsonProperty
+    private String recipientId;
 
-	/** The recipient id. */
-	@JsonProperty
-	private String recipientId;
+    /** The template locked. */
+    @JsonProperty
+    private Boolean templateLocked;
 
-	/** The template locked. */
-	@JsonProperty
-	private Boolean templateLocked;
+    /** The template required. */
+    @JsonProperty
+    private Boolean templateRequired;
 
-	/** The template required. */
-	@JsonProperty
-	private Boolean templateRequired;
-
-	/** The bold. */
-	@JsonProperty
-	private Boolean bold;
+    /** The bold. */
+    @JsonProperty
+    private Boolean bold;
 
     /** The font. */
     @JsonProperty
     private Font font;
 
-	/** The font color. */
-	@JsonProperty
-	private FontColor fontColor;
+    /** The font color. */
+    @JsonProperty
+    private FontColor fontColor;
 
-	/** The font size. */
-	@JsonProperty
-	private FontSize fontSize;
+    /** The font size. */
+    @JsonProperty
+    private FontSize fontSize;
 
-	/** The italic. */
-	@JsonProperty
-	private Boolean italic;
+    /** The italic. */
+    @JsonProperty
+    private Boolean italic;
 
-	/** The underline. */
-	@JsonProperty
-	private Boolean underline;
+    /** The underline. */
+    @JsonProperty
+    private Boolean underline;
 
-	/** The recipient id. */
-	@JsonProperty
-	private String name;
+    /** The recipient id. */
+    @JsonProperty
+    private String name;
 
-	/**
-	 * Gets the conditional parent label.
-	 * 
-	 * @return the conditional parent label
-	 */
-	public String getConditionalParentLabel() {
-		return conditionalParentLabel;
-	}
+    /**
+     * Gets the conditional parent label.
+     * 
+     * @return the conditional parent label
+     */
+    public String getConditionalParentLabel() {
+        return conditionalParentLabel;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -99,14 +98,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.conditionalParentLabel = conditionalParentLabel;
     }
 
-	/**
-	 * Gets the conditional parent value.
-	 * 
-	 * @return the conditional parent value
-	 */
-	public String getConditionalParentValue() {
-		return conditionalParentValue;
-	}
+    /**
+     * Gets the conditional parent value.
+     * 
+     * @return the conditional parent value
+     */
+    public String getConditionalParentValue() {
+        return conditionalParentValue;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -120,14 +119,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.conditionalParentValue = conditionalParentValue;
     }
 
-	/**
-	 * Gets the recipient id.
-	 * 
-	 * @return the recipient id
-	 */
-	public String getRecipientId() {
-		return recipientId;
-	}
+    /**
+     * Gets the recipient id.
+     * 
+     * @return the recipient id
+     */
+    public String getRecipientId() {
+        return recipientId;
+    }
 
     /**
      * Sets the recipient id. This specifies the recipient associated with the tab. Must refer to an existing recipient’s ID
@@ -140,14 +139,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.recipientId = recipientId;
     }
 
-	/**
-	 * Gets the template locked.
-	 * 
-	 * @return the template locked
-	 */
-	public Boolean getTemplateLocked() {
-		return templateLocked;
-	}
+    /**
+     * Gets the template locked.
+     * 
+     * @return the template locked
+     */
+    public Boolean getTemplateLocked() {
+        return templateLocked;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -161,14 +160,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.templateLocked = templateLocked;
     }
 
-	/**
-	 * Gets the template required.
-	 * 
-	 * @return the template required
-	 */
-	public Boolean getTemplateRequired() {
-		return templateRequired;
-	}
+    /**
+     * Gets the template required.
+     * 
+     * @return the template required
+     */
+    public Boolean getTemplateRequired() {
+        return templateRequired;
+    }
 
     /**
      * <b>Optional element.</b><br/>
@@ -181,14 +180,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.templateRequired = templateRequired;
     }
 
-	/**
-	 * Gets the bold.
-	 * 
-	 * @return the bold
-	 */
-	public Boolean getBold() {
-		return bold;
-	}
+    /**
+     * Gets the bold.
+     * 
+     * @return the bold
+     */
+    public Boolean getBold() {
+        return bold;
+    }
 
     /**
      * If true, the information in the tab is bold.
@@ -219,13 +218,13 @@ public class FullNameTab extends AbstractRecipientTab {
     }
 
     /**
-	 * Gets the font color.
-	 * 
-	 * @return the font color
-	 */
-	public FontColor getFontColor() {
-		return fontColor;
-	}
+     * Gets the font color.
+     * 
+     * @return the font color
+     */
+    public FontColor getFontColor() {
+        return fontColor;
+    }
 
     /**
      * Sets the font color used for the information in the tab .
@@ -236,14 +235,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.fontColor = fontColor;
     }
 
-	/**
-	 * Gets the font size.
-	 * 
-	 * @return the font size
-	 */
-	public FontSize getFontSize() {
-		return fontSize;
-	}
+    /**
+     * Gets the font size.
+     * 
+     * @return the font size
+     */
+    public FontSize getFontSize() {
+        return fontSize;
+    }
 
     /**
      * Sets the font size used for the information in the tab.
@@ -255,14 +254,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.fontSize = fontSize;
     }
 
-	/**
-	 * Gets the italic.
-	 * 
-	 * @return the italic
-	 */
-	public Boolean getItalic() {
-		return italic;
-	}
+    /**
+     * Gets the italic.
+     * 
+     * @return the italic
+     */
+    public Boolean getItalic() {
+        return italic;
+    }
 
     /**
      * If true, the information in the tab is italic.
@@ -274,14 +273,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.italic = italic;
     }
 
-	/**
-	 * Gets the underline.
-	 * 
-	 * @return the underline
-	 */
-	public Boolean getUnderline() {
-		return underline;
-	}
+    /**
+     * Gets the underline.
+     * 
+     * @return the underline
+     */
+    public Boolean getUnderline() {
+        return underline;
+    }
 
     /**
      * If true, the information in the tab is underlined.
@@ -293,14 +292,14 @@ public class FullNameTab extends AbstractRecipientTab {
         this.underline = underline;
     }
 
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Gets the name.
+     * 
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
     /**
      * Sets the names associated with the tab type.

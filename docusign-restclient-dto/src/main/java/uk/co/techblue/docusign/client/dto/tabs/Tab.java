@@ -34,6 +34,7 @@ import uk.co.techblue.docusign.client.dto.BaseDto;
  */
 @JsonSerialize(include = Inclusion.NON_NULL)
 public abstract class Tab extends BaseDto {
+
     /**
 	 * 
 	 */
@@ -290,5 +291,4 @@ public abstract class Tab extends BaseDto {
         this.tabLabel = tabLabel;
     }
 
-    
 }
