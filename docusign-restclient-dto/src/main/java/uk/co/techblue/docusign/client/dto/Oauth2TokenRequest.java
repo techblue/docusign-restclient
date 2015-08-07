@@ -26,33 +26,29 @@ import uk.co.techblue.docusign.client.constant.Scope;
  *
  * @author <a href="mailto:dheeraj.arora@techblue.co.uk">Dheeraj Arora</a>
  */
+@Encoded
 public class Oauth2TokenRequest extends BaseDto {
 
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = -3671623571112392075L;
 
     /** The grant type. */
-    @Encoded
     @FormParam("grant_type")
     private final GrantType grantType;
 
     /** The client id. */
-    @Encoded
     @FormParam("client_id")
     private final String clientId;
 
     /** The username. */
-    @Encoded
     @FormParam("username")
     private final String username;
 
     /** The password. */
-    @Encoded
     @FormParam("password")
     private final String password;
 
     /** The scope. */
-    @Encoded
     @FormParam("scope")
     private final Scope scope;
 
