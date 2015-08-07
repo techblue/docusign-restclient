@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2012 Technology Blueprint Ltd
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -21,6 +21,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.text.WordUtils;
 
+import uk.co.techblue.docusign.client.constant.GrantType;
+import uk.co.techblue.docusign.client.constant.Scope;
 import uk.co.techblue.docusign.client.credential.BasicDocusignCredential;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.AuditEvent;
@@ -37,6 +39,8 @@ import uk.co.techblue.docusign.client.dto.EnvelopeExpiration;
 import uk.co.techblue.docusign.client.dto.EnvelopeNotificationInfo;
 import uk.co.techblue.docusign.client.dto.EnvelopeReminder;
 import uk.co.techblue.docusign.client.dto.EnvelopeStatusQueryForm;
+import uk.co.techblue.docusign.client.dto.Oauth2TokenRequest;
+import uk.co.techblue.docusign.client.dto.Oauth2TokenResponse;
 import uk.co.techblue.docusign.client.dto.SignatureResponse;
 import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
@@ -261,8 +265,8 @@ public class DocusignTest {
         final RecipientViewRequest recipientView = new RecipientViewRequest();
         recipientView.setAuthenticationMethod("email");
         recipientView.setReturnUrl("http://demo.docusign.net");
-        recipientView.setEmail("ritesh.wadhwa@techblue.co.uk");
-        recipientView.setUserName("Mr. Ritesh Wadhwa");
+        recipientView.setEmail("<<email id>>");
+        recipientView.setUserName("<<Name>>");
         recipientView.setClientUserId("31");
         return recipientView;
     }
@@ -300,7 +304,7 @@ public class DocusignTest {
             credentials);
         try {
             System.out
-                .println(envService.getDocumentsCombined("4ba2d260-694e-4712-9e8a-8a8fd126a69e"));
+            .println(envService.getDocumentsCombined("4ba2d260-694e-4712-9e8a-8a8fd126a69e"));
             // System.out
             // .println(envService.getEnvelope("e3b09d80-ac1a-4d46-a40b-bea9d7bb5996"));
             // System.out
@@ -326,7 +330,7 @@ public class DocusignTest {
             credentials);
         try {
             System.out
-                .println(envService.getEnvelope("<Envelope Id>"));
+            .println(envService.getEnvelope("<Envelope Id>"));
         } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
@@ -352,74 +356,6 @@ public class DocusignTest {
         } catch (final SignatureRequestException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void testSendTemplateSignRequest(final DocuSignCredentials credentials) throws ServiceInitException {
-        final RequestSignatureService rsService = new RequestSignatureService(
-            SERVER_URI, credentials);
-        final TemplateSignatureRequest signatureRequest = getMockTemplateSignatureRequest();
-        try {
-            System.err.println(rsService.sendFromTemplate(signatureRequest));
-        } catch (final SignatureRequestException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * @return
-     */
-    private static TemplateSignatureRequest getMockTemplateSignatureRequest() {
-
-        final TemplateSignatureRequest signRequest = new TemplateSignatureRequest();
-
-        // signRequest.setEmailBlurb("Please sign this document");
-        // signRequest.setEmailSubject("Please sign this document");
-        signRequest.setStatus(Status.sent);
-        signRequest.setTemplateId("4911B504-4F4E-4DE9-863B-2FE7E280C548");
-        signRequest.setTemplateRoles(getMockTemplateRoles());
-        return signRequest;
-    }
-
-    /**
-     * @return
-     */
-    private static List<TemplateRole> getMockTemplateRoles() {
-        final List<TemplateRole> templateRoles = new ArrayList<TemplateRole>();
-
-        final TemplateRole role = new TemplateRole();
-        role.setEmail("dheeraj.arora@techblue.co.uk");
-        role.setName("Dheeraj Arora");
-        role.setRoleName("landlordSigner");
-        role.setTabs(getMockDocumentTabCollection());
-
-        final TemplateRole role1 = new TemplateRole();
-        role1.setEmail("dheeraj6188@gmail.com");
-        role1.setName("Drj");
-        role1.setRoleName("tenantSigner");
-        role1.setTabs(getMockDocumentTabCollection());
-
-        templateRoles.add(role);
-        templateRoles.add(role1);
-        return templateRoles;
-    }
-
-    /**
-     * @return
-     */
-    private static DocumentTabCollection getMockDocumentTabCollection() {
-        final DocumentTabCollection tabs = new DocumentTabCollection();
-        final List<TextTab> textTabs = new ArrayList<TextTab>();
-        textTabs.add(getMockPropertyAddress("21-23 Clemens Street, Leamington Spa, CV31 2DW"));
-        textTabs.add(getMockTextTab("21-23 Clemens Street, Leamington Spa, CV31 2DW", "landlordAddress"));
-        textTabs.add(getMockTextTab("70 St. Andrew Street, Lincoln, LN5 7UG", "tenantAddress"));
-        textTabs.add(getMockTextTab("Nitin Jain", "tenantName"));
-        textTabs.add(getMockTextTab("Dheeraj Arora", "landlordName"));
-        textTabs.add(getMockTextTab("20", "tenancyStartDay"));
-        textTabs.add(getMockTextTab("09", "tenancyStartMonth"));
-        textTabs.add(getMockTextTab("2014", "tenancyStartYear"));
-        tabs.setTextTabs(textTabs);
-
-        return tabs;
     }
 
     private static TextTab getMockTextTab(final String value, final String textTabLabel) {
@@ -670,10 +606,22 @@ public class DocusignTest {
         return clientInfo;
     }
 
+    private static Oauth2TokenResponse testGetOauth2Token(final DocuSignCredentials credentials) {
+        final LoginService loginService = new LoginService(SERVER_URI, credentials);
+        try {
+            final BasicDocusignCredential basicDocusignCredential = (BasicDocusignCredential) credentials;
+            return loginService.getOAuth2Token(new Oauth2TokenRequest(GrantType.password, basicDocusignCredential.getIntegratorKey(), basicDocusignCredential.getUsername(),
+                basicDocusignCredential.getPassword(), Scope.api));
+        } catch (final LoginException e) {
+            System.err.println(e.getErrorResponse());
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private static DocuSignCredentials getDocuSignCredentials() {
-        // final DocuSignCredentials credentials = new TokenDocuSignCredential("pFJjeUmiOJ+6SzDktsTIPr4RVMM=", "", "");
-        final DocuSignCredentials credentials = new BasicDocusignCredential("dheeraj.arora@techblue.co.uk", "",
-            "TECH-ca1df08a-66d8-41bb-9226-5aeb9a921dbe");
+        final DocuSignCredentials credentials = new BasicDocusignCredential("<<username>>", "<<password>>",
+            "<<integrator key>>");
         return credentials;
     }
 }
