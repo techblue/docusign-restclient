@@ -47,6 +47,8 @@ import uk.co.techblue.docusign.client.dto.EnvelopeStatusResponse;
 import uk.co.techblue.docusign.client.dto.StatusChangeRequest;
 import uk.co.techblue.docusign.client.dto.VoidEnvelopeRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientStatusCollection;
+import uk.co.techblue.docusign.client.dto.recipients.RecipientUpdateResults;
+import uk.co.techblue.docusign.client.dto.recipients.Signers;
 import uk.co.techblue.docusign.client.utils.DocuSignConstants;
 
 @Path(DocuSignConstants.RESOURCE_CONTEXT_PATH)
@@ -142,5 +144,12 @@ public interface EnvelopeResource extends Resource {
 			@PathParam("envelopeId") String envelopeId,
 			@QueryParam("include_tabs") Boolean includeTabs,
 			@QueryParam("include_extended") Boolean includeExtended);
+	
+    @PUT
+    @Path("/envelopes/{envelopeId}/recipients")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ClientResponse<RecipientUpdateResults> resendEnvelope(
+            @PathParam("envelopeId") String envelopeId, @QueryParam("resend_envelope") final boolean resendEnvelope,
+            Signers signersList);
 
 }

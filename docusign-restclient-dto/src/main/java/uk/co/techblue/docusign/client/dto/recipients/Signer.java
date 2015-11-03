@@ -17,6 +17,7 @@ package uk.co.techblue.docusign.client.dto.recipients;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -58,6 +59,9 @@ public class Signer extends Recipient {
 	/** Excluded documents. */
 	@JsonProperty
 	private List<String> excludedDocuments;
+
+    @JsonIgnore
+    private List<Long> letterIds;
 
 	/** 
 	 * Gets the list of excluded documents (list of IDs)
@@ -197,4 +201,12 @@ public class Signer extends Recipient {
 	public void setTabs(DocumentTabCollection tabs) {
 		this.tabs = tabs;
 	}
+	
+	public List<Long> getLetterIds() {
+        return letterIds;
+    }
+
+    public void setLetterIds(final List<Long> letterIds) {
+        this.letterIds = letterIds;
+    }
 }

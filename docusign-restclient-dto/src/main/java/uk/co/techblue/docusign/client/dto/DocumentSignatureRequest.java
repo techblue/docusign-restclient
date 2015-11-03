@@ -52,6 +52,10 @@ public class DocumentSignatureRequest extends SignatureRequest {
     @JsonProperty
     private String brandId;
 
+    /** The envelope email settings. */
+    @JsonProperty(value = "emailSettings")
+    private EnvelopeEmailSetting envelopeEmailSettings;
+
     /**
      * Gets the documents.
      * 
@@ -143,6 +147,24 @@ public class DocumentSignatureRequest extends SignatureRequest {
      */
     public void setBrandId(final String brandId) {
         this.brandId = brandId;
+    }
+
+    /**
+     * Gets the envelope email settings.
+     * 
+     * @return the envelope email settings
+     */
+    public EnvelopeEmailSetting getEnvelopeEmailSettings() {
+        return envelopeEmailSettings;
+    }
+
+    /**
+     * Sets the envelope email settings.
+     * 
+     * @param envelopeEmailSettings the new envelope email settings
+     */
+    public void setEnvelopeEmailSettings(EnvelopeEmailSetting envelopeEmailSettings) {
+        this.envelopeEmailSettings = envelopeEmailSettings;
     }
 
 }
