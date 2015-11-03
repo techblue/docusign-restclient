@@ -30,7 +30,6 @@
         <resteasy.version>2.3.5.Final</resteasy.version>
         <!--resteasy.version>3.0.8.Final</resteasy.version-->
         <jackson.version>1.9.9</jackson.version>
-        <techblue.maven.repo.baseurl>http://repo.maven.techblue.co.uk/nexus/content/repositories</techblue.maven.repo.baseurl>
     </properties>
 
     <licenses>
@@ -55,20 +54,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>techblue-release</id>
-            <name>techblue-release-repository</name>
-            <url>${techblue.maven.repo.baseurl}/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>techblue-snapshot</id>
-            <name>techblue-snapshot-repository</name>
-            <url>${techblue.maven.repo.baseurl}/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
-    
 
     <dependencyManagement>
         <dependencies>
