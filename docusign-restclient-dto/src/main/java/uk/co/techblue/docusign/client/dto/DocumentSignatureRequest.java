@@ -42,7 +42,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /** The custom fields. */
     @JsonProperty
-    private List<CustomField> customFields;
+    private CustomFields CustomFields;
 
     /** The reminder notifications. */
     @JsonProperty("notification")
@@ -93,8 +93,8 @@ public class DocumentSignatureRequest extends SignatureRequest {
      * 
      * @return the custom fields
      */
-    public List<CustomField> getCustomFields() {
-        return customFields;
+    public CustomFields getCustomFields() {
+        return CustomFields;
     }
 
     /**
@@ -103,10 +103,10 @@ public class DocumentSignatureRequest extends SignatureRequest {
      * otherwise not used by DocuSign.
      * 
      * 
-     * @param customFields the new custom fields
+     * @param CustomFields the new custom fields
      */
-    public void setCustomFields(final List<CustomField> customFields) {
-        this.customFields = customFields;
+    public void setCustomFields(final CustomFields CustomFields) {
+        this.CustomFields = CustomFields;
     }
 
     /**

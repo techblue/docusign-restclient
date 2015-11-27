@@ -29,7 +29,7 @@ import uk.co.techblue.docusign.client.dto.AuditEvent;
 import uk.co.techblue.docusign.client.dto.AuditEventField;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
 import uk.co.techblue.docusign.client.dto.CorrectionViewRequest;
-import uk.co.techblue.docusign.client.dto.CustomField;
+import uk.co.techblue.docusign.client.dto.CustomFields;
 import uk.co.techblue.docusign.client.dto.Document;
 import uk.co.techblue.docusign.client.dto.DocumentInfo;
 import uk.co.techblue.docusign.client.dto.DocumentSignatureRequest;
@@ -46,6 +46,7 @@ import uk.co.techblue.docusign.client.dto.Template;
 import uk.co.techblue.docusign.client.dto.TemplateInfo;
 import uk.co.techblue.docusign.client.dto.TemplateRole;
 import uk.co.techblue.docusign.client.dto.TemplateSignatureRequest;
+import uk.co.techblue.docusign.client.dto.TextCustomField;
 import uk.co.techblue.docusign.client.dto.account.Brand;
 import uk.co.techblue.docusign.client.dto.account.BrandDeleteRequest;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientCollection;
@@ -304,7 +305,7 @@ public class DocusignTest {
             credentials);
         try {
             System.out
-            .println(envService.getDocumentsCombined("4ba2d260-694e-4712-9e8a-8a8fd126a69e"));
+                .println(envService.getDocumentsCombined("4ba2d260-694e-4712-9e8a-8a8fd126a69e"));
             // System.out
             // .println(envService.getEnvelope("e3b09d80-ac1a-4d46-a40b-bea9d7bb5996"));
             // System.out
@@ -330,7 +331,7 @@ public class DocusignTest {
             credentials);
         try {
             System.out
-            .println(envService.getEnvelope("<Envelope Id>"));
+                .println(envService.getEnvelope("<Envelope Id>"));
         } catch (final EnvelopeException e) {
             e.printStackTrace();
         }
@@ -493,15 +494,17 @@ public class DocusignTest {
     }
 
     @SuppressWarnings("unused")
-    private static List<CustomField> getCustomFieldList() {
-        final List<CustomField> fieldList = new ArrayList<CustomField>();
-        final CustomField field = new CustomField();
+    private static CustomFields getCustomFieldList() {
+        final CustomFields customFields = new CustomFields();
+        final List<TextCustomField> fieldList = new ArrayList<TextCustomField>();
+        final TextCustomField field = new TextCustomField();
         // field.setCustomFieldType(CustomFieldType.text);
         // field.setShow(false);
         field.setName("landlord_id");
         field.setValue("1831");
         fieldList.add(field);
-        return fieldList;
+        customFields.setTextCustomFields(fieldList);
+        return customFields;
     }
 
     @SuppressWarnings("unused")

@@ -30,7 +30,7 @@ import org.jboss.resteasy.plugins.providers.multipart.OutputPart;
 import uk.co.techblue.docusign.client.BaseService;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
-import uk.co.techblue.docusign.client.dto.CustomField;
+import uk.co.techblue.docusign.client.dto.CustomFields;
 import uk.co.techblue.docusign.client.dto.Document;
 import uk.co.techblue.docusign.client.dto.DocumentFile;
 import uk.co.techblue.docusign.client.dto.DocumentInfo;
@@ -331,16 +331,13 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
      * @return the custom fields
      * @throws EnvelopeException the envelope exception
      */
-    public List<CustomField> getCustomFields(final String envelopeId)
+    public CustomFields getCustomFields(final String envelopeId)
         throws EnvelopeException {
-        final ClientResponse<Map<String, List<CustomField>>> clientResponse = resourceProxy
+        final ClientResponse<CustomFields> clientResponse = resourceProxy
             .getCustomFields(envelopeId);
-        final Map<String, List<CustomField>> customFieldResponse = parseEntityFromResponse(
+        final CustomFields customFieldResponse = parseEntityFromResponse(
             clientResponse, EnvelopeException.class);
-        if (customFieldResponse != null) {
-            return customFieldResponse.get("customFields");
-        }
-        return null;
+        return customFieldResponse;
     }
 
     /**
@@ -382,7 +379,7 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
      */
     public RecipientStatusCollection getRecipientStatus(final String envelopeId,
         final Boolean includeTabs, final Boolean includeExtended)
-        throws EnvelopeException {
+            throws EnvelopeException {
         final ClientResponse<RecipientStatusCollection> clientResponse = resourceProxy.getRecipientStatus(envelopeId, includeTabs,
             includeExtended);
         return parseEntityFromResponse(clientResponse, EnvelopeException.class);

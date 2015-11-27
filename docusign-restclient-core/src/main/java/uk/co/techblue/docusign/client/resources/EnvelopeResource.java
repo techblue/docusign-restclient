@@ -16,7 +16,6 @@
 package uk.co.techblue.docusign.client.resources;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.Consumes;
@@ -37,7 +36,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataOutput;
 
 import uk.co.techblue.docusign.client.Resource;
 import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
-import uk.co.techblue.docusign.client.dto.CustomField;
+import uk.co.techblue.docusign.client.dto.CustomFields;
 import uk.co.techblue.docusign.client.dto.DocumentFile;
 import uk.co.techblue.docusign.client.dto.EnvelopeDetailInfo;
 import uk.co.techblue.docusign.client.dto.EnvelopeDocumentInfo;
@@ -126,7 +125,7 @@ public interface EnvelopeResource extends Resource {
 	@GET
 	@Path("/envelopes/{envelopeId}/custom_fields")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientResponse<Map<String,List<CustomField>>> getCustomFields(
+	public ClientResponse<CustomFields> getCustomFields(
 			@PathParam("envelopeId") String envelopeId);
 	
 	@GET
