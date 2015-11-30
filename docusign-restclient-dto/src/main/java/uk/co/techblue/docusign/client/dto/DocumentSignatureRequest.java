@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright 2012 Technology Blueprint Ltd
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -42,7 +42,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /** The custom fields. */
     @JsonProperty
-    private CustomFields CustomFields;
+    private CustomFields customFields;
 
     /** The reminder notifications. */
     @JsonProperty("notification")
@@ -54,7 +54,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Gets the documents.
-     * 
+     *
      * @return the documents
      */
     public List<Document> getDocuments() {
@@ -63,7 +63,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Sets the documents.
-     * 
+     *
      * @param documents the new documents
      */
     public void setDocuments(final List<Document> documents) {
@@ -72,7 +72,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Gets the recipients.
-     * 
+     *
      * @return the recipients
      */
     public RecipientCollection getRecipients() {
@@ -81,7 +81,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Sets the recipients.
-     * 
+     *
      * @param recipients the new recipients
      */
     public void setRecipients(final RecipientCollection recipients) {
@@ -90,28 +90,28 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Gets the custom fields.
-     * 
+     *
      * @return the custom fields
      */
     public CustomFields getCustomFields() {
-        return CustomFields;
+        return customFields;
     }
 
     /**
      * <b>Optional</b><br/>
      * Allows the sender to send custom data about the recipient. This information is returned in the envelope status but
      * otherwise not used by DocuSign.
-     * 
-     * 
+     *
+     *
      * @param CustomFields the new custom fields
      */
-    public void setCustomFields(final CustomFields CustomFields) {
-        this.CustomFields = CustomFields;
+    public void setCustomFields(final CustomFields customFields) {
+        this.customFields = customFields;
     }
 
     /**
      * Gets the notifications.
-     * 
+     *
      * @return the notifications
      */
     public EnvelopeNotificationInfo getNotifications() {
@@ -120,7 +120,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Sets the notifications.
-     * 
+     *
      * @param notifications the new notifications
      */
     public void setNotifications(final EnvelopeNotificationInfo notifications) {
@@ -129,7 +129,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Gets the brand id.
-     * 
+     *
      * @return the brand id
      */
     public String getBrandId() {
@@ -138,7 +138,7 @@ public class DocumentSignatureRequest extends SignatureRequest {
 
     /**
      * Sets the brand id.
-     * 
+     *
      * @param brandId the new brand id
      */
     public void setBrandId(final String brandId) {
