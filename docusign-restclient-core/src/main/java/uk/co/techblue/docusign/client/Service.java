@@ -15,16 +15,14 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client;
 
-import java.lang.reflect.InvocationTargetException;
-
-import javax.ws.rs.core.Response.Status.Family;
-
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ClientResponseFailure;
-
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.dto.ErrorResponse;
 import uk.co.techblue.docusign.client.exception.DocuSignException;
+
+import javax.ws.rs.core.Response.Status.Family;
+import java.lang.reflect.InvocationTargetException;
 
 public abstract class Service<RT extends Resource> {
     /** The rest base uri. */
@@ -133,5 +131,14 @@ public abstract class Service<RT extends Resource> {
      */
     protected <T> T getResourceProxy(final Class<T> clazz, final String serverUri, final DocuSignCredentials credentials) {
         return DocuSignClient.getClientService(clazz, serverUri, credentials);
+    }
+
+    public <EX extends DocuSignException> void validateResponseAndReleaseConnection(ClientResponse<?> clientResponse,
+        final Class<EX>  exceptionClazz) throws EX {
+        try {
+            validateResponseSuccess(clientResponse, exceptionClazz);
+        } finally {
+            clientResponse.releaseConnection();
+        }
     }
 }

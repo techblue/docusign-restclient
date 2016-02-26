@@ -78,7 +78,7 @@ public class LoginService extends Service<LoginResource> {
     public void changePassword(final ChangePasswordRequest changePasswordRequest)
         throws UserAccountException {
         final ClientResponse<?> clientResponse = resourceProxy.changePassword(changePasswordRequest);
-        validateResponseSuccess(clientResponse, UserAccountException.class);
+        validateResponseAndReleaseConnection(clientResponse, UserAccountException.class);
     }
 
     /*

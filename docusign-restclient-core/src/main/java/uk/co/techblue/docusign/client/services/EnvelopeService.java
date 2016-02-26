@@ -29,20 +29,7 @@ import org.jboss.resteasy.plugins.providers.multipart.OutputPart;
 
 import uk.co.techblue.docusign.client.BaseService;
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
-import uk.co.techblue.docusign.client.dto.AuditEventsResponse;
-import uk.co.techblue.docusign.client.dto.CustomFields;
-import uk.co.techblue.docusign.client.dto.Document;
-import uk.co.techblue.docusign.client.dto.DocumentFile;
-import uk.co.techblue.docusign.client.dto.DocumentInfo;
-import uk.co.techblue.docusign.client.dto.Envelope;
-import uk.co.techblue.docusign.client.dto.EnvelopeDetailInfo;
-import uk.co.techblue.docusign.client.dto.EnvelopeDocumentInfo;
-import uk.co.techblue.docusign.client.dto.EnvelopeInfo;
-import uk.co.techblue.docusign.client.dto.EnvelopeNotificationInfo;
-import uk.co.techblue.docusign.client.dto.EnvelopeStatusQueryForm;
-import uk.co.techblue.docusign.client.dto.EnvelopeStatusResponse;
-import uk.co.techblue.docusign.client.dto.StatusChangeRequest;
-import uk.co.techblue.docusign.client.dto.VoidEnvelopeRequest;
+import uk.co.techblue.docusign.client.dto.*;
 import uk.co.techblue.docusign.client.dto.recipients.RecipientStatusCollection;
 import uk.co.techblue.docusign.client.dto.user.LoginAccount;
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
@@ -96,7 +83,7 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
         statusChangeRequest.setStatus(Status.sent);
         statusChangeRequest.setStatusReason(statusChangeReason);
         final ClientResponse<?> clientResponse = resourceProxy.changeStatus(envelopeId, statusChangeRequest);
-        validateResponseSuccess(clientResponse, EnvelopeException.class);
+        validateResponseAndReleaseConnection(clientResponse, EnvelopeException.class);
     }
 
     /**
@@ -110,7 +97,7 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
     public void changeStatus(final String envelopeId,
         final StatusChangeRequest statusChangeRequest) throws EnvelopeException {
         final ClientResponse<?> clientResponse = resourceProxy.changeStatus(envelopeId, statusChangeRequest);
-        validateResponseSuccess(clientResponse, EnvelopeException.class);
+        validateResponseAndReleaseConnection(clientResponse, EnvelopeException.class);
     }
 
     /**
@@ -122,7 +109,7 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
     public void voidEnvelope(final String envelopeId,
         final VoidEnvelopeRequest voidEnvelopeRequest) throws EnvelopeException {
         final ClientResponse<?> clientResponse = resourceProxy.voidEnvelope(envelopeId, voidEnvelopeRequest);
-        validateResponseSuccess(clientResponse, EnvelopeException.class);
+        validateResponseAndReleaseConnection(clientResponse, EnvelopeException.class);
     }
 
     /**
@@ -153,7 +140,7 @@ public class EnvelopeService extends BaseService<EnvelopeResource> {
         ClientResponse<String> clientResponse;
         clientResponse = resourceProxy.addDocumentToDraftEnvelope(contentDisposition, envelopeId, document.getDocumentId()
             .toString(), fileDataSource.getFile());
-        validateResponseSuccess(clientResponse, EnvelopeException.class);
+        validateResponseAndReleaseConnection(clientResponse, EnvelopeException.class);
     }
 
     /**
