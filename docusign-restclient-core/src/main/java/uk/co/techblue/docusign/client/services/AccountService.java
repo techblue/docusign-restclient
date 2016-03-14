@@ -77,7 +77,7 @@ public class AccountService extends BaseService<AccountResource> {
      */
     public void deleteBrandProfiles(final BrandDeleteRequest brandDeleteRequest) throws AccountException {
         final ClientResponse<String> clientResponse = resourceProxy.deleteBrandingProfiles(brandDeleteRequest);
-        validateResponseSuccess(clientResponse, AccountException.class);
+        validateResponseAndReleaseConnection(clientResponse, AccountException.class);
     }
 
     /*
