@@ -17,8 +17,8 @@ package uk.co.techblue.docusign.client.dto;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import uk.co.techblue.docusign.client.envelope.attributes.Status;
 import uk.co.techblue.docusign.jackson.ISO8601DateDeserializer;

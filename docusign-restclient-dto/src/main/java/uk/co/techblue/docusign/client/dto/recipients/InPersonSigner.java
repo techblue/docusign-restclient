@@ -15,9 +15,10 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.recipients;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Use this action if the signer is in the same physical location as a DocuSign
@@ -27,7 +28,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  * account.
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class InPersonSigner extends Signer {
 
 	/** The signer name. */

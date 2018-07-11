@@ -15,8 +15,9 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.tabs;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Place this tag on the document where you want the envelope ID for to appear.
@@ -24,7 +25,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  * informational purposes only.
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class EnvelopeIdTab extends Tab {
 
 }

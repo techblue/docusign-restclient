@@ -15,9 +15,10 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.recipients;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This recipient has the same management and access rights for the envelope as
@@ -32,7 +33,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  * @author Ajay
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class Editor extends Recipient {
 
 	/** The email. */

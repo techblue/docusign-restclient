@@ -1,8 +1,9 @@
 package uk.co.techblue.docusign.client.dto;
 
-import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * @author jnovotny

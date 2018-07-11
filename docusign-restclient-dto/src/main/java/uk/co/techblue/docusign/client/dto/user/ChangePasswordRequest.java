@@ -15,9 +15,10 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.user;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import uk.co.techblue.docusign.client.dto.BaseDto;
 import uk.co.techblue.docusign.client.dto.ForgottenPasswordInfo;
@@ -27,7 +28,8 @@ import uk.co.techblue.docusign.client.dto.ForgottenPasswordInfo;
  * 
  * @author Ajay
  */
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class ChangePasswordRequest  extends BaseDto{
 
 	/**

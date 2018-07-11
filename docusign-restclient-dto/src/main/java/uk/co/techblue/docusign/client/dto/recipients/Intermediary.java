@@ -15,9 +15,10 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.recipients;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * This recipient can, but is not required to, add name and email information
@@ -26,7 +27,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  * recipient type can only be used if enabled for your account.
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class Intermediary extends Recipient {
 
 	/** The email. */

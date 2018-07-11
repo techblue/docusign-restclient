@@ -6,7 +6,7 @@ package uk.co.techblue.docusign.client.dto.account;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import uk.co.techblue.docusign.client.dto.BaseDto;
 

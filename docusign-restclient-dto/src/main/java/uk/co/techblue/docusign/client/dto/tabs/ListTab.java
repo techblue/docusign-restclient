@@ -17,9 +17,10 @@ package uk.co.techblue.docusign.client.dto.tabs;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import uk.co.techblue.docusign.client.dto.SelectOption;
 import uk.co.techblue.docusign.client.envelope.attributes.Font;
@@ -30,7 +31,8 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
  * Use this tag to give your recipient a list of options, presented as a drop-down list, from which they can select.
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class ListTab extends Tab {
 
     /** The conditional parent label. */

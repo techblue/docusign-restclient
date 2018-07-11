@@ -17,15 +17,17 @@ package uk.co.techblue.docusign.client.dto;
 
 import java.util.Date;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 //FIXME  Call docusign to check actual parameter names. Their API documentations doesn't talks much about it.
 /**
  * This Complex element contains information related to recipient ID check.
  */
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class IDCheckInformationInput extends BaseDto {
 
 	/**

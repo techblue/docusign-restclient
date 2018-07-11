@@ -15,9 +15,10 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.tabs;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import uk.co.techblue.docusign.client.envelope.attributes.Font;
 import uk.co.techblue.docusign.client.envelope.attributes.FontColor;
@@ -28,7 +29,8 @@ import uk.co.techblue.docusign.client.envelope.attributes.FontSize;
  * clicks the Decline tag during the signing process, the envelope is voided.
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class DeclineTab extends Tab {
 
     /** The conditional parent label. */

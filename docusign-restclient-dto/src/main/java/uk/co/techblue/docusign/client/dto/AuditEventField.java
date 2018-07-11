@@ -1,6 +1,6 @@
 package uk.co.techblue.docusign.client.dto;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuditEventField {
 	/** The name of the field. */

@@ -17,10 +17,11 @@ package uk.co.techblue.docusign.client.dto.recipients;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import uk.co.techblue.docusign.client.dto.DocumentTabCollection;
 import uk.co.techblue.docusign.client.dto.SignatureInfo;
@@ -30,7 +31,8 @@ import uk.co.techblue.docusign.client.dto.SignatureInfo;
  * form fields on the documents in the envelope.
  */
 @SuppressWarnings("serial")
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class Signer extends Recipient {
 	/** The host email. */
 	@JsonProperty

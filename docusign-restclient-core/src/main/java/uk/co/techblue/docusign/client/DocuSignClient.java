@@ -19,15 +19,19 @@ import java.io.IOException;
 
 import javax.ws.rs.ext.Provider;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.jboss.resteasy.client.ClientRequest;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
-import org.jboss.resteasy.logging.Logger;
 import org.jboss.resteasy.plugins.providers.RegisterBuiltin;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
 import uk.co.techblue.docusign.client.utils.DocuSignUtils;
@@ -35,7 +39,7 @@ import uk.co.techblue.docusign.resteasy.providers.DocumentFileProvider;
 
 public class DocuSignClient {
 
-    private final static Logger logger = Logger.getLogger(DocuSignClient.class);
+    private final static Logger logger = LoggerFactory.getLogger(DocuSignClient.class);
 
     static {
         initializeProviderFactory();
@@ -92,8 +96,13 @@ public class DocuSignClient {
      */
     public static <T> T getClientService(final Class<T> clazz, final String serverUri, final DocuSignCredentials credentials) {
         logger.info("Generating REST resource proxy for: " + clazz.getName());
-
+        final String proxyHost = System.getProperty("http.proxy");
+        final Integer proxyPort = Integer.valueOf(System.getProperty("http.port"));
         HttpClient httpClient = new DefaultHttpClient();
+        if (StringUtils.isNotBlank(proxyHost)) {
+            final HttpHost httpProxy = new HttpHost(proxyHost, proxyPort);
+            httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY,httpProxy);
+        }
         ApacheHttpClient4Executor executor = new ApacheHttpClient4Executor(httpClient) {
             @SuppressWarnings("rawtypes")
 			@Override

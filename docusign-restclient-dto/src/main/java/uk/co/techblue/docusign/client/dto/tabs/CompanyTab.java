@@ -15,7 +15,7 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto.tabs;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import uk.co.techblue.docusign.client.envelope.attributes.Font;
 import uk.co.techblue.docusign.client.envelope.attributes.FontColor;

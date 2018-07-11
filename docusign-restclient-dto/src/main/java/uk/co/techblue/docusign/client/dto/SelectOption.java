@@ -15,16 +15,18 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client.dto;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * It represents the possible selections for a dropdown list. Used to specify
  * dropdown option elements in
  * {@link uk.co.techblue.docusign.client.dto.tabs.ListTab}
  */
-@JsonSerialize(include = Inclusion.NON_NULL)
+@JsonSerialize
+@JsonInclude(value = Include.NON_NULL)
 public class SelectOption extends BaseDto {
 
 	/**
