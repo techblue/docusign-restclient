@@ -30,7 +30,7 @@ import uk.co.techblue.docusign.client.dto.RadioButton;
  */
 @SuppressWarnings("serial")
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class RadioGroupTab extends Tab {
+public class RadioGroupTab extends AbstractRecipientTab {
 
 	/** The conditional parent label. */
 	@JsonProperty

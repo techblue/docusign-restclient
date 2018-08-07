@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.jboss.resteasy.logging.Logger;
 
 public class AuditEvent {
-	private DateFormat iso8601DateFormat = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
+	private final static Logger logger = Logger.getLogger(AuditEvent.class);
+	
+	private DateFormat iso8601DateFormat = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ssZ");
 	public static final String LOG_TIME = "logTime";
 	public static final String SOURCE = "Source";
 	public static final String USERNAME = "UserName";
@@ -57,10 +60,13 @@ public class AuditEvent {
 	
 	public Date getLogTime() {
 		String value = getEventField(LOG_TIME);
+		logger.info(value);
+		String patchedValue = value.split("\\.")[0].substring(0, 19) + "+0000";
+		logger.info("Before parsing: " + patchedValue);
 		Date datetime = null;
 		if (value != null) {
 			try {
-				datetime = iso8601DateFormat.parse(value);
+				datetime = iso8601DateFormat.parse(patchedValue);
 			} 
 			catch (ParseException e) {
 				e.printStackTrace();

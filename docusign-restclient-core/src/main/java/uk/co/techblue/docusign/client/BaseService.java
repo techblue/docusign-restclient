@@ -15,6 +15,8 @@
  ******************************************************************************/
 package uk.co.techblue.docusign.client;
 
+import java.util.HashMap;
+
 import org.apache.commons.lang3.StringUtils;
 
 import uk.co.techblue.docusign.client.credential.DocuSignCredentials;
@@ -36,6 +38,8 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
 
     /** The credentials. */
     protected final DocuSignCredentials credentials;
+    private static  HashMap<BaseService.CredentialsCacheKey, String> restBaseUriCache = 
+    		new HashMap<BaseService.CredentialsCacheKey, String>();
 
     /**
      * Instantiates a new base service. Uses the default login account to
@@ -83,15 +87,25 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
      */
     private static String getRestBaseUri(String serverUri, DocuSignCredentials credentials)
             throws ServiceInitException {
+    	String baseUrl;
+    	BaseService.CredentialsCacheKey cacheKey = new BaseService.CredentialsCacheKey(serverUri, credentials);
+    	baseUrl = restBaseUriCache.get(cacheKey);
+    	if (baseUrl != null) {
+    		return baseUrl;
+    	}
+    	
         LoginAccount defaultAccount = getDefaultAccount(serverUri, credentials);
         if (defaultAccount == null) {
             throw new ServiceInitException("Default account not found for docusign user");
         }
-        String baseUrl = defaultAccount.getBaseUrl();
+        baseUrl = defaultAccount.getBaseUrl();
         if (StringUtils.isBlank(baseUrl)) {
             throw new ServiceInitException("Base REST URL not found for the default account: \n"
                     + defaultAccount + "'");
         }
+        
+        restBaseUriCache.put(cacheKey, baseUrl);
+        
         return baseUrl;
     }
 
@@ -133,4 +147,30 @@ public abstract class BaseService<RT extends Resource> extends Service<RT> {
                 + clientInfo);
     }
 
+    final static class CredentialsCacheKey {
+    	final String serverUri;
+    	final DocuSignCredentials credentials;
+    	
+    	CredentialsCacheKey(String serverUri, DocuSignCredentials credentials) {
+    		this.serverUri = serverUri;
+    		this.credentials = credentials;
+    	}
+    	
+    	@Override 
+    	public int hashCode() {
+    		return serverUri.hashCode() ^ credentials.hashCode();
+    	}
+    	
+    	public boolean equals(Object obj) {
+    		if (obj == null || !(obj instanceof BaseService.CredentialsCacheKey)) {
+    			return false;
+    		}
+    		CredentialsCacheKey that = (BaseService.CredentialsCacheKey)obj;
+    		boolean isEqual = ((that.serverUri == null && this.serverUri == null)
+    				|| (that.serverUri != null && that.serverUri.equals(this.serverUri)))
+    				&& ((that.credentials == null && this.credentials == null)
+    						|| (that.credentials != null && that.credentials.equals(this.credentials)));
+			return isEqual;
+    	}
+    }
 }

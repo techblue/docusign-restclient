@@ -222,4 +222,22 @@ public class BasicDocusignCredential extends BaseDto implements DocuSignCredenti
     public void setHeader(final ClientRequest request) {
         request.header(DocuSignConstants.HEADER_PARAM_AUTHENTICATION, this);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+    	if (!(obj instanceof BasicDocusignCredential)) {
+    		return false;
+    	}
+    	BasicDocusignCredential that = (BasicDocusignCredential) obj;
+
+    	/* username, password and integratorKey must be not null */
+    	return this.username.equals(that.username) 
+    			&& this.password.equals(that.password) 
+    			&& this.integratorKey.equals(that.integratorKey);
+    }
+    
+    @Override
+    public int hashCode() {
+    	return (username + password + integratorKey).hashCode();
+    }
 }

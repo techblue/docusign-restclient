@@ -77,6 +77,24 @@ public class TokenDocuSignCredential extends BaseDto implements DocuSignCredenti
     @Override
     public void setHeader(final ClientRequest request) {
         request.header(DocuSignConstants.HEADER_PARAM_AUTHORIZATION, "bearer " + token);
-        request.header(DocuSignConstants.HEADER_PARAM_ACT_AS_USER, xDocuSignActAsUser);
+        if (xDocuSignActAsUser != null && !xDocuSignActAsUser.equals("")) {
+        	request.header(DocuSignConstants.HEADER_PARAM_ACT_AS_USER, xDocuSignActAsUser);
+        }
+    }
+    
+    public int hashCode() {
+    	return (token + username + (xDocuSignActAsUser != null? xDocuSignActAsUser: "")).hashCode();
+    }
+    
+    public boolean equals (Object obj) {
+    	if (!(obj instanceof TokenDocuSignCredential)) {
+    		return false;
+    	}
+    	TokenDocuSignCredential that = (TokenDocuSignCredential)obj;
+    	
+    	return token.equals(that.token) 
+    			&& username.equals(that.username)
+    			&& ((xDocuSignActAsUser == null && that.xDocuSignActAsUser == null)
+    					|| (xDocuSignActAsUser != null && xDocuSignActAsUser.equals(that.xDocuSignActAsUser)));
     }
 }

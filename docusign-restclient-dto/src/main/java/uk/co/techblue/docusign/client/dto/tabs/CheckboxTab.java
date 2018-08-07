@@ -27,7 +27,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
  */
 @SuppressWarnings("serial")
 @JsonSerialize(include = Inclusion.NON_NULL)
-public class CheckboxTab extends Tab {
+public class CheckboxTab extends AbstractRecipientTab {
 
 	/** The conditional parent label. */
 	@JsonProperty
