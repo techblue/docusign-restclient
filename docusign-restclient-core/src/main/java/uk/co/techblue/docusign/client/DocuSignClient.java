@@ -46,7 +46,7 @@ import uk.co.techblue.docusign.client.utils.DocuSignUtils;
 import uk.co.techblue.docusign.resteasy.providers.DocumentFileProvider;
 /**
  * The HTTP client can be configured adding in the classpath the following properties file:
- * uk.co.techblue.docusign.client.DocuSignClient.properties
+ * DocuSignClient.properties
  * The configuration allows to set the timeout and the maximum number of connections per route:
  *     docusign.connection.timeout=20000
  *     docusign.max.per.route=50
@@ -57,12 +57,7 @@ import uk.co.techblue.docusign.resteasy.providers.DocumentFileProvider;
 public class DocuSignClient {
 	public static void main(String[] args) throws ClientProtocolException,
 			IOException {
-		ThreadSafeClientConnManager cm = new ThreadSafeClientConnManager();
-		int maxPerRoute = 50;
-		cm.setDefaultMaxPerRoute(maxPerRoute);
-		cm.setMaxTotal(maxPerRoute);
-
-		HttpClient client = new DefaultHttpClient(cm);
+		HttpClient client = getHttpClient();
 		HttpParams params = client.getParams();
 		// Allowable time between packets
 		HttpConnectionParams.setSoTimeout(params, 6000);
@@ -154,11 +149,12 @@ public class DocuSignClient {
 		private ResourceBundle docusignClientBundle = null;
 		private HttpClientConfiguration () {
 			try {
-				docusignClientBundle = ResourceBundle.getBundle(DocuSignClient.class.getCanonicalName());
+				docusignClientBundle = ResourceBundle.getBundle(DocuSignClient.class.getSimpleName());
 			}
 			catch(MissingResourceException mre) {
-				/* Ignore */
+                /* Ignore */
 			}
+
 		}
 		
 		private String getString(String key, String defaultValue) {
@@ -230,7 +226,6 @@ public class DocuSignClient {
 
 					int timeout = httpClientConfiguration.getTimeout();
 					String proxyHost = httpClientConfiguration.getProxyHost();
-
 					HttpParams params = client.getParams();
 					// Allowable time between packets
 					HttpConnectionParams.setSoTimeout(params, timeout);
